@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 1: 말레이시아 학부모 생활영어 (등·하교 픽업편)</title>
+  <title>Dunhill's everyday English in Malaysia - Day 1</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Phosphor Icons -->
@@ -11,333 +11,483 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap');
     body {
-      font-family: 'Pretendard', sans-serif;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       -webkit-tap-highlight-color: transparent;
+    }
+    .speaking-active {
+      background-color: #fef08a !important;
+      border-color: #eab308 !important;
+      transform: scale(1.01);
+      transition: all 0.2s ease;
     }
   </style>
 </head>
-<body class="bg-slate-100 text-slate-800 min-h-screen antialiased flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 pb-28 min-h-screen antialiased flex flex-col justify-between">
 
-  <!-- Header -->
-  <header class="bg-emerald-600 text-white shadow-md sticky top-0 z-30">
-    <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <span class="bg-emerald-800 text-emerald-200 text-xs font-bold px-2 py-0.5 rounded-full">DAY 1</span>
-        <h1 class="font-bold text-base tracking-tight">등·하교 픽업 (Drop-off & Pick-up)</h1>
+  <div>
+    <!-- Top Branding & Navigation Bar -->
+    <header class="bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 text-white shadow-md sticky top-0 z-30">
+      <div class="max-w-xl mx-auto px-4 py-3.5 flex justify-between items-center">
+        <div>
+          <!-- Requested top branding text -->
+          <p class="text-xs uppercase tracking-wider font-extrabold text-emerald-200">Dunhill's everyday English in Malaysia</p>
+          <h1 class="text-base sm:text-lg font-bold tracking-tight mt-0.5">Day 1. 학교 등·하교 픽업 (Drop-off & Pick-up)</h1>
+        </div>
+        <button onclick="shareLink()" class="p-2.5 bg-white/15 hover:bg-white/25 active:scale-95 rounded-full transition flex items-center justify-center text-white shrink-0 shadow-inner" title="웹페이지 링크 공유">
+          <i class="ph ph-share-network text-lg"></i>
+        </button>
       </div>
-      <button onclick="shareViaWebAPI()" class="bg-emerald-700 hover:bg-emerald-800 active:scale-95 text-xs font-medium px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition">
-        <i class="ph ph-share-network text-sm"></i>
-        <span>공유</span>
-      </button>
-    </div>
-  </header>
+    </header>
 
-  <!-- Main Content Container -->
-  <main class="max-w-md mx-auto w-full px-4 py-5 space-y-6">
-
-    <!-- Intro Card -->
-    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80">
-      <div class="flex items-center gap-2 mb-1.5">
-        <span class="text-xl">🇲🇾</span>
-        <h2 class="font-bold text-slate-800 text-sm">말레이시아 학교 일상 영어 10분 완성</h2>
+    <!-- Quick Audio Guide Notice -->
+    <div class="max-w-xl mx-auto px-4 mt-3">
+      <div class="bg-emerald-50 border border-emerald-200/80 text-emerald-900 text-xs px-3.5 py-2.5 rounded-xl flex items-center gap-2.5 shadow-sm">
+        <i class="ph ph-speaker-high text-base text-emerald-600 shrink-0"></i>
+        <span>단어나 문장 옆의 <strong>스피커 아이콘</strong>을 누르면 원어민 발음으로 또박또박 읽어줍니다.</span>
       </div>
-      <p class="text-xs text-slate-500 leading-relaxed">
-        학교 정문 가드 및 선생님과 마주쳤을 때 당황하지 않고 전달할 수 있는 필수 단어 10개와 패턴 3문장입니다. 스피커 버튼을 눌러 정확한 원어민 발음을 들어보세요!
-      </p>
     </div>
 
-    <!-- Section 1: 단어 10개 -->
-    <section class="space-y-2.5">
-      <div class="flex items-center justify-between">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1">
-          <i class="ph ph-translate text-sm"></i>
-          1. 오늘의 필수 단어 10개
-        </h3>
-        <button onclick="readAllVocab()" class="text-xs text-emerald-600 hover:text-emerald-700 font-semibold flex items-center gap-1">
-          <i class="ph ph-speaker-high"></i> 단어 전체 듣기
-        </button>
-      </div>
+    <main class="max-w-xl mx-auto px-4 py-4 space-y-5">
 
-      <div class="bg-white rounded-2xl border border-slate-200/80 divide-y divide-slate-100 shadow-sm overflow-hidden" id="vocabList">
-        <!-- Rendered via JS -->
-      </div>
-    </section>
-
-    <!-- Section 2: 핵심 패턴 3문장 -->
-    <section class="space-y-2.5">
-      <div class="flex items-center justify-between">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1">
-          <i class="ph ph-sparkle text-sm"></i>
-          2. 상황별 핵심 패턴 3문장
-        </h3>
-        <span class="text-[11px] text-slate-400">터치 시 발음 재생</span>
-      </div>
-
-      <div class="space-y-3">
-        <!-- Pattern 1 -->
-        <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm relative overflow-hidden group">
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Pattern 1: 픽업 알림</span>
-            <button onclick="speakText('I am here to pick up Mike from Year 5.')" class="text-slate-400 group-hover:text-emerald-600 p-1">
-              <i class="ph ph-speaker-high text-lg"></i>
-            </button>
+      <!-- 1. 오늘의 단어 10개 -->
+      <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+        <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 bg-emerald-100 text-emerald-700 font-bold rounded-lg flex items-center justify-center text-xs">1</span>
+            <h2 class="text-base font-bold text-slate-800">오늘의 필수 단어 10개</h2>
           </div>
-          <div class="font-bold text-slate-900 text-base mb-1 cursor-pointer" onclick="speakText('I am here to pick up Mike from Year 5.')">
-            "I'm here to pick up <span class="text-emerald-600 underline decoration-emerald-300 underline-offset-4">[Mike / Clara]</span>."
-          </div>
-          <p class="text-xs text-slate-500 mb-2.5">~를 픽업하러 왔습니다.</p>
-          <div class="bg-slate-50 rounded-xl p-2.5 text-xs text-slate-600 space-y-1">
-            <div class="flex items-center gap-1.5 cursor-pointer hover:text-emerald-700" onclick="speakText('I am here to pick up Mike from Year 5.')">
-              <i class="ph ph-arrow-bend-down-right text-emerald-500"></i>
-              <span>"I'm here to pick up <strong>Mike from Year 5</strong>."</span>
-            </div>
-            <div class="flex items-center gap-1.5 cursor-pointer hover:text-emerald-700" onclick="speakText('I am here to pick up Clara from Year 4.')">
-              <i class="ph ph-arrow-bend-down-right text-emerald-500"></i>
-              <span>"I'm here to pick up <strong>Clara from Year 4</strong>."</span>
-            </div>
-          </div>
+          <button onclick="playAllVocab()" class="text-xs text-emerald-600 hover:text-emerald-700 font-semibold flex items-center gap-1">
+            <i class="ph ph-play-circle"></i> 단어 연속 듣기
+          </button>
         </div>
 
-        <!-- Pattern 2 -->
-        <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm relative overflow-hidden group">
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Pattern 2: 지각 안내</span>
-            <button onclick="speakText('I might be 10 minutes late because of heavy traffic.')" class="text-slate-400 group-hover:text-emerald-600 p-1">
-              <i class="ph ph-speaker-high text-lg"></i>
-            </button>
+        <div class="divide-y divide-slate-100" id="vocabContainer">
+          <!-- Rendered via JavaScript -->
+        </div>
+      </section>
+
+      <!-- 2. 핵심 패턴 3개 -->
+      <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+        <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 bg-amber-100 text-amber-700 font-bold rounded-lg flex items-center justify-center text-xs">2</span>
+            <h2 class="text-base font-bold text-slate-800">핵심 실전 패턴 3문장</h2>
           </div>
-          <div class="font-bold text-slate-900 text-base mb-1 cursor-pointer" onclick="speakText('I might be 10 minutes late because of heavy traffic.')">
-            "I might be <span class="text-emerald-600 underline decoration-emerald-300 underline-offset-4">[10 mins]</span> late because of <span class="text-emerald-600 underline decoration-emerald-300 underline-offset-4">[traffic]</span>."
-          </div>
-          <p class="text-xs text-slate-500 mb-2.5">~ 때문에 조금 늦을 것 같습니다.</p>
-          <div class="bg-slate-50 rounded-xl p-2.5 text-xs text-slate-600 space-y-1">
-            <div class="flex items-center gap-1.5 cursor-pointer hover:text-emerald-700" onclick="speakText('I might be 10 minutes late because of heavy traffic.')">
-              <i class="ph ph-arrow-bend-down-right text-emerald-500"></i>
-              <span>"I might be <strong>10 minutes late</strong> because of <strong>heavy traffic</strong>."</span>
-            </div>
-            <div class="flex items-center gap-1.5 cursor-pointer hover:text-emerald-700" onclick="speakText('I might be a bit late because of the rain.')">
-              <i class="ph ph-arrow-bend-down-right text-emerald-500"></i>
-              <span>"I might be <strong>a bit late</strong> because of <strong>the rain</strong>."</span>
-            </div>
-          </div>
+          <span class="text-xs text-slate-400 font-medium">Core Patterns</span>
         </div>
 
-        <!-- Pattern 3 -->
-        <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm relative overflow-hidden group">
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Pattern 3: 대리 픽업</span>
-            <button onclick="speakText('My husband will pick up Mike and Clara today instead of me.')" class="text-slate-400 group-hover:text-emerald-600 p-1">
-              <i class="ph ph-speaker-high text-lg"></i>
-            </button>
-          </div>
-          <div class="font-bold text-slate-900 text-base mb-1 cursor-pointer" onclick="speakText('My husband will pick up Mike and Clara today instead of me.')">
-            "<span class="text-emerald-600 underline decoration-emerald-300 underline-offset-4">[My husband]</span> will pick up <span class="text-emerald-600 underline decoration-emerald-300 underline-offset-4">[Mike and Clara]</span> today instead of me."
-          </div>
-          <p class="text-xs text-slate-500 mb-2.5">오늘은 저 대신 [누구]가 아이들을 픽업합니다.</p>
-          <div class="bg-slate-50 rounded-xl p-2.5 text-xs text-slate-600 space-y-1">
-            <div class="flex items-center gap-1.5 cursor-pointer hover:text-emerald-700" onclick="speakText('My husband will pick up Mike and Clara today instead of me.')">
-              <i class="ph ph-arrow-bend-down-right text-emerald-500"></i>
-              <span>"<strong>My husband</strong> will pick up <strong>Mike and Clara</strong> today instead of me."</span>
-            </div>
-            <div class="flex items-center gap-1.5 cursor-pointer hover:text-emerald-700" onclick="speakText('Leo mom will pick up Clara today instead of me.')">
-              <i class="ph ph-arrow-bend-down-right text-emerald-500"></i>
-              <span>"<strong>Leo's mom</strong> will pick up <strong>Clara</strong> today instead of me."</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 3: 음성 지원 실전 대화 (Audio Role-play) -->
-    <section class="space-y-3">
-      <div class="flex items-center justify-between">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1">
-          <i class="ph ph-chats text-sm"></i>
-          3. 음성 지원 실전 대화 (Role-play)
-        </h3>
-        <button id="fullDialogueBtn" onclick="togglePlayFullDialogue()" class="bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm transition">
-          <i class="ph ph-play" id="playIcon"></i>
-          <span id="playBtnText">전체 대화 듣기</span>
-        </button>
-      </div>
-
-      <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm space-y-3.5" id="dialogueContainer">
-        <!-- Guard 1 -->
-        <div class="dialogue-line flex items-start gap-2.5" data-role="guard" data-text="Good afternoon. Which children are you picking up today?">
-          <div class="w-8 h-8 rounded-full bg-slate-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
-            Guard
-          </div>
-          <div class="flex-1 bg-slate-50 border border-slate-100 rounded-2xl rounded-tl-none p-3 text-xs">
-            <div class="flex justify-between items-center mb-0.5">
-              <span class="font-bold text-slate-800">Good afternoon. Which children are you picking up today?</span>
-              <button onclick="speakText('Good afternoon. Which children are you picking up today?', 'guard')" class="text-slate-400 hover:text-emerald-600 p-0.5">
-                <i class="ph ph-speaker-simple-high text-sm"></i>
+        <div class="space-y-4">
+          <!-- Pattern 1 -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-200/90">
+            <div class="flex justify-between items-start gap-2">
+              <div>
+                <span class="text-[11px] font-bold px-2 py-0.5 bg-amber-500 text-white rounded">Pattern 1</span>
+                <p class="font-bold text-slate-900 text-sm mt-1">I'm here to pick up [누구].</p>
+                <p class="text-xs text-slate-500">~를 데리러(픽업하러) 왔습니다.</p>
+              </div>
+              <button onclick="playTTS('I am here to pick up Mike from Year 5.')" class="p-2 text-amber-600 hover:bg-amber-100 rounded-full transition shrink-0" aria-label="발음 듣기">
+                <i class="ph ph-speaker-high text-lg"></i>
               </button>
             </div>
-            <p class="text-slate-500 text-[11px]">안녕하세요. 오늘 어느 아이들을 데리러 오셨나요?</p>
+            <div class="mt-2.5 pt-2.5 border-t border-slate-200/70 space-y-2 text-xs">
+              <div class="flex items-center justify-between hover:bg-white p-1 rounded-lg transition cursor-pointer" onclick="playTTS('I am here to pick up Mike from Year 5.')">
+                <p class="text-slate-700">📌 <em>"I'm here to pick up <strong>Mike from Year 5</strong>."</em><br><span class="text-slate-500 text-[11px]">(5학년 마이크 픽업하러 왔습니다.)</span></p>
+                <button class="text-slate-400 hover:text-amber-600 p-1"><i class="ph ph-speaker-simple-high"></i></button>
+              </div>
+              <div class="flex items-center justify-between hover:bg-white p-1 rounded-lg transition cursor-pointer" onclick="playTTS('I am here to pick up Clara from Year 4.')">
+                <p class="text-slate-700">📌 <em>"I'm here to pick up <strong>Clara from Year 4</strong>."</em><br><span class="text-slate-500 text-[11px]">(4학년 클라라 데리러 왔습니다.)</span></p>
+                <button class="text-slate-400 hover:text-amber-600 p-1"><i class="ph ph-speaker-simple-high"></i></button>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <!-- Parent 1 -->
-        <div class="dialogue-line flex items-start gap-2.5 flex-row-reverse" data-role="parent" data-text="Good afternoon. I'm here to pick up Mike from Year 5 and Clara from Year 4.">
-          <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
-            You
-          </div>
-          <div class="flex-1 bg-emerald-50 border border-emerald-100 rounded-2xl rounded-tr-none p-3 text-xs">
-            <div class="flex justify-between items-center mb-0.5">
-              <span class="font-bold text-slate-800">Good afternoon. I'm here to pick up Mike from Year 5 and Clara from Year 4.</span>
-              <button onclick="speakText('Good afternoon. I am here to pick up Mike from Year 5 and Clara from Year 4.', 'parent')" class="text-slate-400 hover:text-emerald-600 p-0.5">
-                <i class="ph ph-speaker-simple-high text-sm"></i>
+          <!-- Pattern 2 -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-200/90">
+            <div class="flex justify-between items-start gap-2">
+              <div>
+                <span class="text-[11px] font-bold px-2 py-0.5 bg-amber-500 text-white rounded">Pattern 2</span>
+                <p class="font-bold text-slate-900 text-sm mt-1">I might be [시간] late because of [이유].</p>
+                <p class="text-xs text-slate-500">~ 때문에 [몇 분] 정도 늦을 것 같습니다.</p>
+              </div>
+              <button onclick="playTTS('I might be 10 minutes late because of heavy traffic.')" class="p-2 text-amber-600 hover:bg-amber-100 rounded-full transition shrink-0" aria-label="발음 듣기">
+                <i class="ph ph-speaker-high text-lg"></i>
               </button>
             </div>
-            <p class="text-emerald-800/80 text-[11px]">안녕하세요. 5학년 마이크와 4학년 클라라를 픽업하러 왔습니다.</p>
+            <div class="mt-2.5 pt-2.5 border-t border-slate-200/70 space-y-2 text-xs">
+              <div class="flex items-center justify-between hover:bg-white p-1 rounded-lg transition cursor-pointer" onclick="playTTS('I might be 10 minutes late because of heavy traffic.')">
+                <p class="text-slate-700">📌 <em>"I might be <strong>10 minutes late</strong> because of <strong>heavy traffic</strong>."</em><br><span class="text-slate-500 text-[11px]">(차가 많이 막혀서 10분 정도 늦을 것 같아요.)</span></p>
+                <button class="text-slate-400 hover:text-amber-600 p-1"><i class="ph ph-speaker-simple-high"></i></button>
+              </div>
+              <div class="flex items-center justify-between hover:bg-white p-1 rounded-lg transition cursor-pointer" onclick="playTTS('I might be a bit late because of the sudden rain.')">
+                <p class="text-slate-700">📌 <em>"I might be <strong>a bit late</strong> because of <strong>the sudden rain</strong>."</em><br><span class="text-slate-500 text-[11px]">(갑작스런 비 때문에 조금 늦을 수 있습니다.)</span></p>
+                <button class="text-slate-400 hover:text-amber-600 p-1"><i class="ph ph-speaker-simple-high"></i></button>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <!-- Guard 2 -->
-        <div class="dialogue-line flex items-start gap-2.5" data-role="guard" data-text="Sure, please show me your school parent pass.">
-          <div class="w-8 h-8 rounded-full bg-slate-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
-            Guard
-          </div>
-          <div class="flex-1 bg-slate-50 border border-slate-100 rounded-2xl rounded-tl-none p-3 text-xs">
-            <div class="flex justify-between items-center mb-0.5">
-              <span class="font-bold text-slate-800">Sure, please show me your school parent pass.</span>
-              <button onclick="speakText('Sure, please show me your school parent pass.', 'guard')" class="text-slate-400 hover:text-emerald-600 p-0.5">
-                <i class="ph ph-speaker-simple-high text-sm"></i>
+          <!-- Pattern 3 -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-200/90">
+            <div class="flex justify-between items-start gap-2">
+              <div>
+                <span class="text-[11px] font-bold px-2 py-0.5 bg-amber-500 text-white rounded">Pattern 3</span>
+                <p class="font-bold text-slate-900 text-sm mt-1">[사람] will pick up [아이] today instead of me.</p>
+                <p class="text-xs text-slate-500">오늘은 저 대신 [사람]이 아이를 픽업할 예정입니다.</p>
+              </div>
+              <button onclick="playTTS('Leo mom will pick up Mike and Clara today instead of me.')" class="p-2 text-amber-600 hover:bg-amber-100 rounded-full transition shrink-0" aria-label="발음 듣기">
+                <i class="ph ph-speaker-high text-lg"></i>
               </button>
             </div>
-            <p class="text-slate-500 text-[11px]">네, 학부모 출입증을 보여주세요.</p>
+            <div class="mt-2.5 pt-2.5 border-t border-slate-200/70 space-y-2 text-xs">
+              <div class="flex items-center justify-between hover:bg-white p-1 rounded-lg transition cursor-pointer" onclick="playTTS('Leo mom will pick up Mike and Clara today instead of me.')">
+                <p class="text-slate-700">📌 <em>"<strong>Leo's mom</strong> will pick up <strong>Mike and Clara</strong> today instead of me."</em><br><span class="text-slate-500 text-[11px]">(오늘은 레오 엄마가 저 대신 마이크와 클라라를 픽업할 거예요.)</span></p>
+                <button class="text-slate-400 hover:text-amber-600 p-1"><i class="ph ph-speaker-simple-high"></i></button>
+              </div>
+              <div class="flex items-center justify-between hover:bg-white p-1 rounded-lg transition cursor-pointer" onclick="playTTS('My wife will pick up Clara today instead of me.')">
+                <p class="text-slate-700">📌 <em>"<strong>My wife</strong> will pick up <strong>Clara</strong> today instead of me."</em><br><span class="text-slate-500 text-[11px]">(오늘은 제 아내가 저 대신 클라라를 픽업하러 갈 예정입니다.)</span></p>
+                <button class="text-slate-400 hover:text-amber-600 p-1"><i class="ph ph-speaker-simple-high"></i></button>
+              </div>
+            </div>
           </div>
         </div>
+      </section>
 
-        <!-- Parent 2 -->
-        <div class="dialogue-line flex items-start gap-2.5 flex-row-reverse" data-role="parent" data-text="Here it is. By the way, I was a bit late because of the traffic. Has the dismissal started?">
-          <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
-            You
+      <!-- 3. 실전 대화 & 자동 연속 음성 재생 -->
+      <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+        <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 bg-blue-100 text-blue-700 font-bold rounded-lg flex items-center justify-center text-xs">3</span>
+            <h2 class="text-base font-bold text-slate-800">실전 롤플레잉 대화</h2>
           </div>
-          <div class="flex-1 bg-emerald-50 border border-emerald-100 rounded-2xl rounded-tr-none p-3 text-xs">
-            <div class="flex justify-between items-center mb-0.5">
-              <span class="font-bold text-slate-800">Here it is. By the way, I was a bit late because of the traffic. Has the dismissal started?</span>
-              <button onclick="speakText('Here it is. By the way, I was a bit late because of the traffic. Has the dismissal started?', 'parent')" class="text-slate-400 hover:text-emerald-600 p-0.5">
-                <i class="ph ph-speaker-simple-high text-sm"></i>
+          <button id="playAllBtn" onclick="togglePlayDialogue()" class="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-bold px-3 py-1.5 rounded-full transition shadow-sm">
+            <i class="ph ph-play text-xs" id="playAllIcon"></i>
+            <span id="playAllText">전체 대화 듣기</span>
+          </button>
+        </div>
+
+        <div class="space-y-3" id="dialogueContainer">
+          <!-- Line 1 -->
+          <div id="d-line-0" class="p-3 bg-slate-50 rounded-xl border border-slate-200 transition">
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs font-bold text-slate-600 flex items-center gap-1">
+                <i class="ph ph-shield-check text-blue-600"></i> Guard (학교 경비원)
+              </span>
+              <button onclick="playTTS('Good afternoon. Which year is your child in?', 'guard')" class="text-blue-600 hover:text-blue-800 p-1">
+                <i class="ph ph-speaker-high"></i>
               </button>
             </div>
-            <p class="text-emerald-800/80 text-[11px]">여기 있습니다. 그런데 차가 막혀서 조금 늦었네요. 하교 시작했나요?</p>
+            <p class="text-slate-900 font-medium text-xs sm:text-sm">"Good afternoon. Which year is your child in?"</p>
+            <p class="text-slate-500 text-[11px] mt-0.5">안녕하세요. 아이가 몇 학년인가요?</p>
           </div>
-        </div>
 
-        <!-- Guard 3 -->
-        <div class="dialogue-line flex items-start gap-2.5" data-role="guard" data-text="Yes, they just came out. You can drive through lane 2.">
-          <div class="w-8 h-8 rounded-full bg-slate-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
-            Guard
-          </div>
-          <div class="flex-1 bg-slate-50 border border-slate-100 rounded-2xl rounded-tl-none p-3 text-xs">
-            <div class="flex justify-between items-center mb-0.5">
-              <span class="font-bold text-slate-800">Yes, they just came out. You can drive through lane 2.</span>
-              <button onclick="speakText('Yes, they just came out. You can drive through lane 2.', 'guard')" class="text-slate-400 hover:text-emerald-600 p-0.5">
-                <i class="ph ph-speaker-simple-high text-sm"></i>
+          <!-- Line 2 -->
+          <div id="d-line-1" class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200 transition">
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs font-bold text-emerald-800 flex items-center gap-1">
+                <i class="ph ph-user text-emerald-700"></i> Parent (학부모)
+              </span>
+              <button onclick="playTTS('Good afternoon. I am here to pick up my son, Mike from Year 5, and Clara from Year 4.', 'parent')" class="text-emerald-700 hover:text-emerald-900 p-1">
+                <i class="ph ph-speaker-high"></i>
               </button>
             </div>
-            <p class="text-slate-500 text-[11px]">네, 방금 나왔습니다. 2번 레인으로 진입하시면 됩니다.</p>
+            <p class="text-slate-900 font-medium text-xs sm:text-sm">"Good afternoon. <strong>I'm here to pick up</strong> my son, <strong>Mike from Year 5</strong>, and <strong>Clara from Year 4</strong>."</p>
+            <p class="text-emerald-800/80 text-[11px] mt-0.5">안녕하세요. 5학년 아들 마이크와 4학년 클라라를 픽업하러 왔습니다.</p>
+          </div>
+
+          <!-- Line 3 -->
+          <div id="d-line-2" class="p-3 bg-slate-50 rounded-xl border border-slate-200 transition">
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs font-bold text-slate-600 flex items-center gap-1">
+                <i class="ph ph-shield-check text-blue-600"></i> Guard (학교 경비원)
+              </span>
+              <button onclick="playTTS('Sure, please show me your school parent pass.', 'guard')" class="text-blue-600 hover:text-blue-800 p-1">
+                <i class="ph ph-speaker-high"></i>
+              </button>
+            </div>
+            <p class="text-slate-900 font-medium text-xs sm:text-sm">"Sure, please show me your school parent pass."</p>
+            <p class="text-slate-500 text-[11px] mt-0.5">네, 학부모 출입 패스를 보여주세요.</p>
+          </div>
+
+          <!-- Line 4 -->
+          <div id="d-line-3" class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200 transition">
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs font-bold text-emerald-800 flex items-center gap-1">
+                <i class="ph ph-user text-emerald-700"></i> Parent (학부모)
+              </span>
+              <button onclick="playTTS('Here it is. By the way, I was a bit late because of the rain. Has the dismissal started?', 'parent')" class="text-emerald-700 hover:text-emerald-900 p-1">
+                <i class="ph ph-speaker-high"></i>
+              </button>
+            </div>
+            <p class="text-slate-900 font-medium text-xs sm:text-sm">"Here it is. By the way, <strong>I was a bit late because of the rain</strong>. Has the dismissal started?"</p>
+            <p class="text-emerald-800/80 text-[11px] mt-0.5">여기 있습니다. 비가 와서 조금 늦었네요. 하교 시작했나요?</p>
+          </div>
+
+          <!-- Line 5 -->
+          <div id="d-line-4" class="p-3 bg-slate-50 rounded-xl border border-slate-200 transition">
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs font-bold text-slate-600 flex items-center gap-1">
+                <i class="ph ph-shield-check text-blue-600"></i> Guard (학교 경비원)
+              </span>
+              <button onclick="playTTS('Yes, they just came out. You can drive through lane 2.', 'guard')" class="text-blue-600 hover:text-blue-800 p-1">
+                <i class="ph ph-speaker-high"></i>
+              </button>
+            </div>
+            <p class="text-slate-900 font-medium text-xs sm:text-sm">"Yes, they just came out. You can drive through lane 2."</p>
+            <p class="text-slate-500 text-[11px] mt-0.5">네, 방금 나왔습니다. 2번 차선으로 통과해 들어가시면 됩니다.</p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Sharing Action Cards -->
-    <section class="bg-amber-50 border border-amber-200/80 rounded-2xl p-4 space-y-3">
-      <div class="flex items-center gap-2">
-        <span class="text-lg">💬</span>
-        <h4 class="font-bold text-amber-900 text-xs">학부모 단톡방으로 1번과 2번 바로 공유하기</h4>
-      </div>
-      <p class="text-[11px] text-amber-800 leading-snug">
-        아래 버튼을 누르면 단어 10개와 패턴 3문장이 카카오톡 양식으로 깔끔하게 복사됩니다.
-      </p>
-      
-      <div class="grid grid-cols-2 gap-2 pt-1">
-        <button onclick="copyKakaoFormat()" class="bg-[#FEE500] hover:bg-[#FADA0A] active:scale-95 text-[#191919] font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-sm transition">
-          <i class="ph ph-chat-circle-dots text-base"></i>
-          <span>카톡 텍스트 복사</span>
-        </button>
-        <button onclick="copyPageLink()" class="bg-white hover:bg-slate-50 active:scale-95 text-slate-700 border border-amber-300 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-sm transition">
-          <i class="ph ph-link text-base"></i>
-          <span>웹페이지 링크 복사</span>
-        </button>
-      </div>
-    </section>
+      <!-- 4. 일일 스피킹 & 라이팅 테스트 (Daily Test) -->
+      <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+        <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 bg-purple-100 text-purple-700 font-bold rounded-lg flex items-center justify-center text-xs">4</span>
+            <h2 class="text-base font-bold text-slate-800">오늘의 5분 셀프 테스트</h2>
+          </div>
+          <span class="text-xs text-purple-600 font-bold bg-purple-50 px-2 py-0.5 rounded-full">Daily Test</span>
+        </div>
 
-  </main>
+        <div class="space-y-4">
+          <!-- Quiz 1 -->
+          <div class="bg-purple-50/50 p-4 rounded-xl border border-purple-100">
+            <div class="flex items-center gap-1.5 text-purple-800 font-bold text-xs mb-1.5">
+              <span class="w-4 h-4 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px]">Q1</span>
+              <span>단어 활용 말하기 테스트</span>
+            </div>
+            <p class="text-xs sm:text-sm font-semibold text-slate-800">"차가 막혀서 늦었습니다."를 영어로 직접 소리 내어 말해보세요.</p>
+            <details class="mt-2.5 text-xs group">
+              <summary class="cursor-pointer text-purple-700 font-bold hover:text-purple-900 inline-flex items-center gap-1">
+                <i class="ph ph-lightbulb"></i> 정답 및 원어민 발음 확인
+              </summary>
+              <div class="mt-2 p-2.5 bg-white rounded-lg border border-purple-200 flex items-center justify-between shadow-sm">
+                <div>
+                  <p class="text-purple-950 font-bold text-sm">"I am late because of the traffic."</p>
+                  <p class="text-slate-500 text-[11px] mt-0.5">(또는 "I was late because of heavy traffic.")</p>
+                </div>
+                <button onclick="playTTS('I am late because of the traffic.')" class="p-2 text-purple-600 hover:bg-purple-50 rounded-full transition shrink-0" title="발음 듣기">
+                  <i class="ph ph-speaker-high text-lg"></i>
+                </button>
+              </div>
+            </details>
+          </div>
 
-  <!-- Notification Toast -->
-  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900/90 backdrop-blur-sm text-white text-xs px-4 py-2.5 rounded-full shadow-lg opacity-0 transition-opacity pointer-events-none duration-300 z-50 flex items-center gap-2">
-    <i class="ph ph-check-circle text-emerald-400 text-base"></i>
-    <span id="toastMsg">복사되었습니다. 카카오톡에 붙여넣기 하세요!</span>
+          <!-- Quiz 2 -->
+          <div class="bg-purple-50/50 p-4 rounded-xl border border-purple-100">
+            <div class="flex items-center gap-1.5 text-purple-800 font-bold text-xs mb-1.5">
+              <span class="w-4 h-4 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px]">Q2</span>
+              <span>패턴 응용 영작 & 말하기</span>
+            </div>
+            <p class="text-xs sm:text-sm font-semibold text-slate-800">"오늘은 저 대신 레오 엄마가 마이크와 클라라를 픽업할 거예요."를 영어로 어떻게 말할까요?</p>
+            <details class="mt-2.5 text-xs group">
+              <summary class="cursor-pointer text-purple-700 font-bold hover:text-purple-900 inline-flex items-center gap-1">
+                <i class="ph ph-lightbulb"></i> 정답 및 원어민 발음 확인
+              </summary>
+              <div class="mt-2 p-2.5 bg-white rounded-lg border border-purple-200 flex items-center justify-between shadow-sm">
+                <div>
+                  <p class="text-purple-950 font-bold text-sm">"Leo's mom will pick up Mike and Clara today instead of me."</p>
+                  <p class="text-slate-500 text-[11px] mt-0.5">핵심 패턴 3 ([사람] will pick up [아이] today instead of me) 응용</p>
+                </div>
+                <button onclick="playTTS('Leo mom will pick up Mike and Clara today instead of me.')" class="p-2 text-purple-600 hover:bg-purple-50 rounded-full transition shrink-0" title="발음 듣기">
+                  <i class="ph ph-speaker-high text-lg"></i>
+                </button>
+              </div>
+            </details>
+          </div>
+
+          <!-- Quiz 3 -->
+          <div class="bg-purple-50/50 p-4 rounded-xl border border-purple-100">
+            <div class="flex items-center gap-1.5 text-purple-800 font-bold text-xs mb-1.5">
+              <span class="w-4 h-4 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px]">Q3</span>
+              <span>실전 롤플레잉 순발력 테스트</span>
+            </div>
+            <p class="text-xs sm:text-sm font-semibold text-slate-800">학교 정문 가드가 <span class="text-blue-700 font-bold">"Which year is your child in?"</span>라고 물었을 때, "5학년 마이크를 픽업하러 왔다"고 당당하게 대답해 보세요.</p>
+            <details class="mt-2.5 text-xs group">
+              <summary class="cursor-pointer text-purple-700 font-bold hover:text-purple-900 inline-flex items-center gap-1">
+                <i class="ph ph-lightbulb"></i> 모범 답안 및 발음 확인
+              </summary>
+              <div class="mt-2 p-2.5 bg-white rounded-lg border border-purple-200 flex items-center justify-between shadow-sm">
+                <div>
+                  <p class="text-purple-950 font-bold text-sm">"I'm here to pick up Mike from Year 5."</p>
+                  <p class="text-slate-500 text-[11px] mt-0.5">(또는 둘 다라면: "I'm here to pick up Mike from Year 5 and Clara from Year 4.")</p>
+                </div>
+                <button onclick="playTTS('I am here to pick up Mike from Year 5.')" class="p-2 text-purple-600 hover:bg-purple-50 rounded-full transition shrink-0" title="발음 듣기">
+                  <i class="ph ph-speaker-high text-lg"></i>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+    </main>
   </div>
 
-  <footer class="text-center py-6 text-slate-400 text-[11px]">
-    말레이시아 학부모 생활영어 1일 1패턴 프로젝트 • Everyday English
-  </footer>
+  <!-- Bottom Floating Kakao Sharing Bar -->
+  <div class="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-slate-200 py-3 px-4 z-40 shadow-lg">
+    <div class="max-w-xl mx-auto flex items-center gap-2.5">
+      <button onclick="copyKakaoSummary()" class="flex-1 bg-[#FEE500] hover:bg-[#FADA0A] active:scale-[0.98] text-[#191919] font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm transition text-xs sm:text-sm">
+        <i class="ph ph-chat-circle-dots text-lg"></i>
+        <span>카톡 공유용 텍스트 복사 (1번 & 2번)</span>
+      </button>
+      <button onclick="shareLink()" class="bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 p-3 rounded-xl transition" title="웹페이지 링크 복사">
+        <i class="ph ph-link text-lg"></i>
+      </button>
+    </div>
+  </div>
 
-  <!-- Scripts -->
+  <!-- Toast Alert -->
+  <div id="toast" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-900/90 text-white text-xs px-4 py-3 rounded-2xl shadow-2xl opacity-0 pointer-events-none transition duration-300 z-50 flex items-center gap-2 backdrop-blur-sm">
+    <i class="ph ph-check-circle text-emerald-400 text-base"></i>
+    <span id="toastMsg">복사되었습니다.</span>
+  </div>
+
+  <!-- Script Logic -->
   <script>
     const vocabData = [
-      { no: 1, word: "Pick up", pron: "[픽업]", meaning: "데리러 가다, 픽업하다", note: "I'm here to pick up Mike." },
-      { no: 2, word: "Drop off", pron: "[드랍 오프]", meaning: "차에서 내려주다, 등교시키다", note: "Just dropping off Clara." },
-      { no: 3, word: "Traffic", pron: "[트래픽]", meaning: "교통, 차량 정체", note: "Heavy traffic (심한 정체)" },
-      { no: 4, word: "Late", pron: "[레이트]", meaning: "늦은, 지각한", note: "Running 10 minutes late" },
-      { no: 5, word: "Instead of", pron: "[인스텟 어브]", meaning: "~ 대신에", note: "My husband instead of me" },
-      { no: 6, word: "Authorize", pron: "[오-서라이즈]", meaning: "승인하다, 권한을 주다", note: "Authorized pickup list" },
-      { no: 7, word: "Dismissal", pron: "[디스미설]", meaning: "하교, 마치는 시간", note: "Dismissal time (하교 시간)" },
-      { no: 8, word: "Guard house", pron: "[가드 하우스]", meaning: "경비실, 정문 초소", note: "Stop at the guard house" },
-      { no: 9, word: "Inform", pron: "[인폼]", meaning: "알리다, 통지하다", note: "Please inform the teacher" },
-      { no: 10, word: "Belongings", pron: "[빌롱잉즈]", meaning: "소지품, 두고 내린 물건", note: "Left belongings in the car" }
+      { no: 1, word: "Pick up", pron: "[픽 업]", meaning: "데리러 가다, 픽업하다" },
+      { no: 2, word: "Drop off", pron: "[드랍 오프]", meaning: "차에서 내려주다, 등교시키다" },
+      { no: 3, word: "Traffic", pron: "[트래픽]", meaning: "교통, 차량 정체" },
+      { no: 4, word: "Late", pron: "[레이트]", meaning: "늦은, 지각한" },
+      { no: 5, word: "Instead of", pron: "[인스텓 오브]", meaning: "~ 대신에" },
+      { no: 6, word: "Authorize", pron: "[어서라이즈]", meaning: "승인하다, 대리인 권한을 주다" },
+      { no: 7, word: "Dismissal", pron: "[디스미설]", meaning: "하교, 마치는 시간" },
+      { no: 8, word: "Guard house", pron: "[가드 하우스]", meaning: "경비실, 학교 정문 초소" },
+      { no: 9, word: "Inform", pron: "[인폼]", meaning: "알리다, 공지하다" },
+      { no: 10, word: "Belongings", pron: "[빌롱잉스]", meaning: "소지품, 두고 내린 물건" }
     ];
 
-    // Render vocab list
-    const vocabContainer = document.getElementById('vocabList');
+    const vocabContainer = document.getElementById('vocabContainer');
     vocabContainer.innerHTML = vocabData.map(v => `
-      <div class="p-3 flex items-center justify-between hover:bg-slate-50 transition cursor-pointer" onclick="speakText('${v.word}')">
-        <div class="flex items-start gap-2.5">
-          <span class="w-5 h-5 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold shrink-0 mt-0.5">${v.no}</span>
-          <div>
-            <div class="flex items-baseline gap-1.5">
-              <span class="font-bold text-slate-800 text-sm">${v.word}</span>
-              <span class="text-[11px] text-slate-400 font-mono">${v.pron}</span>
-            </div>
-            <p class="text-xs text-slate-600 mt-0.5">${v.meaning}</p>
-            <p class="text-[10px] text-emerald-600 mt-0.5 font-medium bg-emerald-50 inline-block px-1.5 py-0.2 rounded">${v.note}</p>
+      <div class="py-2.5 flex items-center justify-between gap-2 hover:bg-slate-50/80 px-1 rounded-lg transition cursor-pointer" onclick="playTTS('${v.word}')">
+        <div class="flex-1">
+          <div class="flex items-baseline gap-2">
+            <span class="text-emerald-700 font-bold text-sm sm:text-base">${v.no}. ${v.word}</span>
+            <span class="text-[11px] text-slate-400 font-mono">${v.pron}</span>
           </div>
+          <p class="text-xs text-slate-600 font-medium mt-0.5">${v.meaning}</p>
         </div>
-        <button aria-label="발음 듣기" class="p-2 text-slate-400 hover:text-emerald-600 rounded-full hover:bg-emerald-50 transition shrink-0">
-          <i class="ph ph-speaker-high text-lg"></i>
+        <button aria-label="발음 듣기" class="p-2 text-emerald-600 hover:bg-emerald-50 rounded-full transition">
+          <i class="ph ph-speaker-high text-base"></i>
         </button>
       </div>
     `).join('');
 
-    const kakaoShareText = `[말레이시아 학부모 생활영어 Day 1]
-🚗 주제: 학교 등하교(Drop-off & Pick-up) 실전 영어
+    function playTTS(text, role = 'general') {
+      if (!('speechSynthesis' in window)) {
+        alert('이 기기는 음성 읽기 기능을 지원하지 않습니다.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.88;
 
-📚 1. 오늘의 필수 단어 10개
-1. Pick up : 데리러 가다
-2. Drop off : 차에서 내려주다
-3. Traffic : 교통, 정체
-4. Late : 늦은, 지각한
-5. Instead of : ~ 대신에
-6. Authorize : 승인하다
-7. Dismissal : 하교 시간
-8. Guard house : 경비실/초소
-9. Inform : 알리다, 전하다
-10. Belongings : 소지품
+      if (role === 'guard') {
+        utterance.pitch = 0.85;
+      } else if (role === 'parent') {
+        utterance.pitch = 1.15;
+      }
 
-💡 2. 상황별 핵심 패턴 3문장
-① I'm here to pick up Mike from Year 5.
-  (5학년 마이크를 픽업하러 왔습니다.)
-② I might be [10 mins] late because of [traffic].
-  (차 막힘 때문에 10분 정도 늦을 것 같습니다.)
-③ [My husband] will pick up [Mike and Clara] today instead of me.
-  (오늘은 저 대신 남편이 아이들을 픽업합니다.)
+      window.speechSynthesis.speak(utterance);
+    }
 
-오늘도 자신 있게 한 마디씩 써보세요! 화이팅! 🇲🇾`;
+    async function playAllVocab() {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      for (const item of vocabData) {
+        const u = new SpeechSynthesisUtterance(item.word);
+        u.lang = 'en-US';
+        u.rate = 0.85;
+        window.speechSynthesis.speak(u);
+        await new Promise(res => { u.onend = res; });
+        await new Promise(res => setTimeout(res, 300));
+      }
+    }
+
+    const dialogueLines = [
+      { id: 'd-line-0', text: "Good afternoon. Which year is your child in?", role: 'guard' },
+      { id: 'd-line-1', text: "Good afternoon. I am here to pick up my son, Mike from Year 5, and Clara from Year 4.", role: 'parent' },
+      { id: 'd-line-2', text: "Sure, please show me your school parent pass.", role: 'guard' },
+      { id: 'd-line-3', text: "Here it is. By the way, I was a bit late because of the rain. Has the dismissal started?", role: 'parent' },
+      { id: 'd-line-4', text: "Yes, they just came out. You can drive through lane 2.", role: 'guard' }
+    ];
+
+    let isPlayingDialogue = false;
+    let currentDialogueIdx = 0;
+
+    function togglePlayDialogue() {
+      if (isPlayingDialogue) {
+        stopDialogue();
+      } else {
+        startDialogue();
+      }
+    }
+
+    function startDialogue() {
+      if (!('speechSynthesis' in window)) {
+        alert('음성 읽기를 지원하지 않는 브라우저입니다.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      isPlayingDialogue = true;
+      currentDialogueIdx = 0;
+      updatePlayAllButton(true);
+      playNextDialogueLine();
+    }
+
+    function stopDialogue() {
+      window.speechSynthesis.cancel();
+      isPlayingDialogue = false;
+      clearHighlights();
+      updatePlayAllButton(false);
+    }
+
+    function updatePlayAllButton(playing) {
+      const icon = document.getElementById('playAllIcon');
+      const text = document.getElementById('playAllText');
+      if (playing) {
+        icon.className = 'ph ph-stop text-xs';
+        text.innerText = '재생 중지';
+      } else {
+        icon.className = 'ph ph-play text-xs';
+        text.innerText = '전체 대화 듣기';
+      }
+    }
+
+    function clearHighlights() {
+      dialogueLines.forEach(line => {
+        const el = document.getElementById(line.id);
+        if (el) el.classList.remove('speaking-active');
+      });
+    }
+
+    function playNextDialogueLine() {
+      if (!isPlayingDialogue || currentDialogueIdx >= dialogueLines.length) {
+        stopDialogue();
+        return;
+      }
+
+      clearHighlights();
+      const current = dialogueLines[currentDialogueIdx];
+      const el = document.getElementById(current.id);
+      if (el) el.classList.add('speaking-active');
+
+      const utterance = new SpeechSynthesisUtterance(current.text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.88;
+      utterance.pitch = current.role === 'guard' ? 0.85 : 1.15;
+
+      utterance.onend = () => {
+        currentDialogueIdx++;
+        setTimeout(playNextDialogueLine, 500);
+      };
+
+      utterance.onerror = () => {
+        stopDialogue();
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
 
     function showToast(msg) {
       const toast = document.getElementById('toast');
@@ -346,131 +496,65 @@
       toast.classList.remove('opacity-0');
       setTimeout(() => {
         toast.classList.add('opacity-0');
-      }, 2500);
+      }, 2300);
     }
 
-    function copyKakaoFormat() {
-      navigator.clipboard.writeText(kakaoShareText).then(() => {
-        showToast('카톡 전송용 단어/패턴이 복사되었습니다!');
-      }).catch(() => {
-        const textarea = document.createElement('textarea');
-        textarea.value = kakaoShareText;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        showToast('카톡 전송용 단어/패턴이 복사되었습니다!');
-      });
-    }
-
-    function copyPageLink() {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        showToast('페이지 링크가 복사되었습니다!');
-      });
-    }
-
-    function shareViaWebAPI() {
+    function shareLink() {
       if (navigator.share) {
         navigator.share({
-          title: '말레이시아 학부모 생활영어 Day 1',
-          text: kakaoShareText,
+          title: "Dunhill's everyday English in Malaysia - Day 1",
+          text: "말레이시아 학부모 생활영어 Day 1 - 등·하교 픽업편",
           url: window.location.href
         }).catch(() => {});
       } else {
-        copyKakaoFormat();
-      }
-    }
-
-    let synth = window.speechSynthesis;
-    let isPlayingFull = false;
-
-    function speakText(text, role = 'general') {
-      if (synth.speaking) {
-        synth.cancel();
-      }
-
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US';
-      utterance.rate = 0.9;
-
-      if (role === 'guard') {
-        utterance.pitch = 0.85;
-      } else if (role === 'parent') {
-        utterance.pitch = 1.15;
-      }
-
-      synth.speak(utterance);
-    }
-
-    async function readAllVocab() {
-      if (synth.speaking) synth.cancel();
-      for (const item of vocabData) {
-        const u = new SpeechSynthesisUtterance(item.word);
-        u.lang = 'en-US';
-        u.rate = 0.85;
-        synth.speak(u);
-        await new Promise(r => { u.onend = r; });
-      }
-    }
-
-    const dialogueLines = [
-      { role: 'guard', text: "Good afternoon. Which children are you picking up today?" },
-      { role: 'parent', text: "Good afternoon. I'm here to pick up Mike from Year 5 and Clara from Year 4." },
-      { role: 'guard', text: "Sure, please show me your school parent pass." },
-      { role: 'parent', text: "Here it is. By the way, I was a bit late because of the traffic. Has the dismissal started?" },
-      { role: 'guard', text: "Yes, they just came out. You can drive through lane 2." }
-    ];
-
-    async function togglePlayFullDialogue() {
-      const playIcon = document.getElementById('playIcon');
-      const playBtnText = document.getElementById('playBtnText');
-
-      if (isPlayingFull) {
-        synth.cancel();
-        isPlayingFull = false;
-        playIcon.className = "ph ph-play";
-        playBtnText.innerText = "전체 대화 듣기";
-        highlightLine(-1);
-        return;
-      }
-
-      isPlayingFull = true;
-      playIcon.className = "ph ph-stop";
-      playBtnText.innerText = "정지";
-
-      for (let i = 0; i < dialogueLines.length; i++) {
-        if (!isPlayingFull) break;
-        highlightLine(i);
-
-        const current = dialogueLines[i];
-        const utterance = new SpeechSynthesisUtterance(current.text);
-        utterance.lang = 'en-US';
-        utterance.rate = 0.88;
-        utterance.pitch = current.role === 'guard' ? 0.85 : 1.15;
-
-        synth.speak(utterance);
-        await new Promise(res => {
-          utterance.onend = res;
-          utterance.onerror = res;
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          showToast('웹페이지 링크가 복사되었습니다!');
         });
-
-        await new Promise(res => setTimeout(res, 500));
       }
-
-      isPlayingFull = false;
-      highlightLine(-1);
-      playIcon.className = "ph ph-play";
-      playBtnText.innerText = "전체 대화 듣기";
     }
 
-    function highlightLine(index) {
-      const lineDoms = document.querySelectorAll('.dialogue-line');
-      lineDoms.forEach((el, idx) => {
-        if (idx === index) {
-          el.classList.add('ring-2', 'ring-emerald-500', 'rounded-2xl', 'p-1', 'transition');
-        } else {
-          el.classList.remove('ring-2', 'ring-emerald-500', 'rounded-2xl', 'p-1');
-        }
+    function copyKakaoSummary() {
+      const kakaoText = `[🇲🇾 Dunhill's everyday English in Malaysia - Day 1]
+주제: 학교 등·하교 픽업 (Drop-off & Pick-up)
+
+📖 오늘의 필수 단어 10개
+1. Pick up : 데리러 가다, 픽업하다
+2. Drop off : 차에서 내려주다
+3. Traffic : 교통, 차량 정체
+4. Late : 늦은, 지각한
+5. Instead of : ~ 대신에
+6. Authorize : 승인하다
+7. Dismissal : 하교 시간
+8. Guard house : 경비실, 정문 초소
+9. Inform : 알리다, 공지하다
+10. Belongings : 소지품
+
+🎯 오늘의 핵심 패턴 3문장
+1. I'm here to pick up [누구].
+   → "I'm here to pick up Mike from Year 5."
+   (5학년 마이크 픽업하러 왔습니다.)
+
+2. I might be [시간] late because of [이유].
+   → "I might be 10 minutes late because of heavy traffic."
+   (차가 막혀서 10분 정도 늦을 것 같아요.)
+
+3. [사람] will pick up [아이] today instead of me.
+   → "Leo's mom will pick up Mike and Clara today instead of me."
+   (오늘은 레오 엄마가 저 대신 마이크와 클라라를 픽업해 주시기로 했습니다.)
+
+🔊 원어민 음성 듣기 및 5분 테스트 풀어보기:
+${window.location.href}`;
+
+      navigator.clipboard.writeText(kakaoText).then(() => {
+        showToast('카톡 공유용 내용이 복사되었습니다!');
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = kakaoText;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('카톡 공유용 내용이 복사되었습니다!');
       });
     }
   </script>
