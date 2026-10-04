@@ -7,45 +7,52 @@
     <style>
         :root {
             --primary: #1e3a8a;
-            --primary-light: #3b82f6;
+            --primary-light: #2563eb;
             --bg: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-sub: #64748b;
-            --accent: #f59e0b;
+            --text-main: #0f172a;
+            --text-sub: #475569;
+            --accent: #d97706;
             --border: #e2e8f0;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
-        body { background-color: var(--bg); color: var(--text-main); padding: 20px 16px 60px; }
+        body { background-color: var(--bg); color: var(--text-main); padding: 24px 16px 80px; }
         .container { max-width: 680px; margin: 0 auto; }
         
-        /* Header */
-        header { text-align: center; margin-bottom: 28px; padding-top: 10px; }
+        header { text-align: center; margin-bottom: 28px; }
         header h1 { font-size: 1.55rem; font-weight: 800; color: var(--primary); margin-bottom: 6px; }
-        header p { font-size: 0.95rem; color: var(--text-sub); }
+        header p { font-size: 0.92rem; color: var(--text-sub); }
 
-        /* Report List Container */
         .report-list { display: flex; flex-direction: column; gap: 24px; }
-
-        /* Report Card */
-        .report-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.04); overflow: hidden; }
+        .report-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 14px rgba(0,0,0,0.04); overflow: hidden; }
         .card-header { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: #fff; padding: 18px 20px; }
-        .card-badge { display: inline-block; background: rgba(255,255,255,0.2); font-size: 0.75rem; padding: 3px 8px; border-radius: 6px; font-weight: 700; margin-bottom: 6px; }
-        .card-header h2 { font-size: 1.25rem; font-weight: 700; margin: 0; }
+        .card-badge { display: inline-block; background: rgba(255,255,255,0.25); font-size: 0.75rem; padding: 3px 8px; border-radius: 6px; font-weight: 700; margin-bottom: 6px; }
+        .card-header h2 { font-size: 1.25rem; font-weight: 700; }
         .card-header .topic { font-size: 0.9rem; opacity: 0.9; margin-top: 4px; }
-        .card-body { padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+        .card-body { padding: 20px; display: flex; flex-direction: column; gap: 22px; }
 
-        /* Content Sections */
-        .section-title { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-        .vocab-grid { display: flex; flex-direction: column; gap: 10px; }
-        .vocab-item { background: #f1f5f9; padding: 12px 14px; border-radius: 10px; }
-        .vocab-word { font-weight: 700; color: var(--primary); font-size: 1rem; }
-        .vocab-meaning { font-size: 0.9rem; color: var(--text-main); margin-top: 2px; }
-        .vocab-tip { font-size: 0.8rem; color: #0284c7; margin-top: 4px; }
+        .section-title { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+        
+        /* Audio Button Style */
+        .speak-btn { background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 2px 6px; border-radius: 6px; vertical-align: middle; transition: 0.2s; }
+        .speak-btn:hover { background: #e2e8f0; }
+
+        .vocab-grid { display: flex; flex-direction: column; gap: 8px; }
+        .vocab-item { background: #f8fafc; border: 1px solid var(--border); padding: 10px 14px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .vocab-content { flex: 1; }
+        .vocab-word { font-weight: 700; color: var(--primary); font-size: 0.98rem; }
+        .vocab-meaning { font-size: 0.88rem; color: var(--text-main); margin-top: 2px; }
+        .vocab-tip { font-size: 0.78rem; color: #0284c7; margin-top: 2px; }
 
         .pattern-box, .dialogue-box, .quiz-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
-        .dialogue-line { margin-bottom: 8px; font-size: 0.92rem; line-height: 1.5; }
+        .pattern-item { margin-bottom: 12px; }
+        .pattern-item:last-child { margin-bottom: 0; }
+        .pattern-title { font-weight: 700; color: var(--primary); font-size: 0.95rem; }
+        .pattern-example { font-size: 0.9rem; color: var(--text-main); margin-top: 3px; }
+
+        .dialogue-line { margin-bottom: 10px; font-size: 0.92rem; line-height: 1.5; display: flex; justify-content: space-between; align-items: flex-start; }
         .dialogue-line:last-child { margin-bottom: 0; }
+        .dialogue-text { flex: 1; }
         .speaker { font-weight: 700; color: var(--primary); }
 
         .quiz-item { margin-bottom: 12px; font-size: 0.9rem; }
@@ -63,7 +70,7 @@
 
         <main class="report-list" id="report-container">
 <!-- NEW_CARD_PLACEHOLDER -->
-            <!-- Day 1 Card (기본 유지) -->
+            <!-- Day 1 Card (단어 10개 및 오디오 탑재) -->
             <article class="report-card">
                 <div class="card-header">
                     <span class="card-badge">Day 1</span>
@@ -72,43 +79,72 @@
                 </div>
                 <div class="card-body">
                     <section>
-                        <div class="section-title">📌 오늘의 핵심 어휘 6개</div>
+                        <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
                         <div class="vocab-grid">
-                            <div class="vocab-item"><div class="vocab-word">Drop-off / Pick-up lane</div><div class="vocab-meaning">승하차 전용 차선</div><div class="vocab-tip">💡 Sunway 등 국제학교 교문 앞 드롭존에서 대기하지 않고 즉시 이동할 때 씁니다.</div></div>
-                            <div class="vocab-item"><div class="vocab-word">Pick-up card / Parent pass</div><div class="vocab-meaning">학부모 픽업 신분증/차량 등록증</div><div class="vocab-tip">💡 가드(보안 요원)에게 차량 앞유리로 보여주며 확인받는 카드입니다.</div></div>
-                            <div class="vocab-item"><div class="vocab-word">After-school activity (CCA/ECA)</div><div class="vocab-meaning">방과 후 클럽 활동</div><div class="vocab-tip">💡 아이 방과 후 스포츠나 액티비티 시간 확인할 때 필수 어휘입니다.</div></div>
-                            <div class="vocab-item"><div class="vocab-word">Car line / Queue</div><div class="vocab-meaning">차량 대기줄</div><div class="vocab-tip">💡 하원 피크 시간대 차량 줄이 길 때 교문 스태프가 정리하며 쓰는 표현입니다.</div></div>
-                            <div class="vocab-item"><div class="vocab-word">Sign out</div><div class="vocab-meaning">조기 하원 서명 / 출석 기록부 확인</div><div class="vocab-tip">💡 조퇴하거나 일찍 데려갈 때 리셉션에서 서명할 때 씁니다.</div></div>
-                            <div class="vocab-item"><div class="vocab-word">Guard house</div><div class="vocab-meaning">정문 보안초소</div><div class="vocab-tip">💡 정문 통과 전 방문증 교환이나 차량 검문이 이루어지는 곳입니다.</div></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Drop-off lane</div><div class="vocab-meaning">승하차 전용 차선</div><div class="vocab-tip">💡 Sunway 등 교문 앞 정차 없이 바로 하차시키는 구역</div></div><button class="speak-btn" onclick="playAudio('Drop-off lane')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Pick-up card</div><div class="vocab-meaning">학부모 픽업 등록증 / 카드</div><div class="vocab-tip">💡 하원 시 차량 앞유리에 부착하거나 가드에게 제시하는 신분증</div></div><button class="speak-btn" onclick="playAudio('Pick-up card')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Guard house</div><div class="vocab-meaning">정문 보안초소</div><div class="vocab-tip">💡 방문 등록 및 외부 차량 검문소</div></div><button class="speak-btn" onclick="playAudio('Guard house')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. ECA / CCA</div><div class="vocab-meaning">방과 후 특별 활동</div><div class="vocab-tip">💡 Extra-Curricular / Co-Curricular Activity의 약어</div></div><button class="speak-btn" onclick="playAudio('Extra-Curricular Activities')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Sign out</div><div class="vocab-meaning">조기 하원 서명부 작성</div><div class="vocab-tip">💡 아이가 조퇴하거나 일찍 갈 때 리셉션에 기록하는 절차</div></div><button class="speak-btn" onclick="playAudio('Sign out')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Car line</div><div class="vocab-meaning">하원 차량 대기줄</div><div class="vocab-tip">💡 피크 시간대 차량 행렬 대기선</div></div><button class="speak-btn" onclick="playAudio('Car line')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Foyer / Lobby</div><div class="vocab-meaning">학교 중앙 홀 / 로비</div><div class="vocab-tip">💡 아이들이 부모님을 대기하는 1층 실내 공간</div></div><button class="speak-btn" onclick="playAudio('Foyer')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Authorised person</div><div class="vocab-meaning">지정 대리 픽업자</div><div class="vocab-tip">💡 부모 외 다른 사람이 픽업할 때 학교에 사전 등록된 대리인</div></div><button class="speak-btn" onclick="playAudio('Authorised person')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Pull up</div><div class="vocab-meaning">앞으로 차를 바짝 대다</div><div class="vocab-tip">💡 가드가 "Please pull up to the front"라고 차선 정리를 지시할 때 씀</div></div><button class="speak-btn" onclick="playAudio('Pull up')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. School dismissal</div><div class="vocab-meaning">정규 수업 종료 / 하원 시간</div><div class="vocab-tip">💡 학교가 공식적으로 끝나는 정규 하교 시점</div></div><button class="speak-btn" onclick="playAudio('School dismissal')">🔊</button></div>
                         </div>
                     </section>
                     <section>
                         <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
                         <div class="pattern-box">
-                            <p><strong>1. I'm here to pick up [아이 이름].</strong> (저 [아이 이름] 데리러 왔어요.)</p>
-                            <p style="margin-top:6px;"><strong>2. He/She has an after-school class today.</strong> (오늘 아이가 방과 후 수업이 있어요.)</p>
-                            <p style="margin-top:6px;"><strong>3. Could you please call [아이 이름] to the foyer?</strong> (아이를 로비/승하차 구역으로 불러주실 수 있나요?)</p>
+                            <div class="pattern-item">
+                                <div class="pattern-title">Pattern 1. I'm here to pick up [아이 이름]. <button class="speak-btn" onclick="playAudio('I am here to pick up my child.')">🔊</button></div>
+                                <div class="pattern-example">저 아이 픽업하러 왔습니다.</div>
+                            </div>
+                            <div class="pattern-item">
+                                <div class="pattern-title">Pattern 2. He/She has an ECA today, so dismissal is at 4. <button class="speak-btn" onclick="playAudio('He has an ECA today, so dismissal is at four.')">🔊</button></div>
+                                <div class="pattern-example">오늘 아이 방과 후 수업이 있어서 4시에 끝나요.</div>
+                            </div>
+                            <div class="pattern-item">
+                                <div class="pattern-title">Pattern 3. Could you please call [아이 이름] to Bay 2? <button class="speak-btn" onclick="playAudio('Could you please call my child to Bay two?')">🔊</button></div>
+                                <div class="pattern-example">아이를 2번 베이 쪽으로 불러내어 주실 수 있나요?</div>
+                            </div>
                         </div>
                     </section>
                     <section>
-                        <div class="section-title">💬 실전 롤플레잉 대화문 (드롭존 상황)</div>
+                        <div class="section-title">💬 실전 롤플레잉 대화문</div>
                         <div class="dialogue-box">
-                            <div class="dialogue-line"><span class="speaker">Parent:</span> Good afternoon, sir. Here is my pick-up card. I'm here for Day 1 pick-up.</div>
-                            <div class="dialogue-line"><span class="speaker">Guard:</span> Good afternoon. Please pull up to Bay 3. The teacher will bring your children out.</div>
-                            <div class="dialogue-line"><span class="speaker">Parent:</span> Thank you! Could you please let them know their father is waiting?</div>
-                            <div class="dialogue-line"><span class="speaker">Guard:</span> Sure, give it just a minute. Drive safely!</div>
+                            <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent:</span> Good afternoon, sir. Here is my pick-up pass.</div><button class="speak-btn" onclick="playAudio('Good afternoon, sir. Here is my pick-up pass.')">🔊</button></div>
+                            <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Guard:</span> Good afternoon. Please pull up to Bay 3. The teacher will escort the students out.</div><button class="speak-btn" onclick="playAudio('Good afternoon. Please pull up to Bay 3. The teacher will escort the students out.')">🔊</button></div>
+                            <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent:</span> Thank you! Could you please let my son know his dad is waiting?</div><button class="speak-btn" onclick="playAudio('Thank you! Could you please let my son know his dad is waiting?')">🔊</button></div>
+                            <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Guard:</span> Sure, give it just a moment. Drive safely!</div><button class="speak-btn" onclick="playAudio('Sure, give it just a moment. Drive safely!')">🔊</button></div>
                         </div>
                     </section>
                     <section>
                         <div class="section-title">✍️ 1분 셀프 테스트</div>
                         <div class="quiz-box">
-                            <div class="quiz-item"><div class="quiz-q">Q1. '방과 후 활동'을 국제학교에서 부르는 약어는?</div><div class="quiz-a">정답: CCA 또는 ECA</div></div>
-                            <div class="quiz-item"><div class="quiz-q">Q2. "저 아이 픽업하러 왔습니다"를 영어로?</div><div class="quiz-a">정답: I'm here to pick up my child.</div></div>
+                            <div class="quiz-item"><div class="quiz-q">Q1. 학교 '방과 후 액티비티'를 부르는 대표적인 두 가지 약어는?</div><div class="quiz-a">정답: ECA / CCA</div></div>
+                            <div class="quiz-item"><div class="quiz-q">Q2. 가드가 "앞쪽으로 차를 바짝 대세요"라고 할 때 쓰는 동사 표현은?</div><div class="quiz-a">정답: Pull up</div></div>
+                            <div class="quiz-item"><div class="quiz-q">Q3. "저 [아이 이름] 픽업하러 왔습니다"를 영어로 말하면?</div><div class="quiz-a">정답: I'm here to pick up [아이 이름].</div></div>
                         </div>
                     </section>
                 </div>
             </article>
         </main>
     </div>
+
+    <!-- Web Speech TTS 엔진: 스마트폰/PC에서 누르면 즉시 원어민 발음 재생 -->
+    <script>
+        function playAudio(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.88;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('이 브라우저는 음성 듣기를 지원하지 않습니다.');
+            }
+        }
+    </script>
 </body>
 </html>
