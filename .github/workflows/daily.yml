@@ -1,0 +1,41 @@
+name: Daily English Auto Publish
+
+on:
+  schedule:
+    # UTC 기준 21:50 = 말레이시아/한국 시간 기준 매일 아침 05:50
+    - cron: '50 21 * * *'
+  workflow_dispatch: # Actions 탭에서 수동으로 즉시 테스트 실행 가능하게 해주는 설정
+
+permissions:
+  contents: write # GitHub Actions가 index.html 수정 사항을 커밋하고 푸시할 수 있도록 권한 부여
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 코드 불러오기
+        uses: actions/checkout@v4
+
+      - name: 파이썬 실행 환경 설정
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 필요한 파이썬 라이브러리 설치
+        run: |
+          pip install google-generativeai requests
+
+      - name: 리포트 자동 생성 및 카카오톡 링크 전송 실행
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          KAKAO_REFRESH_TOKEN: ${{ secrets.KAKAO_REFRESH_TOKEN }}
+        run: python auto_publish.py
+
+      - name: 새로 생성된 index.html 커밋 및 배포
+        run: |
+          git config --global user.name "DailyBot"
+          git config --global user.email "bot@github.com"
+          git add index.html
+          git commit -m "Auto-update English report [skip ci]" || echo "No changes to commit"
+          git push
