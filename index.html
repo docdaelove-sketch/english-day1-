@@ -33,7 +33,7 @@
 
         .section-title { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
         
-        /* Audio Button Style */
+        /* Audio Button */
         .speak-btn { background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 2px 6px; border-radius: 6px; vertical-align: middle; transition: 0.2s; }
         .speak-btn:hover { background: #e2e8f0; }
 
@@ -55,76 +55,89 @@
         .dialogue-text { flex: 1; }
         .speaker { font-weight: 700; color: var(--primary); }
 
-        .quiz-item { margin-bottom: 12px; font-size: 0.9rem; }
-        .quiz-item:last-child { margin-bottom: 0; }
-        .quiz-q { font-weight: 600; margin-bottom: 4px; }
-        .quiz-a { color: var(--accent); font-weight: 600; }
+        /* Click to Reveal Quiz Details */
+        details.quiz-item { margin-bottom: 10px; background: #ffffff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; cursor: pointer; }
+        details.quiz-item:last-child { margin-bottom: 0; }
+        details.quiz-item summary { font-weight: 600; font-size: 0.9rem; outline: none; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        details.quiz-item summary::-webkit-details-marker { display: none; }
+        details.quiz-item summary::after { content: '👉 정답 확인'; font-size: 0.8rem; color: var(--primary-light); font-weight: 700; }
+        details[open].quiz-item summary::after { content: '닫기'; color: var(--text-sub); }
+        .quiz-answer-content { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); font-size: 0.9rem; color: var(--accent); font-weight: 700; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>🇲🇾 Dunhill's Everyday English</h1>
-            <p>말레이시아 현지 생활 & 국제학교 학부모를 위한 매일 실전 회화</p>
+            <p>Sunway International School 학부모 실전 회화</p>
         </header>
 
         <main class="report-list" id="report-container">
 <!-- NEW_CARD_PLACEHOLDER -->
-            <!-- Day 1 Card (단어 10개 및 오디오 탑재) -->
+            <!-- Day 1 Card (Mike, Clara, Block B, 정답 클릭 토글 완비) -->
             <article class="report-card">
                 <div class="card-header">
                     <span class="card-badge">Day 1</span>
-                    <h2>국제학교 등하원 & 픽업 실전 회화</h2>
-                    <div class="topic">드롭오프 존 소통, 픽업 카드 제시, 방과 후 레슨 문의</div>
+                    <h2>Sunway International School 등하원 & 픽업 실전 회화</h2>
+                    <div class="topic">드롭존 소통, 픽업 패스 확인, 하원 지연 및 Block B 픽업</div>
                 </div>
                 <div class="card-body">
                     <section>
                         <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
                         <div class="vocab-grid">
-                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Drop-off lane</div><div class="vocab-meaning">승하차 전용 차선</div><div class="vocab-tip">💡 Sunway 등 교문 앞 정차 없이 바로 하차시키는 구역</div></div><button class="speak-btn" onclick="playAudio('Drop-off lane')">🔊</button></div>
-                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Pick-up card</div><div class="vocab-meaning">학부모 픽업 등록증 / 카드</div><div class="vocab-tip">💡 하원 시 차량 앞유리에 부착하거나 가드에게 제시하는 신분증</div></div><button class="speak-btn" onclick="playAudio('Pick-up card')">🔊</button></div>
-                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Guard house</div><div class="vocab-meaning">정문 보안초소</div><div class="vocab-tip">💡 방문 등록 및 외부 차량 검문소</div></div><button class="speak-btn" onclick="playAudio('Guard house')">🔊</button></div>
-                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. ECA / CCA</div><div class="vocab-meaning">방과 후 특별 활동</div><div class="vocab-tip">💡 Extra-Curricular / Co-Curricular Activity의 약어</div></div><button class="speak-btn" onclick="playAudio('Extra-Curricular Activities')">🔊</button></div>
-                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Sign out</div><div class="vocab-meaning">조기 하원 서명부 작성</div><div class="vocab-tip">💡 아이가 조퇴하거나 일찍 갈 때 리셉션에 기록하는 절차</div></div><button class="speak-btn" onclick="playAudio('Sign out')">🔊</button></div>
-                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Car line</div><div class="vocab-meaning">하원 차량 대기줄</div><div class="vocab-tip">💡 피크 시간대 차량 행렬 대기선</div></div><button class="speak-btn" onclick="playAudio('Car line')">🔊</button></div>
-                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Foyer / Lobby</div><div class="vocab-meaning">학교 중앙 홀 / 로비</div><div class="vocab-tip">💡 아이들이 부모님을 대기하는 1층 실내 공간</div></div><button class="speak-btn" onclick="playAudio('Foyer')">🔊</button></div>
-                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Authorised person</div><div class="vocab-meaning">지정 대리 픽업자</div><div class="vocab-tip">💡 부모 외 다른 사람이 픽업할 때 학교에 사전 등록된 대리인</div></div><button class="speak-btn" onclick="playAudio('Authorised person')">🔊</button></div>
-                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Pull up</div><div class="vocab-meaning">앞으로 차를 바짝 대다</div><div class="vocab-tip">💡 가드가 "Please pull up to the front"라고 차선 정리를 지시할 때 씀</div></div><button class="speak-btn" onclick="playAudio('Pull up')">🔊</button></div>
-                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. School dismissal</div><div class="vocab-meaning">정규 수업 종료 / 하원 시간</div><div class="vocab-tip">💡 학교가 공식적으로 끝나는 정규 하교 시점</div></div><button class="speak-btn" onclick="playAudio('School dismissal')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Drop-off bay</div><div class="vocab-meaning">승하차 전용 구역</div><div class="vocab-tip">💡 아침 등교 시 주차하지 않고 아이만 바로 내리게 하는 곳</div></div><button class="speak-btn" onclick="playAudio('Drop-off bay')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Pick-up pass</div><div class="vocab-meaning">학부모 픽업 등록증 / 카드</div><div class="vocab-tip">💡 하원 시 보안 가드에게 제시하거나 대시보드에 올려두는 패스</div></div><button class="speak-btn" onclick="playAudio('Pick-up pass')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Guard post</div><div class="vocab-meaning">정문 경비 초소</div><div class="vocab-tip">💡 학교 출입 시 차량 등록과 신분증 확인을 진행하는 부스</div></div><button class="speak-btn" onclick="playAudio('Guard post')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. CCA (Co-Curricular Activity)</div><div class="vocab-meaning">방과 후 특별 활동</div><div class="vocab-tip">💡 수영, 축구, 악기 등 하교 후 참여하는 클럽 액티비티</div></div><button class="speak-btn" onclick="playAudio('Co Curricular Activity')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Early dismissal</div><div class="vocab-meaning">조퇴 / 조기 하원</div><div class="vocab-tip">💡 병원 진료나 개인 사정으로 정규 시간보다 일찍 데려갈 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Early dismissal')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Move forward / Pull up</div><div class="vocab-meaning">차를 앞으로 바짝 대다</div><div class="vocab-tip">💡 가드가 뒤차 통행을 위해 앞쪽으로 당겨달라고 손짓하며 하는 말</div></div><button class="speak-btn" onclick="playAudio('Move forward, please')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Foyer</div><div class="vocab-meaning">학교 중앙 현관 로비</div><div class="vocab-tip">💡 하원 시간 아이들이 가방을 메고 대기하는 1층 실내 구역</div></div><button class="speak-btn" onclick="playAudio('Foyer')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Authorized guardian</div><div class="vocab-meaning">사전 등록된 대리 픽업자</div><div class="vocab-tip">💡 부모 대신 친구 엄마나 기사가 데리러 갈 때 쓰는 공식 용어</div></div><button class="speak-btn" onclick="playAudio('Authorized guardian')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Block B</div><div class="vocab-meaning">B동 교사 건물 / 픽업 장소</div><div class="vocab-tip">💡 SIS 캠퍼스 내 특정 교실이나 클럽 활동이 진행되는 동</div></div><button class="speak-btn" onclick="playAudio('Block B')">🔊</button></div>
+                            <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Sign-out sheet</div><div class="vocab-meaning">조기 하원 출석 확인 대장</div><div class="vocab-tip">💡 행정실(Admin)에서 아이 픽업 확인 서명할 때 쓰는 서식</div></div><button class="speak-btn" onclick="playAudio('Sign out sheet')">🔊</button></div>
                         </div>
                     </section>
                     <section>
                         <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
                         <div class="pattern-box">
                             <div class="pattern-item">
-                                <div class="pattern-title">Pattern 1. I'm here to pick up [아이 이름]. <button class="speak-btn" onclick="playAudio('I am here to pick up my child.')">🔊</button></div>
-                                <div class="pattern-example">저 아이 픽업하러 왔습니다.</div>
+                                <div class="pattern-title">Pattern 1. I'm here to pick up Mike and Clara. <button class="speak-btn" onclick="playAudio('I am here to pick up Mike and Clara.')">🔊</button></div>
+                                <div class="pattern-example">저 마이크랑 클라라 픽업하러 왔습니다.</div>
                             </div>
                             <div class="pattern-item">
-                                <div class="pattern-title">Pattern 2. He/She has an ECA today, so dismissal is at 4. <button class="speak-btn" onclick="playAudio('He has an ECA today, so dismissal is at four.')">🔊</button></div>
-                                <div class="pattern-example">오늘 아이 방과 후 수업이 있어서 4시에 끝나요.</div>
+                                <div class="pattern-title">Pattern 2. Could you please call Mike to Block B? <button class="speak-btn" onclick="playAudio('Could you please call Mike to Block B?')">🔊</button></div>
+                                <div class="pattern-example">마이크를 B동 출구 쪽으로 불러내어 주실 수 있나요?</div>
                             </div>
                             <div class="pattern-item">
-                                <div class="pattern-title">Pattern 3. Could you please call [아이 이름] to Bay 2? <button class="speak-btn" onclick="playAudio('Could you please call my child to Bay two?')">🔊</button></div>
-                                <div class="pattern-example">아이를 2번 베이 쪽으로 불러내어 주실 수 있나요?</div>
+                                <div class="pattern-title">Pattern 3. Clara has a CCA today, so dismissal is at 4:30. <button class="speak-btn" onclick="playAudio('Clara has a CCA today, so dismissal is at 4 30.')">🔊</button></div>
+                                <div class="pattern-example">클라라는 오늘 방과 후 활동이 있어서 4시 30분에 끝나요.</div>
                             </div>
                         </div>
                     </section>
                     <section>
-                        <div class="section-title">💬 실전 롤플레잉 대화문</div>
+                        <div class="section-title">💬 실전 롤플레잉 대화문 (Sunway 교문 앞 상황)</div>
                         <div class="dialogue-box">
-                            <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent:</span> Good afternoon, sir. Here is my pick-up pass.</div><button class="speak-btn" onclick="playAudio('Good afternoon, sir. Here is my pick-up pass.')">🔊</button></div>
-                            <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Guard:</span> Good afternoon. Please pull up to Bay 3. The teacher will escort the students out.</div><button class="speak-btn" onclick="playAudio('Good afternoon. Please pull up to Bay 3. The teacher will escort the students out.')">🔊</button></div>
-                            <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent:</span> Thank you! Could you please let my son know his dad is waiting?</div><button class="speak-btn" onclick="playAudio('Thank you! Could you please let my son know his dad is waiting?')">🔊</button></div>
-                            <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Guard:</span> Sure, give it just a moment. Drive safely!</div><button class="speak-btn" onclick="playAudio('Sure, give it just a moment. Drive safely!')">🔊</button></div>
+                            <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent:</span> Good afternoon! Here is my pick-up pass. I'm here for Mike and Clara.</div><button class="speak-btn" onclick="playAudio('Good afternoon! Here is my pick-up pass. I am here for Mike and Clara.')">🔊</button></div>
+                            <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Guard:</span> Good afternoon, sir. Please move forward and pull up in front of Block B.</div><button class="speak-btn" onclick="playAudio('Good afternoon, sir. Please move forward and pull up in front of Block B.')">🔊</button></div>
+                            <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent:</span> Got it. Clara is in the foyer with Sinwoo right now, right?</div><button class="speak-btn" onclick="playAudio('Got it. Clara is in the foyer with Sinwoo right now, right?')">🔊</button></div>
+                            <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Guard:</span> Yes, they are right there. The teacher is bringing them out now.</div><button class="speak-btn" onclick="playAudio('Yes, they are right there. The teacher is bringing them out now.')">🔊</button></div>
                         </div>
                     </section>
                     <section>
-                        <div class="section-title">✍️ 1분 셀프 테스트</div>
+                        <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
                         <div class="quiz-box">
-                            <div class="quiz-item"><div class="quiz-q">Q1. 학교 '방과 후 액티비티'를 부르는 대표적인 두 가지 약어는?</div><div class="quiz-a">정답: ECA / CCA</div></div>
-                            <div class="quiz-item"><div class="quiz-q">Q2. 가드가 "앞쪽으로 차를 바짝 대세요"라고 할 때 쓰는 동사 표현은?</div><div class="quiz-a">정답: Pull up</div></div>
-                            <div class="quiz-item"><div class="quiz-q">Q3. "저 [아이 이름] 픽업하러 왔습니다"를 영어로 말하면?</div><div class="quiz-a">정답: I'm here to pick up [아이 이름].</div></div>
+                            <details class="quiz-item">
+                                <summary>Q1. 학교 보안 요원에게 "저 마이크 데리러 왔어요"라고 할 때 가장 알맞은 말은?</summary>
+                                <div class="quiz-answer-content">정답: "I'm here to pick up Mike."</div>
+                            </details>
+                            <details class="quiz-item">
+                                <summary>Q2. 가드가 뒤차 통행을 위해 "앞쪽으로 차를 당겨주세요"라고 할 때 쓰는 표현은?</summary>
+                                <div class="quiz-answer-content">정답: "Please move forward" 또는 "Please pull up."</div>
+                            </details>
+                            <details class="quiz-item">
+                                <summary>Q3. "마이크를 B동 쪽으로 불러주실 수 있나요?"를 영어로 말하면?</summary>
+                                <div class="quiz-answer-content">정답: "Could you please call Mike to Block B?"</div>
+                            </details>
                         </div>
                     </section>
                 </div>
@@ -132,7 +145,7 @@
         </main>
     </div>
 
-    <!-- Web Speech TTS 엔진: 스마트폰/PC에서 누르면 즉시 원어민 발음 재생 -->
+    <!-- Web Speech TTS 엔진 -->
     <script>
         function playAudio(text) {
             if ('speechSynthesis' in window) {
