@@ -93,20 +93,36 @@ def send_kakao_message(link_url, title_text):
         print("카카오 토큰 갱신 실패:", token_res)
         return
 
-    # 나에게 메시지 전송 (버튼 및 링크 적용)
+    # 나에게 메시지 전송 (본문 직접 링크 + 하단 버튼 이중 적용)
     msg_url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
     headers = {
         "Authorization": f"Bearer {access_token}",
         "Content-Type": "application/x-www-form-urlencoded"
     }
+    
+    message_text = (
+        f"[오늘의 영어 리포트 도착]\n"
+        f"{title_text}\n\n"
+        f"아래 링크를 누르면 오늘 자 리포트로 바로 이동합니다:\n"
+        f"{link_url}"
+    )
+    
     template = {
         "object_type": "text",
-        "text": f"[오늘의 영어 리포트 도착]\n{title_text}\n\n오늘의 학습 리포트가 업데이트되었습니다. 아래 버튼을 눌러 확인해보세요!",
+        "text": message_text,
         "link": {
             "web_url": link_url,
             "mobile_web_url": link_url
         },
-        "button_title": "리포트 바로보기"
+        "buttons": [
+            {
+                "title": "리포트 바로보기",
+                "link": {
+                    "web_url": link_url,
+                    "mobile_web_url": link_url
+                }
+            }
+        ]
     }
     
     res = requests.post(msg_url, headers=headers, data={"template_object": json.dumps(template, ensure_ascii=False)})
