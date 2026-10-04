@@ -77,6 +77,8 @@ print(f"index.html 업데이트 완료: {day_title}")
 
 # 5. 카카오톡 액세스 토큰 갱신 및 본인에게 링크 전송
 def send_kakao_message(link_url, title_text):
+    import json
+    
     # 토큰 갱신 요청
     token_url = "https://kauth.kakao.com/oauth/token"
     token_data = {
@@ -91,21 +93,23 @@ def send_kakao_message(link_url, title_text):
         print("카카오 토큰 갱신 실패:", token_res)
         return
 
-    # 나에게 메시지 전송
+    # 나에게 메시지 전송 (버튼 및 링크 적용)
     msg_url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
-    headers = {"Authorization": f"Bearer {access_token}"}
-    payload = {
-        "template_object": f'''{{
-            "object_type": "text",
-            "text": "[오늘의 영어 리포트 도착]\\n{title_text}\\n웹페이지가 업데이트되었습니다. 아래 링크를 눌러 확인하고 공유해보세요!",
-            "link": {{
-                "web_url": "{link_url}",
-                "mobile_web_url": "{link_url}"
-            }},
-            "button_title": "리포트 확인하기"
-        }}'''
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/x-www-form-urlencoded"
     }
-    res = requests.post(msg_url, headers=headers, data=payload)
+    template = {
+        "object_type": "text",
+        "text": f"[오늘의 영어 리포트 도착]\n{title_text}\n\n오늘의 학습 리포트가 업데이트되었습니다. 아래 버튼을 눌러 확인해보세요!",
+        "link": {
+            "web_url": link_url,
+            "mobile_web_url": link_url
+        },
+        "button_title": "리포트 바로보기"
+    }
+    
+    res = requests.post(msg_url, headers=headers, data={"template_object": json.dumps(template, ensure_ascii=False)})
     print("카카오톡 전송 결과:", res.status_code, res.text)
 
 # GitHub Pages 웹사이트 주소
