@@ -34,16 +34,6 @@ day_title, topic_desc = curriculum.get(weekday, ("Daily English", "말레이시�
 genai.configure(api_key=GEMINI_KEY)
 model = genai.GenerativeModel("gemini-3.8-flash")
 
-# 사용 가능한 generateContent 지원 모델 중 최신 모델 자동 선택
-available_models = [
-    m.name for m in genai.list_models() 
-    if "generateContent" in m.supported_generation_methods
-]
-chosen_model = next((m for m in available_models if "flash" in m), available_models[0])
-print(f"선택된 모델: {chosen_model}")
-
-model = genai.GenerativeModel(chosen_model)
-
 if weekday == 5:
     # 토요일: 주간 총정리 테스트 양식
     prompt = f"""
