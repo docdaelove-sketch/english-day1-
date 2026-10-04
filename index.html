@@ -1,562 +1,484 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dunhill's everyday English in Malaysia - Day 1</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Phosphor Icons -->
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap');
-    body {
-      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .speaking-active {
-      background-color: #fef08a !important;
-      border-color: #eab308 !important;
-      transform: scale(1.01);
-      transition: all 0.2s ease;
-    }
-  </style>
-</head>
-<body class="bg-slate-50 text-slate-800 pb-28 min-h-screen antialiased flex flex-col justify-between">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Day 2] 말레이시아 실전 영어: 레스토랑 주문 & 계산</title>
+    <style>
+        :root {
+            --primary: #0F766E;
+            --primary-light: #CCFBF1;
+            --secondary: #D97706;
+            --secondary-light: #FEF3C7;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --bg-page: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --border-color: #E2E8F0;
+            --accent-tag: #0284C7;
+        }
 
-  <div>
-    <!-- Top Branding & Navigation Bar -->
-    <header class="bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 text-white shadow-md sticky top-0 z-30">
-      <div class="max-w-xl mx-auto px-4 py-3.5 flex justify-between items-center">
-        <div>
-          <!-- Requested top branding text -->
-          <p class="text-xs uppercase tracking-wider font-extrabold text-emerald-200">Dunhill's everyday English in Malaysia</p>
-          <h1 class="text-base sm:text-lg font-bold tracking-tight mt-0.5">Day 1. 학교 등·하교 픽업 (Drop-off & Pick-up)</h1>
-        </div>
-        <button onclick="shareLink()" class="p-2.5 bg-white/15 hover:bg-white/25 active:scale-95 rounded-full transition flex items-center justify-center text-white shrink-0 shadow-inner" title="웹페이지 링크 공유">
-          <i class="ph ph-share-network text-lg"></i>
-        </button>
-      </div>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0F766E, #115E59);
+            color: white;
+            padding: 28px 20px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.15);
+        }
+
+        .header-tag {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #FEF3C7;
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .header-desc {
+            font-size: 0.95rem;
+            color: #E6FFFA;
+            opacity: 0.95;
+        }
+
+        /* Card common */
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 22px 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .section-title span.badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 8px;
+            font-size: 0.85rem;
+        }
+
+        /* Section 1: Vocabulary */
+        .voca-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .voca-item {
+            background: #F8FAFC;
+            border-left: 4px solid var(--primary);
+            padding: 12px 14px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .voca-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .voca-word {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0F172A;
+        }
+
+        .voca-meaning {
+            font-size: 0.9rem;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        .local-tip {
+            margin-top: 6px;
+            font-size: 0.83rem;
+            background-color: #FEF3C7;
+            color: #92400E;
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* Section 2: Patterns */
+        .pattern-box {
+            margin-bottom: 18px;
+            background-color: #F8FAFC;
+            border: 1px dashed #CBD5E1;
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .pattern-box:last-child {
+            margin-bottom: 0;
+        }
+
+        .pattern-title {
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .pattern-title::before {
+            content: "★";
+            margin-right: 6px;
+            color: var(--secondary);
+        }
+
+        .pattern-sentence {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0F172A;
+            margin-bottom: 4px;
+        }
+
+        .pattern-ko {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        /* Section 3: Dialogue */
+        .dialogue-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .bubble {
+            max-width: 88%;
+            padding: 12px 14px;
+            border-radius: 14px;
+            font-size: 0.92rem;
+            position: relative;
+        }
+
+        .bubble-mom {
+            align-self: flex-end;
+            background: #E0F2FE;
+            color: #0369A1;
+            border-bottom-right-radius: 2px;
+        }
+
+        .bubble-staff {
+            align-self: flex-start;
+            background: #F1F5F9;
+            color: #334155;
+            border-bottom-left-radius: 2px;
+        }
+
+        .speaker-name {
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+
+        .trans {
+            font-size: 0.8rem;
+            color: #64748B;
+            margin-top: 4px;
+            display: block;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            padding-top: 4px;
+        }
+
+        /* Section 4: Self Test */
+        .quiz-item {
+            margin-bottom: 14px;
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .quiz-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .quiz-question {
+            font-size: 0.93rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1E293B;
+        }
+
+        .quiz-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            font-size: 0.82rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-btn:hover {
+            background-color: #115E59;
+        }
+
+        .quiz-answer {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #ECFDF5;
+            border-left: 3px solid #10B981;
+            border-radius: 4px;
+            font-size: 0.88rem;
+            color: #065F46;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #94A3B8;
+            padding: 16px 0 24px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <header>
+        <span class="header-tag">MALAYSIA SURVIVAL ENGLISH · DAY 2</span>
+        <h1>레스토랑 주문 & 분할 계산</h1>
+        <p class="header-desc">아이 동반 자리 잡기부터 맵기/얼음 조절, 학부모 모임 더치페이까지 당당하게 영어로 소통해보세요!</p>
     </header>
 
-    <!-- Quick Audio Guide Notice -->
-    <div class="max-w-xl mx-auto px-4 mt-3">
-      <div class="bg-emerald-50 border border-emerald-200/80 text-emerald-900 text-xs px-3.5 py-2.5 rounded-xl flex items-center gap-2.5 shadow-sm">
-        <i class="ph ph-speaker-high text-base text-emerald-600 shrink-0"></i>
-        <span>단어나 문장 옆의 <strong>스피커 아이콘</strong>을 누르면 원어민 발음으로 또박또박 읽어줍니다.</span>
-      </div>
-    </div>
-
-    <main class="max-w-xl mx-auto px-4 py-4 space-y-5">
-
-      <!-- 1. 오늘의 단어 10개 -->
-      <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
-        <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
-          <div class="flex items-center gap-2">
-            <span class="w-6 h-6 bg-emerald-100 text-emerald-700 font-bold rounded-lg flex items-center justify-center text-xs">1</span>
-            <h2 class="text-base font-bold text-slate-800">오늘의 필수 단어 10개</h2>
-          </div>
-          <button onclick="playAllVocab()" class="text-xs text-emerald-600 hover:text-emerald-700 font-semibold flex items-center gap-1">
-            <i class="ph ph-play-circle"></i> 단어 연속 듣기
-          </button>
-        </div>
-
-        <div class="divide-y divide-slate-100" id="vocabContainer">
-          <!-- Rendered via JavaScript -->
-        </div>
-      </section>
-
-      <!-- 2. 핵심 패턴 3개 -->
-      <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
-        <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
-          <div class="flex items-center gap-2">
-            <span class="w-6 h-6 bg-amber-100 text-amber-700 font-bold rounded-lg flex items-center justify-center text-xs">2</span>
-            <h2 class="text-base font-bold text-slate-800">핵심 실전 패턴 3문장</h2>
-          </div>
-          <span class="text-xs text-slate-400 font-medium">Core Patterns</span>
-        </div>
-
-        <div class="space-y-4">
-          <!-- Pattern 1 -->
-          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-200/90">
-            <div class="flex justify-between items-start gap-2">
-              <div>
-                <span class="text-[11px] font-bold px-2 py-0.5 bg-amber-500 text-white rounded">Pattern 1</span>
-                <p class="font-bold text-slate-900 text-sm mt-1">I'm here to pick up [누구].</p>
-                <p class="text-xs text-slate-500">~를 데리러(픽업하러) 왔습니다.</p>
-              </div>
-              <button onclick="playTTS('I am here to pick up Mike from Year 5.')" class="p-2 text-amber-600 hover:bg-amber-100 rounded-full transition shrink-0" aria-label="발음 듣기">
-                <i class="ph ph-speaker-high text-lg"></i>
-              </button>
-            </div>
-            <div class="mt-2.5 pt-2.5 border-t border-slate-200/70 space-y-2 text-xs">
-              <div class="flex items-center justify-between hover:bg-white p-1 rounded-lg transition cursor-pointer" onclick="playTTS('I am here to pick up Mike from Year 5.')">
-                <p class="text-slate-700">📌 <em>"I'm here to pick up <strong>Mike from Year 5</strong>."</em><br><span class="text-slate-500 text-[11px]">(5학년 마이크 픽업하러 왔습니다.)</span></p>
-                <button class="text-slate-400 hover:text-amber-600 p-1"><i class="ph ph-speaker-simple-high"></i></button>
-              </div>
-              <div class="flex items-center justify-between hover:bg-white p-1 rounded-lg transition cursor-pointer" onclick="playTTS('I am here to pick up Clara from Year 4.')">
-                <p class="text-slate-700">📌 <em>"I'm here to pick up <strong>Clara from Year 4</strong>."</em><br><span class="text-slate-500 text-[11px]">(4학년 클라라 데리러 왔습니다.)</span></p>
-                <button class="text-slate-400 hover:text-amber-600 p-1"><i class="ph ph-speaker-simple-high"></i></button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pattern 2 -->
-          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-200/90">
-            <div class="flex justify-between items-start gap-2">
-              <div>
-                <span class="text-[11px] font-bold px-2 py-0.5 bg-amber-500 text-white rounded">Pattern 2</span>
-                <p class="font-bold text-slate-900 text-sm mt-1">I might be [시간] late because of [이유].</p>
-                <p class="text-xs text-slate-500">~ 때문에 [몇 분] 정도 늦을 것 같습니다.</p>
-              </div>
-              <button onclick="playTTS('I might be 10 minutes late because of heavy traffic.')" class="p-2 text-amber-600 hover:bg-amber-100 rounded-full transition shrink-0" aria-label="발음 듣기">
-                <i class="ph ph-speaker-high text-lg"></i>
-              </button>
-            </div>
-            <div class="mt-2.5 pt-2.5 border-t border-slate-200/70 space-y-2 text-xs">
-              <div class="flex items-center justify-between hover:bg-white p-1 rounded-lg transition cursor-pointer" onclick="playTTS('I might be 10 minutes late because of heavy traffic.')">
-                <p class="text-slate-700">📌 <em>"I might be <strong>10 minutes late</strong> because of <strong>heavy traffic</strong>."</em><br><span class="text-slate-500 text-[11px]">(차가 많이 막혀서 10분 정도 늦을 것 같아요.)</span></p>
-                <button class="text-slate-400 hover:text-amber-600 p-1"><i class="ph ph-speaker-simple-high"></i></button>
-              </div>
-              <div class="flex items-center justify-between hover:bg-white p-1 rounded-lg transition cursor-pointer" onclick="playTTS('I might be a bit late because of the sudden rain.')">
-                <p class="text-slate-700">📌 <em>"I might be <strong>a bit late</strong> because of <strong>the sudden rain</strong>."</em><br><span class="text-slate-500 text-[11px]">(갑작스런 비 때문에 조금 늦을 수 있습니다.)</span></p>
-                <button class="text-slate-400 hover:text-amber-600 p-1"><i class="ph ph-speaker-simple-high"></i></button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pattern 3 -->
-          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-200/90">
-            <div class="flex justify-between items-start gap-2">
-              <div>
-                <span class="text-[11px] font-bold px-2 py-0.5 bg-amber-500 text-white rounded">Pattern 3</span>
-                <p class="font-bold text-slate-900 text-sm mt-1">[사람] will pick up [아이] today instead of me.</p>
-                <p class="text-xs text-slate-500">오늘은 저 대신 [사람]이 아이를 픽업할 예정입니다.</p>
-              </div>
-              <button onclick="playTTS('Leo mom will pick up Mike and Clara today instead of me.')" class="p-2 text-amber-600 hover:bg-amber-100 rounded-full transition shrink-0" aria-label="발음 듣기">
-                <i class="ph ph-speaker-high text-lg"></i>
-              </button>
-            </div>
-            <div class="mt-2.5 pt-2.5 border-t border-slate-200/70 space-y-2 text-xs">
-              <div class="flex items-center justify-between hover:bg-white p-1 rounded-lg transition cursor-pointer" onclick="playTTS('Leo mom will pick up Mike and Clara today instead of me.')">
-                <p class="text-slate-700">📌 <em>"<strong>Leo's mom</strong> will pick up <strong>Mike and Clara</strong> today instead of me."</em><br><span class="text-slate-500 text-[11px]">(오늘은 레오 엄마가 저 대신 마이크와 클라라를 픽업할 거예요.)</span></p>
-                <button class="text-slate-400 hover:text-amber-600 p-1"><i class="ph ph-speaker-simple-high"></i></button>
-              </div>
-              <div class="flex items-center justify-between hover:bg-white p-1 rounded-lg transition cursor-pointer" onclick="playTTS('My wife will pick up Clara today instead of me.')">
-                <p class="text-slate-700">📌 <em>"<strong>My wife</strong> will pick up <strong>Clara</strong> today instead of me."</em><br><span class="text-slate-500 text-[11px]">(오늘은 제 아내가 저 대신 클라라를 픽업하러 갈 예정입니다.)</span></p>
-                <button class="text-slate-400 hover:text-amber-600 p-1"><i class="ph ph-speaker-simple-high"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3. 실전 대화 & 자동 연속 음성 재생 -->
-      <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
-        <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
-          <div class="flex items-center gap-2">
-            <span class="w-6 h-6 bg-blue-100 text-blue-700 font-bold rounded-lg flex items-center justify-center text-xs">3</span>
-            <h2 class="text-base font-bold text-slate-800">실전 롤플레잉 대화</h2>
-          </div>
-          <button id="playAllBtn" onclick="togglePlayDialogue()" class="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-bold px-3 py-1.5 rounded-full transition shadow-sm">
-            <i class="ph ph-play text-xs" id="playAllIcon"></i>
-            <span id="playAllText">전체 대화 듣기</span>
-          </button>
-        </div>
-
-        <div class="space-y-3" id="dialogueContainer">
-          <!-- Line 1 -->
-          <div id="d-line-0" class="p-3 bg-slate-50 rounded-xl border border-slate-200 transition">
-            <div class="flex justify-between items-center mb-1">
-              <span class="text-xs font-bold text-slate-600 flex items-center gap-1">
-                <i class="ph ph-shield-check text-blue-600"></i> Guard (학교 경비원)
-              </span>
-              <button onclick="playTTS('Good afternoon. Which year is your child in?', 'guard')" class="text-blue-600 hover:text-blue-800 p-1">
-                <i class="ph ph-speaker-high"></i>
-              </button>
-            </div>
-            <p class="text-slate-900 font-medium text-xs sm:text-sm">"Good afternoon. Which year is your child in?"</p>
-            <p class="text-slate-500 text-[11px] mt-0.5">안녕하세요. 아이가 몇 학년인가요?</p>
-          </div>
-
-          <!-- Line 2 -->
-          <div id="d-line-1" class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200 transition">
-            <div class="flex justify-between items-center mb-1">
-              <span class="text-xs font-bold text-emerald-800 flex items-center gap-1">
-                <i class="ph ph-user text-emerald-700"></i> Parent (학부모)
-              </span>
-              <button onclick="playTTS('Good afternoon. I am here to pick up my son, Mike from Year 5, and Clara from Year 4.', 'parent')" class="text-emerald-700 hover:text-emerald-900 p-1">
-                <i class="ph ph-speaker-high"></i>
-              </button>
-            </div>
-            <p class="text-slate-900 font-medium text-xs sm:text-sm">"Good afternoon. <strong>I'm here to pick up</strong> my son, <strong>Mike from Year 5</strong>, and <strong>Clara from Year 4</strong>."</p>
-            <p class="text-emerald-800/80 text-[11px] mt-0.5">안녕하세요. 5학년 아들 마이크와 4학년 클라라를 픽업하러 왔습니다.</p>
-          </div>
-
-          <!-- Line 3 -->
-          <div id="d-line-2" class="p-3 bg-slate-50 rounded-xl border border-slate-200 transition">
-            <div class="flex justify-between items-center mb-1">
-              <span class="text-xs font-bold text-slate-600 flex items-center gap-1">
-                <i class="ph ph-shield-check text-blue-600"></i> Guard (학교 경비원)
-              </span>
-              <button onclick="playTTS('Sure, please show me your school parent pass.', 'guard')" class="text-blue-600 hover:text-blue-800 p-1">
-                <i class="ph ph-speaker-high"></i>
-              </button>
-            </div>
-            <p class="text-slate-900 font-medium text-xs sm:text-sm">"Sure, please show me your school parent pass."</p>
-            <p class="text-slate-500 text-[11px] mt-0.5">네, 학부모 출입 패스를 보여주세요.</p>
-          </div>
-
-          <!-- Line 4 -->
-          <div id="d-line-3" class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200 transition">
-            <div class="flex justify-between items-center mb-1">
-              <span class="text-xs font-bold text-emerald-800 flex items-center gap-1">
-                <i class="ph ph-user text-emerald-700"></i> Parent (학부모)
-              </span>
-              <button onclick="playTTS('Here it is. By the way, I was a bit late because of the rain. Has the dismissal started?', 'parent')" class="text-emerald-700 hover:text-emerald-900 p-1">
-                <i class="ph ph-speaker-high"></i>
-              </button>
-            </div>
-            <p class="text-slate-900 font-medium text-xs sm:text-sm">"Here it is. By the way, <strong>I was a bit late because of the rain</strong>. Has the dismissal started?"</p>
-            <p class="text-emerald-800/80 text-[11px] mt-0.5">여기 있습니다. 비가 와서 조금 늦었네요. 하교 시작했나요?</p>
-          </div>
-
-          <!-- Line 5 -->
-          <div id="d-line-4" class="p-3 bg-slate-50 rounded-xl border border-slate-200 transition">
-            <div class="flex justify-between items-center mb-1">
-              <span class="text-xs font-bold text-slate-600 flex items-center gap-1">
-                <i class="ph ph-shield-check text-blue-600"></i> Guard (학교 경비원)
-              </span>
-              <button onclick="playTTS('Yes, they just came out. You can drive through lane 2.', 'guard')" class="text-blue-600 hover:text-blue-800 p-1">
-                <i class="ph ph-speaker-high"></i>
-              </button>
-            </div>
-            <p class="text-slate-900 font-medium text-xs sm:text-sm">"Yes, they just came out. You can drive through lane 2."</p>
-            <p class="text-slate-500 text-[11px] mt-0.5">네, 방금 나왔습니다. 2번 차선으로 통과해 들어가시면 됩니다.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4. 일일 스피킹 & 라이팅 테스트 (Daily Test) -->
-      <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
-        <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
-          <div class="flex items-center gap-2">
-            <span class="w-6 h-6 bg-purple-100 text-purple-700 font-bold rounded-lg flex items-center justify-center text-xs">4</span>
-            <h2 class="text-base font-bold text-slate-800">오늘의 5분 셀프 테스트</h2>
-          </div>
-          <span class="text-xs text-purple-600 font-bold bg-purple-50 px-2 py-0.5 rounded-full">Daily Test</span>
-        </div>
-
-        <div class="space-y-4">
-          <!-- Quiz 1 -->
-          <div class="bg-purple-50/50 p-4 rounded-xl border border-purple-100">
-            <div class="flex items-center gap-1.5 text-purple-800 font-bold text-xs mb-1.5">
-              <span class="w-4 h-4 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px]">Q1</span>
-              <span>단어 활용 말하기 테스트</span>
-            </div>
-            <p class="text-xs sm:text-sm font-semibold text-slate-800">"차가 막혀서 늦었습니다."를 영어로 직접 소리 내어 말해보세요.</p>
-            <details class="mt-2.5 text-xs group">
-              <summary class="cursor-pointer text-purple-700 font-bold hover:text-purple-900 inline-flex items-center gap-1">
-                <i class="ph ph-lightbulb"></i> 정답 및 원어민 발음 확인
-              </summary>
-              <div class="mt-2 p-2.5 bg-white rounded-lg border border-purple-200 flex items-center justify-between shadow-sm">
-                <div>
-                  <p class="text-purple-950 font-bold text-sm">"I am late because of the traffic."</p>
-                  <p class="text-slate-500 text-[11px] mt-0.5">(또는 "I was late because of heavy traffic.")</p>
+    <!-- 1. Vocabulary -->
+    <section class="card">
+        <h2 class="section-title"><span class="badge">1</span> 오늘의 핵심 어휘 6개</h2>
+        <div class="voca-grid">
+            <div class="voca-item">
+                <div class="voca-header">
+                    <span class="voca-word">High chair / Baby chair</span>
+                    <span class="voca-meaning">유아용 식탁 의자</span>
                 </div>
-                <button onclick="playTTS('I am late because of the traffic.')" class="p-2 text-purple-600 hover:bg-purple-50 rounded-full transition shrink-0" title="발음 듣기">
-                  <i class="ph ph-speaker-high text-lg"></i>
-                </button>
-              </div>
-            </details>
-          </div>
-
-          <!-- Quiz 2 -->
-          <div class="bg-purple-50/50 p-4 rounded-xl border border-purple-100">
-            <div class="flex items-center gap-1.5 text-purple-800 font-bold text-xs mb-1.5">
-              <span class="w-4 h-4 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px]">Q2</span>
-              <span>패턴 응용 영작 & 말하기</span>
+                <div class="local-tip">💡 현지 쇼핑몰 식당이나 카페에서는 보통 "Baby chair"라고 하면 바로 알아듣습니다.</div>
             </div>
-            <p class="text-xs sm:text-sm font-semibold text-slate-800">"오늘은 저 대신 레오 엄마가 마이크와 클라라를 픽업할 거예요."를 영어로 어떻게 말할까요?</p>
-            <details class="mt-2.5 text-xs group">
-              <summary class="cursor-pointer text-purple-700 font-bold hover:text-purple-900 inline-flex items-center gap-1">
-                <i class="ph ph-lightbulb"></i> 정답 및 원어민 발음 확인
-              </summary>
-              <div class="mt-2 p-2.5 bg-white rounded-lg border border-purple-200 flex items-center justify-between shadow-sm">
-                <div>
-                  <p class="text-purple-950 font-bold text-sm">"Leo's mom will pick up Mike and Clara today instead of me."</p>
-                  <p class="text-slate-500 text-[11px] mt-0.5">핵심 패턴 3 ([사람] will pick up [아이] today instead of me) 응용</p>
-                </div>
-                <button onclick="playTTS('Leo mom will pick up Mike and Clara today instead of me.')" class="p-2 text-purple-600 hover:bg-purple-50 rounded-full transition shrink-0" title="발음 듣기">
-                  <i class="ph ph-speaker-high text-lg"></i>
-                </button>
-              </div>
-            </details>
-          </div>
 
-          <!-- Quiz 3 -->
-          <div class="bg-purple-50/50 p-4 rounded-xl border border-purple-100">
-            <div class="flex items-center gap-1.5 text-purple-800 font-bold text-xs mb-1.5">
-              <span class="w-4 h-4 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px]">Q3</span>
-              <span>실전 롤플레잉 순발력 테스트</span>
+            <div class="voca-item">
+                <div class="voca-header">
+                    <span class="voca-word">Mild / Non-spicy</span>
+                    <span class="voca-meaning">안 매운 맛 (순한 맛)</span>
+                </div>
+                <div class="local-tip">💡 현지어 팁: "Tak mau pedas (딱 마우 쁘다스)"라고 덧붙이면 칠리 파디(작은 고추)를 확실히 빼줍니다.</div>
             </div>
-            <p class="text-xs sm:text-sm font-semibold text-slate-800">학교 정문 가드가 <span class="text-blue-700 font-bold">"Which year is your child in?"</span>라고 물었을 때, "5학년 마이크를 픽업하러 왔다"고 당당하게 대답해 보세요.</p>
-            <details class="mt-2.5 text-xs group">
-              <summary class="cursor-pointer text-purple-700 font-bold hover:text-purple-900 inline-flex items-center gap-1">
-                <i class="ph ph-lightbulb"></i> 모범 답안 및 발음 확인
-              </summary>
-              <div class="mt-2 p-2.5 bg-white rounded-lg border border-purple-200 flex items-center justify-between shadow-sm">
-                <div>
-                  <p class="text-purple-950 font-bold text-sm">"I'm here to pick up Mike from Year 5."</p>
-                  <p class="text-slate-500 text-[11px] mt-0.5">(또는 둘 다라면: "I'm here to pick up Mike from Year 5 and Clara from Year 4.")</p>
+
+            <div class="voca-item">
+                <div class="voca-header">
+                    <span class="voca-word">Less ice / No ice</span>
+                    <span class="voca-meaning">얼음 적게 / 얼음 없이</span>
                 </div>
-                <button onclick="playTTS('I am here to pick up Mike from Year 5.')" class="p-2 text-purple-600 hover:bg-purple-50 rounded-full transition shrink-0" title="발음 듣기">
-                  <i class="ph ph-speaker-high text-lg"></i>
-                </button>
-              </div>
-            </details>
-          </div>
+                <div class="local-tip">💡 현지 카페는 기본적으로 컵 가득 얼음을 채우므로, 아이용 음료는 주문 시 미리 말씀하세요.</div>
+            </div>
+
+            <div class="voca-item">
+                <div class="voca-header">
+                    <span class="voca-word">Split the bill</span>
+                    <span class="voca-meaning">계산서 나누기 (각자 계산)</span>
+                </div>
+                <div class="local-tip">💡 학부모 모임 필수 표현! "Pay separately" 또는 "Separate bills"로도 많이 씁니다.</div>
+            </div>
+
+            <div class="voca-item">
+                <div class="voca-header">
+                    <span class="voca-word">Takeaway / Bungkus</span>
+                    <span class="voca-meaning">남은 음식 포장 (테이크아웃)</span>
+                </div>
+                <div class="local-tip">💡 현지에서는 테이크아웃 대신 말레이어 'Bungkus(붕꾸스)' 또는 'Tapau(타파오)'를 일상적으로 씁니다.</div>
+            </div>
+
+            <div class="voca-item">
+                <div class="voca-header">
+                    <span class="voca-word">Service charge (SST)</span>
+                    <span class="voca-meaning">봉사료 및 정부 판매세</span>
+                </div>
+                <div class="local-tip">💡 말레이시아 식당 영수증의 '++'는 보통 봉사료 10%와 SST 6~8%가 추가된다는 의미입니다.</div>
+            </div>
         </div>
-      </section>
+    </section>
 
-    </main>
-  </div>
+    <!-- 2. Core Patterns -->
+    <section class="card">
+        <h2 class="section-title"><span class="badge">2</span> 입에 붙이는 실전 핵심 패턴 3</h2>
 
-  <!-- Bottom Floating Kakao Sharing Bar -->
-  <div class="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-slate-200 py-3 px-4 z-40 shadow-lg">
-    <div class="max-w-xl mx-auto flex items-center gap-2.5">
-      <button onclick="copyKakaoSummary()" class="flex-1 bg-[#FEE500] hover:bg-[#FADA0A] active:scale-[0.98] text-[#191919] font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm transition text-xs sm:text-sm">
-        <i class="ph ph-chat-circle-dots text-lg"></i>
-        <span>카톡 공유용 텍스트 복사 (1번 & 2번)</span>
-      </button>
-      <button onclick="shareLink()" class="bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 p-3 rounded-xl transition" title="웹페이지 링크 복사">
-        <i class="ph ph-link text-lg"></i>
-      </button>
-    </div>
-  </div>
-
-  <!-- Toast Alert -->
-  <div id="toast" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-900/90 text-white text-xs px-4 py-3 rounded-2xl shadow-2xl opacity-0 pointer-events-none transition duration-300 z-50 flex items-center gap-2 backdrop-blur-sm">
-    <i class="ph ph-check-circle text-emerald-400 text-base"></i>
-    <span id="toastMsg">복사되었습니다.</span>
-  </div>
-
-  <!-- Script Logic -->
-  <script>
-    const vocabData = [
-      { no: 1, word: "Pick up", pron: "[픽 업]", meaning: "데리러 가다, 픽업하다" },
-      { no: 2, word: "Drop off", pron: "[드랍 오프]", meaning: "차에서 내려주다, 등교시키다" },
-      { no: 3, word: "Traffic", pron: "[트래픽]", meaning: "교통, 차량 정체" },
-      { no: 4, word: "Late", pron: "[레이트]", meaning: "늦은, 지각한" },
-      { no: 5, word: "Instead of", pron: "[인스텓 오브]", meaning: "~ 대신에" },
-      { no: 6, word: "Authorize", pron: "[어서라이즈]", meaning: "승인하다, 대리인 권한을 주다" },
-      { no: 7, word: "Dismissal", pron: "[디스미설]", meaning: "하교, 마치는 시간" },
-      { no: 8, word: "Guard house", pron: "[가드 하우스]", meaning: "경비실, 학교 정문 초소" },
-      { no: 9, word: "Inform", pron: "[인폼]", meaning: "알리다, 공지하다" },
-      { no: 10, word: "Belongings", pron: "[빌롱잉스]", meaning: "소지품, 두고 내린 물건" }
-    ];
-
-    const vocabContainer = document.getElementById('vocabContainer');
-    vocabContainer.innerHTML = vocabData.map(v => `
-      <div class="py-2.5 flex items-center justify-between gap-2 hover:bg-slate-50/80 px-1 rounded-lg transition cursor-pointer" onclick="playTTS('${v.word}')">
-        <div class="flex-1">
-          <div class="flex items-baseline gap-2">
-            <span class="text-emerald-700 font-bold text-sm sm:text-base">${v.no}. ${v.word}</span>
-            <span class="text-[11px] text-slate-400 font-mono">${v.pron}</span>
-          </div>
-          <p class="text-xs text-slate-600 font-medium mt-0.5">${v.meaning}</p>
+        <div class="pattern-box">
+            <div class="pattern-title">패턴 1: 인원 안내 및 유아 의자 요청</div>
+            <div class="pattern-sentence">"Table for [인원], and can we also get a baby chair?"</div>
+            <div class="pattern-ko">~명 자리 부탁드려요. 그리고 아기 의자도 하나 주실 수 있나요?</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #475569;">
+                • Table for <strong>three adults and two kids</strong>, please. (어른 3명, 아이 2명이요.)
+            </div>
         </div>
-        <button aria-label="발음 듣기" class="p-2 text-emerald-600 hover:bg-emerald-50 rounded-full transition">
-          <i class="ph ph-speaker-high text-base"></i>
-        </button>
-      </div>
-    `).join('');
 
-    function playTTS(text, role = 'general') {
-      if (!('speechSynthesis' in window)) {
-        alert('이 기기는 음성 읽기 기능을 지원하지 않습니다.');
-        return;
-      }
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US';
-      utterance.rate = 0.88;
+        <div class="pattern-box">
+            <div class="pattern-title">패턴 2: 맵기 및 얼음 맞춤 조절</div>
+            <div class="pattern-sentence">"Could you make it [조절내용], please?"</div>
+            <div class="pattern-ko">~하게 만들어 주실 수 있나요?</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #475569;">
+                • Could you make this pasta <strong>non-spicy</strong> for the kids? (아이들 먹게 파스타 안 맵게 해주시겠어요?)<br>
+                • Could you make the apple juice with <strong>less ice</strong>, please? (사과주스 얼음 적게 넣어주세요.)
+            </div>
+        </div>
 
-      if (role === 'guard') {
-        utterance.pitch = 0.85;
-      } else if (role === 'parent') {
-        utterance.pitch = 1.15;
-      }
+        <div class="pattern-box">
+            <div class="pattern-title">패턴 3: 분할 계산 요청하기</div>
+            <div class="pattern-sentence">"Can we [split the bill / pay separately]?"</div>
+            <div class="pattern-ko">각자 따로 계산할 수 있을까요?</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #475569;">
+                • Can we split the bill <strong>in half</strong>? (반반씩 나눠 결제할 수 있을까요?)<br>
+                • Could we pay separately <strong>by card</strong>? (카드 2장으로 따로 결제할게요.)
+            </div>
+        </div>
+    </section>
 
-      window.speechSynthesis.speak(utterance);
+    <!-- 3. Real Dialogue -->
+    <section class="card">
+        <h2 class="section-title"><span class="badge">3</span> 실전 상황 롤플레잉 (학부모 브런치 모임)</h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">
+            장소: 몽키아라(Mont Kiara) 브런치 카페 / 등장인물: 지우 엄마 & 직원
+        </p>
+
+        <div class="dialogue-wrapper">
+            <div class="bubble bubble-mom">
+                <div class="speaker-name">지우 엄마</div>
+                Hi! Table for two adults and one child, please. Could we also have a baby chair?
+                <span class="trans">안녕하세요! 어른 2명, 아이 1명 자리 부탁드려요. 아기 의자도 하나 주시겠어요?</span>
+            </div>
+
+            <div class="bubble bubble-staff">
+                <div class="speaker-name">Cafe Staff</div>
+                Sure! Right this way, please. Here are the menus and the baby chair.
+                <span class="trans">네! 이쪽으로 오세요. 여기 메뉴판과 아기 의자 준비해 드렸습니다.</span>
+            </div>
+
+            <div class="bubble bubble-mom">
+                <div class="speaker-name">지우 엄마</div>
+                Thank you. For the fried rice, could you make it completely non-spicy? It’s for the little one. And less ice for the watermelon juice, please.
+                <span class="trans">감사합니다. 볶음밥은 전혀 안 맵게 해주실 수 있나요? 아이가 먹을 거라서요. 그리고 수박 주스는 얼음 적게 부탁드려요.</span>
+            </div>
+
+            <div class="bubble bubble-staff">
+                <div class="speaker-name">Cafe Staff</div>
+                No problem at all! No chilli, and less ice for the juice.
+                <span class="trans">문제없습니다! 고추 빼고 주스 얼음 적게 해드릴게요.</span>
+            </div>
+
+            <div class="bubble bubble-mom">
+                <div class="speaker-name">지우 엄마 (식사 후 카운터에서)</div>
+                Excuse me, we'd like to settle the bill. Can we pay separately by credit card?
+                <span class="trans">저기요, 계산할게요. 신용카드로 각자 따로 결제할 수 있을까요?</span>
+            </div>
+
+            <div class="bubble bubble-staff">
+                <div class="speaker-name">Cafe Staff</div>
+                Yes, of course. Just let me know which items belong to each card.
+                <span class="trans">네, 물론이죠. 각 카드별로 어떤 메뉴인지 알려주세요.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Self Quiz -->
+    <section class="card">
+        <h2 class="section-title"><span class="badge">4</span> 1분 셀프 테스트</h2>
+
+        <div class="quiz-item">
+            <div class="quiz-question">Q1. 식당에 어른 2명, 아이 2명이 들어갈 때 직원에게 할 적절한 인원 표현은?</div>
+            <button class="quiz-btn" onclick="toggleQuiz('ans1')">정답 확인하기</button>
+            <div id="ans1" class="quiz-answer">
+                <strong>정답:</strong> "Table for two adults and two kids, please."<br>
+                아이 인원을 명확히 분리해서 말해주면 유아용 식기나 의자를 미리 준비해 줍니다.
+            </div>
+        </div>
+
+        <div class="quiz-item">
+            <div class="quiz-question">Q2. 현지 음료가 너무 달고 차가울 때, "얼음 적게 넣어주세요"를 영어로 바꾸면?</div>
+            <button class="quiz-btn" onclick="toggleQuiz('ans2')">정답 확인하기</button>
+            <div id="ans2" class="quiz-answer">
+                <strong>정답:</strong> "(With) less ice, please."<br>
+                추가 팁: 설탕도 줄이고 싶다면 "Less sweet" 또는 현지어로 "Kurang manis (꾸랑 마니스)"라고 외쳐보세요!
+            </div>
+        </div>
+
+        <div class="quiz-item">
+            <div class="quiz-question">Q3. 식사 후 다른 학부모님과 각각 본인 몫을 따로 결제하고 싶을 때 할 수 있는 요청은?</div>
+            <button class="quiz-btn" onclick="toggleQuiz('ans3')">정답 확인하기</button>
+            <div id="ans3" class="quiz-answer">
+                <strong>정답:</strong> "Can we split the bill?" 또는 "Can we pay separately?"<br>
+                현지 캐셔에게 주문서를 보여주며 "This is mine, and that is hers."라고 나누어 가리키면 손쉽게 결제해 줍니다.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 말레이시아 학부모 실전 영어 가이드 · 내일 Day 3에서 만나요!
+    </footer>
+</div>
+
+<script>
+    function toggleQuiz(id) {
+        const target = document.getElementById(id);
+        if (target.style.display === "block") {
+            target.style.display = "none";
+        } else {
+            target.style.display = "block";
+        }
     }
+</script>
 
-    async function playAllVocab() {
-      if (!('speechSynthesis' in window)) return;
-      window.speechSynthesis.cancel();
-      for (const item of vocabData) {
-        const u = new SpeechSynthesisUtterance(item.word);
-        u.lang = 'en-US';
-        u.rate = 0.85;
-        window.speechSynthesis.speak(u);
-        await new Promise(res => { u.onend = res; });
-        await new Promise(res => setTimeout(res, 300));
-      }
-    }
-
-    const dialogueLines = [
-      { id: 'd-line-0', text: "Good afternoon. Which year is your child in?", role: 'guard' },
-      { id: 'd-line-1', text: "Good afternoon. I am here to pick up my son, Mike from Year 5, and Clara from Year 4.", role: 'parent' },
-      { id: 'd-line-2', text: "Sure, please show me your school parent pass.", role: 'guard' },
-      { id: 'd-line-3', text: "Here it is. By the way, I was a bit late because of the rain. Has the dismissal started?", role: 'parent' },
-      { id: 'd-line-4', text: "Yes, they just came out. You can drive through lane 2.", role: 'guard' }
-    ];
-
-    let isPlayingDialogue = false;
-    let currentDialogueIdx = 0;
-
-    function togglePlayDialogue() {
-      if (isPlayingDialogue) {
-        stopDialogue();
-      } else {
-        startDialogue();
-      }
-    }
-
-    function startDialogue() {
-      if (!('speechSynthesis' in window)) {
-        alert('음성 읽기를 지원하지 않는 브라우저입니다.');
-        return;
-      }
-      window.speechSynthesis.cancel();
-      isPlayingDialogue = true;
-      currentDialogueIdx = 0;
-      updatePlayAllButton(true);
-      playNextDialogueLine();
-    }
-
-    function stopDialogue() {
-      window.speechSynthesis.cancel();
-      isPlayingDialogue = false;
-      clearHighlights();
-      updatePlayAllButton(false);
-    }
-
-    function updatePlayAllButton(playing) {
-      const icon = document.getElementById('playAllIcon');
-      const text = document.getElementById('playAllText');
-      if (playing) {
-        icon.className = 'ph ph-stop text-xs';
-        text.innerText = '재생 중지';
-      } else {
-        icon.className = 'ph ph-play text-xs';
-        text.innerText = '전체 대화 듣기';
-      }
-    }
-
-    function clearHighlights() {
-      dialogueLines.forEach(line => {
-        const el = document.getElementById(line.id);
-        if (el) el.classList.remove('speaking-active');
-      });
-    }
-
-    function playNextDialogueLine() {
-      if (!isPlayingDialogue || currentDialogueIdx >= dialogueLines.length) {
-        stopDialogue();
-        return;
-      }
-
-      clearHighlights();
-      const current = dialogueLines[currentDialogueIdx];
-      const el = document.getElementById(current.id);
-      if (el) el.classList.add('speaking-active');
-
-      const utterance = new SpeechSynthesisUtterance(current.text);
-      utterance.lang = 'en-US';
-      utterance.rate = 0.88;
-      utterance.pitch = current.role === 'guard' ? 0.85 : 1.15;
-
-      utterance.onend = () => {
-        currentDialogueIdx++;
-        setTimeout(playNextDialogueLine, 500);
-      };
-
-      utterance.onerror = () => {
-        stopDialogue();
-      };
-
-      window.speechSynthesis.speak(utterance);
-    }
-
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toastMsg');
-      toastMsg.innerText = msg;
-      toast.classList.remove('opacity-0');
-      setTimeout(() => {
-        toast.classList.add('opacity-0');
-      }, 2300);
-    }
-
-    function shareLink() {
-      if (navigator.share) {
-        navigator.share({
-          title: "Dunhill's everyday English in Malaysia - Day 1",
-          text: "말레이시아 학부모 생활영어 Day 1 - 등·하교 픽업편",
-          url: window.location.href
-        }).catch(() => {});
-      } else {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          showToast('웹페이지 링크가 복사되었습니다!');
-        });
-      }
-    }
-
-    function copyKakaoSummary() {
-      const kakaoText = `[🇲🇾 Dunhill's everyday English in Malaysia - Day 1]
-주제: 학교 등·하교 픽업 (Drop-off & Pick-up)
-
-📖 오늘의 필수 단어 10개
-1. Pick up : 데리러 가다, 픽업하다
-2. Drop off : 차에서 내려주다
-3. Traffic : 교통, 차량 정체
-4. Late : 늦은, 지각한
-5. Instead of : ~ 대신에
-6. Authorize : 승인하다
-7. Dismissal : 하교 시간
-8. Guard house : 경비실, 정문 초소
-9. Inform : 알리다, 공지하다
-10. Belongings : 소지품
-
-🎯 오늘의 핵심 패턴 3문장
-1. I'm here to pick up [누구].
-   → "I'm here to pick up Mike from Year 5."
-   (5학년 마이크 픽업하러 왔습니다.)
-
-2. I might be [시간] late because of [이유].
-   → "I might be 10 minutes late because of heavy traffic."
-   (차가 막혀서 10분 정도 늦을 것 같아요.)
-
-3. [사람] will pick up [아이] today instead of me.
-   → "Leo's mom will pick up Mike and Clara today instead of me."
-   (오늘은 레오 엄마가 저 대신 마이크와 클라라를 픽업해 주시기로 했습니다.)
-
-🔊 원어민 음성 듣기 및 5분 테스트 풀어보기:
-${window.location.href}`;
-
-      navigator.clipboard.writeText(kakaoText).then(() => {
-        showToast('카톡 공유용 내용이 복사되었습니다!');
-      }).catch(() => {
-        const ta = document.createElement('textarea');
-        ta.value = kakaoText;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        showToast('카톡 공유용 내용이 복사되었습니다!');
-      });
-    }
-  </script>
 </body>
 </html>
