@@ -66,12 +66,12 @@ else:
 - 마크다운 태그(```html) 없이 순수한 HTML 코드만 출력할 것.
 """
 
-response = model.generate_content(prompt)
-html_content = response.text.strip().removeprefix("```html").removesuffix("```").strip()
+# response = model.generate_content(prompt)
+# html_content = response.text.strip().removeprefix("```html").removesuffix("```").strip()
 
-# 4. index.html 파일 저장
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
+# # 4. index.html 파일 저장
+# with open("index.html", "w", encoding="utf-8") as f:
+#     f.write(html_content)
 
 print(f"index.html 업데이트 완료: {day_title}")
 
