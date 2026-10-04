@@ -30,8 +30,9 @@ curriculum = {
 
 day_title, topic_desc = curriculum.get(weekday, ("Daily English", "말레이시아 실전 회화"))
 
-# 3. Gemini API 프롬프트 구성 및 모델 자동 연결
+# 3. Gemini API 프롬프트 구성 및 모델 연결
 genai.configure(api_key=GEMINI_KEY)
+model = genai.GenerativeModel("gemini-3.8-flash")
 
 # 사용 가능한 generateContent 지원 모델 중 최신 모델 자동 선택
 available_models = [
