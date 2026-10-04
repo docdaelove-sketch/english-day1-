@@ -3,34 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Day 2] 말레이시아 실전 영어: 레스토랑 주문 & 계산</title>
+    <title>[Day 2] 레스토랑 주문 마스터 - 말레이시아 실전 영어</title>
     <style>
         :root {
-            --primary: #0F766E;
-            --primary-light: #CCFBF1;
-            --secondary: #D97706;
-            --secondary-light: #FEF3C7;
-            --text-main: #1F2937;
-            --text-muted: #6B7280;
-            --bg-page: #F8FAFC;
-            --bg-card: #FFFFFF;
-            --border-color: #E2E8F0;
-            --accent-tag: #0284C7;
+            --primary-color: #0d5c75;
+            --primary-light: #e8f4f8;
+            --accent-color: #e27d60;
+            --accent-bg: #fff5f2;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --success: #38a169;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-page);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
-            padding: 16px;
+            padding: 20px 15px;
         }
 
         .container {
@@ -38,183 +37,166 @@
             margin: 0 auto;
         }
 
-        /* Header */
         header {
-            background: linear-gradient(135deg, #0F766E, #115E59);
+            text-align: center;
+            padding: 25px 20px;
+            background: linear-gradient(135deg, var(--primary-color), #1995ad);
             color: white;
-            padding: 28px 20px;
             border-radius: 16px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.15);
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(13, 92, 117, 0.15);
         }
 
-        .header-tag {
+        .badge {
             display: inline-block;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #FEF3C7;
-            font-size: 0.82rem;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 0.8rem;
             font-weight: 700;
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
-            margin-bottom: 10px;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 800;
             margin-bottom: 8px;
-            line-height: 1.3;
         }
 
-        .header-desc {
+        header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+            font-weight: 800;
+        }
+
+        header p {
             font-size: 0.95rem;
-            color: #E6FFFA;
-            opacity: 0.95;
+            opacity: 0.9;
         }
 
-        /* Card common */
-        .card {
-            background: var(--bg-card);
+        .section-card {
+            background: var(--card-bg);
             border-radius: 16px;
-            padding: 22px 18px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            padding: 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid var(--border-color);
         }
 
         .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 16px;
+            gap: 8px;
         }
 
-        .section-title span.badge {
-            background: var(--primary-light);
-            color: var(--primary);
-            width: 28px;
-            height: 28px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin-right: 8px;
-            font-size: 0.85rem;
+        .section-title span {
+            font-size: 1.3rem;
         }
 
-        /* Section 1: Vocabulary */
-        .voca-grid {
-            display: grid;
-            grid-template-columns: 1fr;
+        /* Vocabulary Cards */
+        .vocab-grid {
+            display: flex;
+            flex-direction: column;
             gap: 12px;
         }
 
-        .voca-item {
-            background: #F8FAFC;
-            border-left: 4px solid var(--primary);
-            padding: 12px 14px;
-            border-radius: 0 10px 10px 0;
+        .vocab-card {
+            background-color: #fafbfc;
+            border-left: 4px solid var(--primary-color);
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            border: 1px solid var(--border-color);
+            border-left-width: 4px;
         }
 
-        .voca-header {
+        .vocab-head {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             margin-bottom: 4px;
         }
 
-        .voca-word {
-            font-size: 1.05rem;
+        .vocab-eng {
             font-weight: 700;
-            color: #0F172A;
+            font-size: 1.05rem;
+            color: var(--primary-color);
         }
 
-        .voca-meaning {
+        .vocab-kor {
             font-size: 0.9rem;
-            color: #334155;
-            font-weight: 500;
+            font-weight: 600;
+            color: var(--text-main);
         }
 
         .local-tip {
-            margin-top: 6px;
-            font-size: 0.83rem;
-            background-color: #FEF3C7;
-            color: #92400E;
+            font-size: 0.85rem;
+            color: #d9534f;
+            background: #fff8f8;
             padding: 4px 8px;
-            border-radius: 6px;
+            border-radius: 4px;
+            margin-top: 6px;
             display: inline-block;
         }
 
-        /* Section 2: Patterns */
-        .pattern-box {
+        /* Pattern Section */
+        .pattern-block {
             margin-bottom: 18px;
-            background-color: #F8FAFC;
-            border: 1px dashed #CBD5E1;
-            border-radius: 12px;
-            padding: 14px;
+            padding-bottom: 14px;
+            border-bottom: 1px dashed var(--border-color);
         }
 
-        .pattern-box:last-child {
+        .pattern-block:last-child {
             margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
         }
 
         .pattern-title {
             font-weight: 700;
-            color: var(--secondary);
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-
-        .pattern-title::before {
-            content: "★";
-            margin-right: 6px;
-            color: var(--secondary);
-        }
-
-        .pattern-sentence {
+            color: var(--accent-color);
+            margin-bottom: 6px;
             font-size: 1rem;
-            font-weight: 600;
-            color: #0F172A;
-            margin-bottom: 4px;
         }
 
-        .pattern-ko {
-            font-size: 0.88rem;
-            color: var(--text-muted);
+        .pattern-example {
+            background: var(--primary-light);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            margin-top: 6px;
         }
 
-        /* Section 3: Dialogue */
-        .dialogue-wrapper {
+        .pattern-example strong {
+            color: var(--primary-color);
+        }
+
+        /* Dialogue Section */
+        .dialogue-box {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
+            background: #fdfdfd;
         }
 
-        .bubble {
-            max-width: 88%;
-            padding: 12px 14px;
-            border-radius: 14px;
+        .speech-bubble {
+            padding: 12px 15px;
+            border-radius: 12px;
+            max-width: 90%;
             font-size: 0.92rem;
-            position: relative;
         }
 
-        .bubble-mom {
-            align-self: flex-end;
-            background: #E0F2FE;
-            color: #0369A1;
-            border-bottom-right-radius: 2px;
-        }
-
-        .bubble-staff {
+        .staff {
             align-self: flex-start;
-            background: #F1F5F9;
-            color: #334155;
+            background-color: #f1f3f5;
             border-bottom-left-radius: 2px;
+        }
+
+        .parent {
+            align-self: flex-end;
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border-bottom-right-radius: 2px;
         }
 
         .speaker-name {
@@ -222,260 +204,311 @@
             font-weight: 700;
             margin-bottom: 3px;
             text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .parent .speaker-name {
+            text-align: right;
+            color: #0d5c75;
         }
 
         .trans {
-            font-size: 0.8rem;
-            color: #64748B;
+            font-size: 0.83rem;
+            color: var(--text-muted);
             margin-top: 4px;
             display: block;
-            border-top: 1px solid rgba(0,0,0,0.06);
-            padding-top: 4px;
         }
 
-        /* Section 4: Self Test */
+        /* Quiz Section */
         .quiz-item {
-            margin-bottom: 14px;
-            background: #F8FAFC;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 14px;
-        }
-
-        .quiz-item:last-child {
-            margin-bottom: 0;
+            border-radius: 10px;
         }
 
         .quiz-question {
-            font-size: 0.93rem;
             font-weight: 600;
+            font-size: 0.95rem;
             margin-bottom: 10px;
-            color: #1E293B;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .quiz-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 6px 14px;
-            font-size: 0.82rem;
+            background: #fff;
+            border: 1px solid #cbd5e0;
+            padding: 10px 12px;
+            text-align: left;
             border-radius: 6px;
+            font-size: 0.88rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
 
         .quiz-btn:hover {
-            background-color: #115E59;
+            background-color: var(--primary-light);
+            border-color: var(--primary-color);
         }
 
-        .quiz-answer {
-            display: none;
+        .quiz-feedback {
             margin-top: 10px;
-            padding: 10px;
-            background-color: #ECFDF5;
-            border-left: 3px solid #10B981;
-            border-radius: 4px;
-            font-size: 0.88rem;
-            color: #065F46;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: none;
+            padding: 8px 10px;
+            border-radius: 6px;
         }
 
-        /* Footer */
+        .quiz-feedback.correct {
+            display: block;
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .quiz-feedback.wrong {
+            display: block;
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
         footer {
             text-align: center;
             font-size: 0.8rem;
-            color: #94A3B8;
-            padding: 16px 0 24px;
+            color: var(--text-muted);
+            padding: 15px 0;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Header -->
     <header>
-        <span class="header-tag">MALAYSIA SURVIVAL ENGLISH · DAY 2</span>
-        <h1>레스토랑 주문 & 분할 계산</h1>
-        <p class="header-desc">아이 동반 자리 잡기부터 맵기/얼음 조절, 학부모 모임 더치페이까지 당당하게 영어로 소통해보세요!</p>
+        <span class="badge">말레이시아 실전 챌린지 - Day 2</span>
+        <h1>레스토랑 주문 & 요청 완벽 정복</h1>
+        <p>인원 안내부터 맵기·얼음 조절, 각자 계산까지 깔끔하게 끝내기</p>
     </header>
 
-    <!-- 1. Vocabulary -->
-    <section class="card">
-        <h2 class="section-title"><span class="badge">1</span> 오늘의 핵심 어휘 6개</h2>
-        <div class="voca-grid">
-            <div class="voca-item">
-                <div class="voca-header">
-                    <span class="voca-word">High chair / Baby chair</span>
-                    <span class="voca-meaning">유아용 식탁 의자</span>
+    <!-- SECTION 1: VOCABULARY -->
+    <section class="section-card">
+        <h2 class="section-title"><span>📚</span> 오늘의 핵심 생존 어휘 6선</h2>
+        <div class="vocab-grid">
+            <div class="vocab-card">
+                <div class="vocab-head">
+                    <span class="vocab-eng">High chair / Baby chair</span>
+                    <span class="vocab-kor">유아용 식탁 의자</span>
                 </div>
-                <div class="local-tip">💡 현지 쇼핑몰 식당이나 카페에서는 보통 "Baby chair"라고 하면 바로 알아듣습니다.</div>
+                <div class="local-tip">🇲🇾 현지 팁: 말레이시아 몰(Mall) 내 식당은 거의 구비되어 있으나, 직접 "Baby chair please"라고 요청해야 빠르게 가져다줍니다.</div>
             </div>
 
-            <div class="voca-item">
-                <div class="voca-header">
-                    <span class="voca-word">Mild / Non-spicy</span>
-                    <span class="voca-meaning">안 매운 맛 (순한 맛)</span>
+            <div class="vocab-card">
+                <div class="vocab-head">
+                    <span class="vocab-eng">Mild / Non-spicy</span>
+                    <span class="vocab-kor">덜 맵게 / 안 맵게</span>
                 </div>
-                <div class="local-tip">💡 현지어 팁: "Tak mau pedas (딱 마우 쁘다스)"라고 덧붙이면 칠리 파디(작은 고추)를 확실히 빼줍니다.</div>
+                <div class="local-tip">🇲🇾 현지 팁: 로컬 레스토랑의 "Mild"도 한국인 아이에게는 매울 수 있습니다. 완전히 안 맵게는 <b>"Not spicy at all"</b> 혹은 말레이어로 <b>"Tak pedas (딱 뻐다스)"</b>라고 강조하세요.</div>
             </div>
 
-            <div class="voca-item">
-                <div class="voca-header">
-                    <span class="voca-word">Less ice / No ice</span>
-                    <span class="voca-meaning">얼음 적게 / 얼음 없이</span>
+            <div class="vocab-card">
+                <div class="vocab-head">
+                    <span class="vocab-eng">Less ice (Kurang ais)</span>
+                    <span class="vocab-kor">얼음 적게</span>
                 </div>
-                <div class="local-tip">💡 현지 카페는 기본적으로 컵 가득 얼음을 채우므로, 아이용 음료는 주문 시 미리 말씀하세요.</div>
+                <div class="local-tip">🇲🇾 현지 팁: 음료에 얼음이 70% 이상 채워져 나오는 경우가 많습니다. 찬 음료를 피하는 아이들에겐 "Less ice" 필수!</div>
             </div>
 
-            <div class="voca-item">
-                <div class="voca-header">
-                    <span class="voca-word">Split the bill</span>
-                    <span class="voca-meaning">계산서 나누기 (각자 계산)</span>
+            <div class="vocab-card">
+                <div class="vocab-head">
+                    <span class="vocab-eng">Less sweet (Kurang manis)</span>
+                    <span class="vocab-kor">덜 달게</span>
                 </div>
-                <div class="local-tip">💡 학부모 모임 필수 표현! "Pay separately" 또는 "Separate bills"로도 많이 씁니다.</div>
+                <div class="local-tip">🇲🇾 현지 팁: 말레이시아 티/커피/주스는 연유와 시럽이 과하게 들어갑니다. 건강을 위해 "Kurang manis(꾸랑 마니스)"를 기억해두세요.</div>
             </div>
 
-            <div class="voca-item">
-                <div class="voca-header">
-                    <span class="voca-word">Takeaway / Bungkus</span>
-                    <span class="voca-meaning">남은 음식 포장 (테이크아웃)</span>
+            <div class="vocab-card">
+                <div class="vocab-head">
+                    <span class="vocab-eng">Split the bill / Pay separately</span>
+                    <span class="vocab-kor">계산서 나누기 / 각자 계산</span>
                 </div>
-                <div class="local-tip">💡 현지에서는 테이크아웃 대신 말레이어 'Bungkus(붕꾸스)' 또는 'Tapau(타파오)'를 일상적으로 씁니다.</div>
+                <div class="local-tip">🇲🇾 현지 팁: 학부모 모임 후 더치페이할 때 "Split the bill" 또는 "Separate payments"라고 주문대(Counter)에서 요청합니다.</div>
             </div>
 
-            <div class="voca-item">
-                <div class="voca-header">
-                    <span class="voca-word">Service charge (SST)</span>
-                    <span class="voca-meaning">봉사료 및 정부 판매세</span>
+            <div class="vocab-card">
+                <div class="vocab-head">
+                    <span class="vocab-eng">Tapao (Dabao) / Takeaway</span>
+                    <span class="vocab-kor">포장하기 (남은 음식 포장)</span>
                 </div>
-                <div class="local-tip">💡 말레이시아 식당 영수증의 '++'는 보통 봉사료 10%와 SST 6~8%가 추가된다는 의미입니다.</div>
+                <div class="local-tip">🇲🇾 현지 팁: 영미권 표현은 "Takeaway"이지만, 현지에서는 중국어 기원의 <b>"Tapao(따빠오)"</b>라는 단어가 남녀노소 통용됩니다.</div>
             </div>
         </div>
     </section>
 
-    <!-- 2. Core Patterns -->
-    <section class="card">
-        <h2 class="section-title"><span class="badge">2</span> 입에 붙이는 실전 핵심 패턴 3</h2>
+    <!-- SECTION 2: PATTERNS -->
+    <section class="section-card">
+        <h2 class="section-title"><span>🗣️</span> 입에 착 붙는 핵심 패턴 3</h2>
 
-        <div class="pattern-box">
-            <div class="pattern-title">패턴 1: 인원 안내 및 유아 의자 요청</div>
-            <div class="pattern-sentence">"Table for [인원], and can we also get a baby chair?"</div>
-            <div class="pattern-ko">~명 자리 부탁드려요. 그리고 아기 의자도 하나 주실 수 있나요?</div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #475569;">
-                • Table for <strong>three adults and two kids</strong>, please. (어른 3명, 아이 2명이요.)
+        <div class="pattern-block">
+            <div class="pattern-title">Pattern 1. 인원수 & 유아 의자 안내하기</div>
+            <p><strong>"A table for [인원], and we need [수량] high chair(s), please."</strong></p>
+            <div class="pattern-example">
+                - <b>A table for three, and we need one high chair, please.</b><br>
+                (3명이고요, 유아용 의자 1개 필요해요.)<br>
+                - <b>A table for two adults and one child, please.</b><br>
+                (어른 2명, 아이 1명 자리 부탁드려요.)
             </div>
         </div>
 
-        <div class="pattern-box">
-            <div class="pattern-title">패턴 2: 맵기 및 얼음 맞춤 조절</div>
-            <div class="pattern-sentence">"Could you make it [조절내용], please?"</div>
-            <div class="pattern-ko">~하게 만들어 주실 수 있나요?</div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #475569;">
-                • Could you make this pasta <strong>non-spicy</strong> for the kids? (아이들 먹게 파스타 안 맵게 해주시겠어요?)<br>
-                • Could you make the apple juice with <strong>less ice</strong>, please? (사과주스 얼음 적게 넣어주세요.)
+        <div class="pattern-block">
+            <div class="pattern-title">Pattern 2. 맵기·얼음·당도 조절하기</div>
+            <p><strong>"Could you make this [요청사항], please?"</strong></p>
+            <div class="pattern-example">
+                - <b>Could you make this fried rice not spicy at all? It's for the kid.</b><br>
+                (이 볶음밥 전혀 안 맵게 해주실 수 있나요? 아이가 먹을 거예요.)<br>
+                - <b>Could I get an iced latte with less ice and no sugar?</b><br>
+                (아이스 라떼 얼음 적게, 시럽 빼고 주시겠어요?)
             </div>
         </div>
 
-        <div class="pattern-box">
-            <div class="pattern-title">패턴 3: 분할 계산 요청하기</div>
-            <div class="pattern-sentence">"Can we [split the bill / pay separately]?"</div>
-            <div class="pattern-ko">각자 따로 계산할 수 있을까요?</div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #475569;">
-                • Can we split the bill <strong>in half</strong>? (반반씩 나눠 결제할 수 있을까요?)<br>
-                • Could we pay separately <strong>by card</strong>? (카드 2장으로 따로 결제할게요.)
+        <div class="pattern-block">
+            <div class="pattern-title">Pattern 3. 분할 결제 요청하기</div>
+            <p><strong>"Can we [split the bill / pay separately]?"</strong></p>
+            <div class="pattern-example">
+                - <b>Can we split the bill equally between three cards?</b><br>
+                (카드 3장으로 균등하게 나눠서 계산할 수 있을까요?)<br>
+                - <b>Can we pay separately for what we ordered?</b><br>
+                (각자 주문한 것 따로 계산 가능한가요?)
             </div>
         </div>
     </section>
 
-    <!-- 3. Real Dialogue -->
-    <section class="card">
-        <h2 class="section-title"><span class="badge">3</span> 실전 상황 롤플레잉 (학부모 브런치 모임)</h2>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">
-            장소: 몽키아라(Mont Kiara) 브런치 카페 / 등장인물: 지우 엄마 & 직원
+    <!-- SECTION 3: ROLE-PLAY DIALOGUE -->
+    <section class="section-card">
+        <h2 class="section-title"><span>🎭</span> 학부모 실생활 롤플레잉</h2>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom: 12px;">
+            상황: 국제학교 하교 후, 몽키아라(Mont Kiara) 브런치 카페에서 학부모 지인과 아이를 동반해 식사하는 상황
         </p>
 
-        <div class="dialogue-wrapper">
-            <div class="bubble bubble-mom">
-                <div class="speaker-name">지우 엄마</div>
-                Hi! Table for two adults and one child, please. Could we also have a baby chair?
-                <span class="trans">안녕하세요! 어른 2명, 아이 1명 자리 부탁드려요. 아기 의자도 하나 주시겠어요?</span>
+        <div class="dialogue-box">
+            <div class="speech-bubble staff">
+                <div class="speaker-name">Staff</div>
+                Good afternoon! How many persons?
+                <span class="trans">안녕하세요! 몇 분이신가요?</span>
             </div>
 
-            <div class="bubble bubble-staff">
-                <div class="speaker-name">Cafe Staff</div>
-                Sure! Right this way, please. Here are the menus and the baby chair.
-                <span class="trans">네! 이쪽으로 오세요. 여기 메뉴판과 아기 의자 준비해 드렸습니다.</span>
+            <div class="speech-bubble parent">
+                <div class="speaker-name">You (엄마)</div>
+                Hi! <b>A table for two adults and one toddler, please. And could we get a baby chair?</b>
+                <span class="trans">안녕하세요! 어른 둘에 아기 한 명이요. 유아용 의자도 하나 부탁드릴게요.</span>
             </div>
 
-            <div class="bubble bubble-mom">
-                <div class="speaker-name">지우 엄마</div>
-                Thank you. For the fried rice, could you make it completely non-spicy? It’s for the little one. And less ice for the watermelon juice, please.
-                <span class="trans">감사합니다. 볶음밥은 전혀 안 맵게 해주실 수 있나요? 아이가 먹을 거라서요. 그리고 수박 주스는 얼음 적게 부탁드려요.</span>
+            <div class="speech-bubble staff">
+                <div class="speaker-name">Staff</div>
+                Sure, right this way. Here is the menu. Are you ready to order?
+                <span class="trans">네, 이쪽으로 오세요. 메뉴판입니다. 주문하시겠어요?</span>
             </div>
 
-            <div class="bubble bubble-staff">
-                <div class="speaker-name">Cafe Staff</div>
-                No problem at all! No chilli, and less ice for the juice.
-                <span class="trans">문제없습니다! 고추 빼고 주스 얼음 적게 해드릴게요.</span>
+            <div class="speech-bubble parent">
+                <div class="speaker-name">You (엄마)</div>
+                Yes. We'd like the Mee Goreng and Chicken Chop. But <b>could you make the Mee Goreng not spicy at all? It's for my daughter.</b>
+                <span class="trans">네, 미고랭이랑 치킨찹 주세요. 그런데 미고랭은 아예 안 맵게 해주실 수 있나요? 딸아이가 먹을 거라서요.</span>
             </div>
 
-            <div class="bubble bubble-mom">
-                <div class="speaker-name">지우 엄마 (식사 후 카운터에서)</div>
-                Excuse me, we'd like to settle the bill. Can we pay separately by credit card?
-                <span class="trans">저기요, 계산할게요. 신용카드로 각자 따로 결제할 수 있을까요?</span>
+            <div class="speech-bubble staff">
+                <div class="speaker-name">Staff</div>
+                No problem, no chili. Any drinks for you?
+                <span class="trans">문제없습니다, 고추 뺄게요. 음료는 필요하신가요?</span>
             </div>
 
-            <div class="bubble bubble-staff">
-                <div class="speaker-name">Cafe Staff</div>
-                Yes, of course. Just let me know which items belong to each card.
-                <span class="trans">네, 물론이죠. 각 카드별로 어떤 메뉴인지 알려주세요.</span>
+            <div class="speech-bubble parent">
+                <div class="speaker-name">You (엄마)</div>
+                Two iced teas, please. <b>Make it less ice and less sweet, please.</b>
+                <span class="trans">아이스티 두 잔 주세요. 얼음 적게, 덜 달게 해주세요.</span>
+            </div>
+
+            <div class="speech-bubble staff">
+                <div class="speaker-name">Staff (식사 후)</div>
+                Here is the bill, ma'am.
+                <span class="trans">계산서 여기 있습니다, 손님.</span>
+            </div>
+
+            <div class="speech-bubble parent">
+                <div class="speaker-name">You (엄마)</div>
+                Thank you. <b>Can we split the bill on two cards?</b>
+                <span class="trans">감사합니다. 카드 두 개로 반반 결제할 수 있을까요?</span>
+            </div>
+
+            <div class="speech-bubble staff">
+                <div class="speaker-name">Staff</div>
+                Sure! Please tap your cards here one by one.
+                <span class="trans">물론이죠! 여기에 카드를 한 장씩 태그해주세요.</span>
             </div>
         </div>
     </section>
 
-    <!-- 4. Self Quiz -->
-    <section class="card">
-        <h2 class="section-title"><span class="badge">4</span> 1분 셀프 테스트</h2>
+    <!-- SECTION 4: QUIZ -->
+    <section class="section-card">
+        <h2 class="section-title"><span>⚡</span> 1분 셀프 테스트</h2>
 
-        <div class="quiz-item">
-            <div class="quiz-question">Q1. 식당에 어른 2명, 아이 2명이 들어갈 때 직원에게 할 적절한 인원 표현은?</div>
-            <button class="quiz-btn" onclick="toggleQuiz('ans1')">정답 확인하기</button>
-            <div id="ans1" class="quiz-answer">
-                <strong>정답:</strong> "Table for two adults and two kids, please."<br>
-                아이 인원을 명확히 분리해서 말해주면 유아용 식기나 의자를 미리 준비해 줍니다.
+        <!-- Quiz 1 -->
+        <div class="quiz-item" id="q1">
+            <p class="quiz-question">1. 아이와 함께 식당에 들어가 "어른 2명, 아이 1명이고 아기의자 1개 주세요"라고 말할 때 가장 자연스러운 표현은?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="checkAnswer('q1', 1, false)">A. Table two and one, bring baby chair.</button>
+                <button class="quiz-btn" onclick="checkAnswer('q1', 2, true)">B. Table for two adults and one child, and one high chair please.</button>
+                <button class="quiz-btn" onclick="checkAnswer('q1', 3, false)">C. We are three humans with small chair.</button>
             </div>
+            <div class="quiz-feedback" id="q1-fb"></div>
         </div>
 
-        <div class="quiz-item">
-            <div class="quiz-question">Q2. 현지 음료가 너무 달고 차가울 때, "얼음 적게 넣어주세요"를 영어로 바꾸면?</div>
-            <button class="quiz-btn" onclick="toggleQuiz('ans2')">정답 확인하기</button>
-            <div id="ans2" class="quiz-answer">
-                <strong>정답:</strong> "(With) less ice, please."<br>
-                추가 팁: 설탕도 줄이고 싶다면 "Less sweet" 또는 현지어로 "Kurang manis (꾸랑 마니스)"라고 외쳐보세요!
+        <!-- Quiz 2 -->
+        <div class="quiz-item" id="q2">
+            <p class="quiz-question">2. 말레이시아 카페에서 음료의 얼음을 줄이고 덜 달게 마시고 싶을 때 적절한 말레이어/영어 혼용 표현은?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="checkAnswer('q2', 1, true)">A. Less ice, kurang manis please.</button>
+                <button class="quiz-btn" onclick="checkAnswer('q2', 2, false)">B. No cold, much sweet please.</button>
+                <button class="quiz-btn" onclick="checkAnswer('q2', 3, false)">C. Takeaway ice sugar up please.</button>
             </div>
+            <div class="quiz-feedback" id="q2-fb"></div>
         </div>
 
-        <div class="quiz-item">
-            <div class="quiz-question">Q3. 식사 후 다른 학부모님과 각각 본인 몫을 따로 결제하고 싶을 때 할 수 있는 요청은?</div>
-            <button class="quiz-btn" onclick="toggleQuiz('ans3')">정답 확인하기</button>
-            <div id="ans3" class="quiz-answer">
-                <strong>정답:</strong> "Can we split the bill?" 또는 "Can we pay separately?"<br>
-                현지 캐셔에게 주문서를 보여주며 "This is mine, and that is hers."라고 나누어 가리키면 손쉽게 결제해 줍니다.
+        <!-- Quiz 3 -->
+        <div class="quiz-item" id="q3">
+            <p class="quiz-question">3. 학부모 모임 후 각자 카드로 나눠서 계산하고 싶을 때 직원에게 건넬 말은?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="checkAnswer('q3', 1, false)">A. Break the money, please.</button>
+                <button class="quiz-btn" onclick="checkAnswer('q3', 2, false)">B. Give me two receipts and cash back.</button>
+                <button class="quiz-btn" onclick="checkAnswer('q3', 3, true)">C. Can we split the bill / pay separately?</button>
             </div>
+            <div class="quiz-feedback" id="q3-fb"></div>
         </div>
     </section>
 
     <footer>
-        © 말레이시아 학부모 실전 영어 가이드 · 내일 Day 3에서 만나요!
+        <p>© 말레이시아 학부모 실전 영어 가이드 • 매일 5분 투자로 현지 적응 끝내기</p>
     </footer>
 </div>
 
 <script>
-    function toggleQuiz(id) {
-        const target = document.getElementById(id);
-        if (target.style.display === "block") {
-            target.style.display = "none";
+    function checkAnswer(quizId, optionIndex, isCorrect) {
+        const feedback = document.getElementById(quizId + '-fb');
+        const container = document.getElementById(quizId);
+        const buttons = container.querySelectorAll('.quiz-btn');
+
+        buttons.forEach(btn => {
+            btn.style.pointerEvents = 'none'; // 클릭 비활성화
+        });
+
+        if (isCorrect) {
+            feedback.className = 'quiz-feedback correct';
+            feedback.innerHTML = '🎉 정답입니다! 실전에서도 바로 활용해보세요.';
         } else {
-            target.style.display = "block";
+            feedback.className = 'quiz-feedback wrong';
+            feedback.innerHTML = '❌ 아쉬워요! 다시 한번 정답 표현을 확인해보세요.';
         }
     }
 </script>
