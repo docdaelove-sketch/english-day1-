@@ -23,7 +23,7 @@ jobs:
 
       - name: 필요한 파이썬 라이브러리 설치
         run: |
-          pip install google-generativeai requests
+          pip install --upgrade requests "google-generativeai>=0.8.3"
 
       - name: 리포트 자동 생성 및 카카오톡 링크 전송 실행
         env:
