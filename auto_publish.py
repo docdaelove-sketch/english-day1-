@@ -32,7 +32,7 @@ day_title, topic_desc = curriculum.get(weekday, ("Daily English", "말레이시�
 
 # 3. Gemini API 프롬프트 구성 및 HTML 생성
 genai.configure(api_key=GEMINI_KEY)
-model = genai.GenerativeModel("gemini-pro")
+model = genai.GenerativeModel("gemini-1.5-flash-latest")
 
 if weekday == 5:
     # 토요일: 주간 총정리 테스트 양식
