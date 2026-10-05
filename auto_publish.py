@@ -58,7 +58,7 @@ date_str = now_dt.strftime("%Y년 %m월 %d일")
 
 # 3. Gemini 프롬프트 구성 (엄격한 캐릭터 및 포맷 지침)
 genai.configure(api_key=GEMINI_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-1.5-flash-latest")
 
 prompt = f"""
 당신은 말레이시아 거주 한국인 학부모를 위한 실전 영어 교육 전문가입니다.
@@ -196,5 +196,5 @@ def send_kakao_message(link_url, title_text):
     res = requests.post(msg_url, headers=headers, data={"template_object": json.dumps(template, ensure_ascii=False)})
     print("카카오톡 전송 결과:", res.status_code, res.text)
 
-MY_GITHUB_PAGES_URL = "[https://docdaelove-sketch.github.io/english-day1-/](https://docdaelove-sketch.github.io/english-day1-/)"
+MY_GITHUB_PAGES_URL = "https://docdaelove-sketch.github.io/english-day1-/"
 send_kakao_message(MY_GITHUB_PAGES_URL, f"[{day_title}] {topic_desc}")
