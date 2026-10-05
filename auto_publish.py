@@ -2,7 +2,6 @@ import os
 import datetime
 import requests
 import json
-import google.generativeai as genai
 
 # 1. 환경 변수
 GEMINI_KEY = os.getenv("GEMINI_API_KEY")
@@ -51,10 +50,7 @@ else:
 
 date_str = now_dt.strftime("%Y년 %m월 %d일")
 
-# 3. Gemini 호출
-genai.configure(api_key=GEMINI_KEY)
-model = genai.GenerativeModel("gemini-pro")
-
+# 3. Gemini REST API 직접 호출 (현행 표준 gemini-2.5-flash 모델 적용)
 prompt = f"""
 당신은 말레이시아 거주 한국인 학부모를 위한 실전 영어 교육 전문가입니다.
 날짜: {date_str}
@@ -115,12 +111,22 @@ prompt = f"""
 """
 
 card_html = ""
+gemini_api_url = f"[https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=](https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=){GEMINI_KEY}"
+payload = {
+    "contents": [{"parts": [{"text": prompt}]}]
+}
+
 try:
-    response = model.generate_content(prompt, request_options={"timeout": 45})
-    card_html = response.text.strip().removeprefix("```html").removesuffix("```").strip()
-    print("Gemini 생성 성공!")
+    api_res = requests.post(gemini_api_url, json=payload, timeout=45)
+    if api_res.status_code == 200:
+        res_json = api_res.json()
+        raw_text = res_json['candidates'][0]['content']['parts'][0]['text']
+        card_html = raw_text.strip().removeprefix("```html").removesuffix("```").strip()
+        print("Gemini 생성 성공!")
+    else:
+        print("Gemini API 호출 실패 코드:", api_res.status_code, api_res.text)
 except Exception as e:
-    print("Gemini 호출 오류:", e)
+    print("Gemini 네트워크 오류:", e)
 
 # 4. 기존 index.html에 새 Day 카드 누적 삽입
 if card_html:
@@ -141,6 +147,8 @@ if card_html:
             print(f"{day_title} 카드가 이미 존재합니다.")
     else:
         print("경고: index.html에 <!-- NEW_CARD_PLACEHOLDER --> 태그를 찾을 수 없습니다.")
+else:
+    print("오류: 생성된 카드 HTML이 없어 index.html 업데이트를 건너뜁니다.")
 
 # 5. 카카오톡 본인에게 링크 전송
 def send_kakao_message(link_url, title_text):
