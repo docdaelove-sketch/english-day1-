@@ -114,7 +114,7 @@ card_html = ""
 # 마크다운 자동 링크 변환을 100% 무력화하는 조립형 주소
 p_https = "h" + "ttps://"
 gemini_host = "generativelanguage.googleapis.com"
-gemini_path = f"/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_KEY}"
+gemini_path = f"/v1beta/models/gemini-3.8-flash:generateContent?key={GEMINI_KEY}"
 gemini_api_url = p_https + gemini_host + gemini_path
 
 payload = {
