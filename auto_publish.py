@@ -162,7 +162,7 @@ def send_kakao_message(link_url, title_text):
         print("카카오 토큰 갱신 실패:", token_res)
         return
 
-    msg_url = "[https://kapi.kakao.com/v2/api/talk/memo/default/send](https://kapi.kakao.com/v2/api/talk/memo/default/send)"
+    msg_url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
     headers = {
         "Authorization": f"Bearer {access_token}",
         "Content-Type": "application/x-www-form-urlencoded"
