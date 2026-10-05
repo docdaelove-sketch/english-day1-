@@ -13,32 +13,27 @@ KAKAO_REFRESH_TOKEN = os.getenv("KAKAO_REFRESH_TOKEN")
 START_DATE = datetime.date(2026, 10, 5)
 now_dt = datetime.datetime.utcnow() + datetime.timedelta(hours=8)
 today_date = now_dt.date()
-weekday = now_dt.weekday() # 0:월 ~ 6:일
+weekday = now_dt.weekday()  # 0:월 ~ 6:일
 
-# 일요일은 배포 휴식
 if weekday == 6:
     print("일요일은 정규 배포가 없습니다. (자율 복습일)")
     exit(0)
 
-# 경과 주차 및 일차 계산
 delta_days = (today_date - START_DATE).days
 if delta_days < 0:
     delta_days = 0
 
 week_num = (delta_days // 7) + 1
 
-# 토요일: 주간 통합 총정리
 if weekday == 5:
     day_title = f"{week_num}주차 총정리"
     start_day_of_week = (week_num - 1) * 5 + 1
     end_day_of_week = week_num * 5
     topic_desc = f"{week_num}주차 통합 복습 테스트 (Day {start_day_of_week}~{end_day_of_week} 핵심 어휘 25개 및 실전 퀴즈 총정리)"
 else:
-    # 월~금: 순차 일차 계산 (월요일=1, 화요일=2 ... 다음주 월요일=6, 다다음주 월요일=11)
     current_day_number = (week_num - 1) * 5 + (weekday + 1)
     day_title = f"Day {current_day_number}"
     
-    # 대표 주제 풀 (순차 할당)
     topic_pool = {
         1: "Sunway International School 등하원 & 픽업 실전 회화 (드롭존 소통, 학부모 ID 확인, Block B 픽업)",
         2: "레스토랑 주문하기 (인원 안내, 맵기·얼음 조절, 계산서 분할 요청)",
@@ -56,7 +51,7 @@ else:
 
 date_str = now_dt.strftime("%Y년 %m월 %d일")
 
-# 3. Gemini 프롬프트 구성 (엄격한 캐릭터 및 포맷 지침)
+# 3. Gemini 호출 (타임아웃 30초 설정 추가)
 genai.configure(api_key=GEMINI_KEY)
 model = genai.GenerativeModel("gemini-1.5-flash-latest")
 
@@ -119,13 +114,13 @@ prompt = f"""
 마크다운(```html) 없이 순수한 HTML 태그 조각만 출력하세요.
 """
 
-# Gemini 호출 및 카드 추출
+card_html = ""
 try:
-    response = model.generate_content(prompt)
+    response = model.generate_content(prompt, request_options={"timeout": 45})
     card_html = response.text.strip().removeprefix("```html").removesuffix("```").strip()
+    print("Gemini 생성 성공!")
 except Exception as e:
     print("Gemini 호출 오류:", e)
-    card_html = ""
 
 # 4. 기존 index.html에 새 Day 카드 누적 삽입
 if card_html:
@@ -149,7 +144,7 @@ if card_html:
 
 # 5. 카카오톡 본인에게 링크 전송
 def send_kakao_message(link_url, title_text):
-    token_url = "https://kauth.kakao.com/oauth/token"
+    token_url = "[https://kauth.kakao.com/oauth/token](https://kauth.kakao.com/oauth/token)"
     token_data = {
         "grant_type": "refresh_token",
         "client_id": KAKAO_REST_KEY,
@@ -162,7 +157,7 @@ def send_kakao_message(link_url, title_text):
         print("카카오 토큰 갱신 실패:", token_res)
         return
 
-    msg_url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
+    msg_url = "[https://kapi.kakao.com/v2/api/talk/memo/default/send](https://kapi.kakao.com/v2/api/talk/memo/default/send)"
     headers = {
         "Authorization": f"Bearer {access_token}",
         "Content-Type": "application/x-www-form-urlencoded"
