@@ -50,7 +50,7 @@ else:
 
 date_str = now_dt.strftime("%Y년 %m월 %d일")
 
-# 3. Gemini REST API 직접 호출 (현행 표준 gemini-2.5-flash 모델 적용)
+# 3. Gemini REST API 직접 호출
 prompt = f"""
 당신은 말레이시아 거주 한국인 학부모를 위한 실전 영어 교육 전문가입니다.
 날짜: {date_str}
@@ -95,7 +95,7 @@ prompt = f"""
             </div>
         </section>
         <section>
-            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="section-title">✍ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
             <div class="quiz-box">
                 <details class="quiz-item">
                     <summary>Q1. 질문 내용</summary>
@@ -111,7 +111,12 @@ prompt = f"""
 """
 
 card_html = ""
-gemini_api_url = f"[https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=](https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=){GEMINI_KEY}"
+# 마크다운 자동 링크 변환을 100% 무력화하는 조립형 주소
+p_https = "h" + "ttps://"
+gemini_host = "generativelanguage.googleapis.com"
+gemini_path = f"/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_KEY}"
+gemini_api_url = p_https + gemini_host + gemini_path
+
 payload = {
     "contents": [{"parts": [{"text": prompt}]}]
 }
@@ -152,7 +157,7 @@ else:
 
 # 5. 카카오톡 본인에게 링크 전송
 def send_kakao_message(link_url, title_text):
-    token_url = "https://" + "kauth.kakao.com" + "/oauth/token"
+    token_url = p_https + "kauth.kakao.com" + "/oauth/token"
     token_data = {
         "grant_type": "refresh_token",
         "client_id": KAKAO_REST_KEY,
@@ -165,7 +170,7 @@ def send_kakao_message(link_url, title_text):
         print("카카오 토큰 갱신 실패:", token_res)
         return
 
-    msg_url = "https://" + "kapi.kakao.com" + "/v2/api/talk/memo/default/send"
+    msg_url = p_https + "kapi.kakao.com" + "/v2/api/talk/memo/default/send"
     headers = {
         "Authorization": f"Bearer {access_token}",
         "Content-Type": "application/x-www-form-urlencoded"
@@ -199,6 +204,6 @@ def send_kakao_message(link_url, title_text):
     res = requests.post(msg_url, headers=headers, data={"template_object": json.dumps(template, ensure_ascii=False)})
     print("카카오톡 전송 결과:", res.status_code, res.text)
 
-# 시스템 자동 마크다운 변환을 방지하기 위한 안전한 결합 방식
-MY_GITHUB_PAGES_URL = "https://" + "docdaelove-sketch.github.io" + "/english-day1-/"
+# 웹사이트 주소도 조립형으로 완전 방어
+MY_GITHUB_PAGES_URL = p_https + "docdaelove-sketch.github.io/english-day1-/"
 send_kakao_message(MY_GITHUB_PAGES_URL, f"[{day_title}] {topic_desc}")
