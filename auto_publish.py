@@ -149,7 +149,7 @@ if card_html:
 
 # 5. 카카오톡 본인에게 링크 전송
 def send_kakao_message(link_url, title_text):
-    token_url = "[https://kauth.kakao.com/oauth/token](https://kauth.kakao.com/oauth/token)"
+    token_url = "https://kauth.kakao.com/oauth/token"
     token_data = {
         "grant_type": "refresh_token",
         "client_id": KAKAO_REST_KEY,
