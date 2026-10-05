@@ -53,7 +53,7 @@ date_str = now_dt.strftime("%Y년 %m월 %d일")
 
 # 3. Gemini 호출
 genai.configure(api_key=GEMINI_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash-latest")
+model = genai.GenerativeModel("gemini-pro")
 
 prompt = f"""
 당신은 말레이시아 거주 한국인 학부모를 위한 실전 영어 교육 전문가입니다.
