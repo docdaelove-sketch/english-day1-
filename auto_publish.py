@@ -51,7 +51,7 @@ else:
 
 date_str = now_dt.strftime("%Y년 %m월 %d일")
 
-# 3. Gemini 호출 (타임아웃 30초 설정 추가)
+# 3. Gemini 호출
 genai.configure(api_key=GEMINI_KEY)
 model = genai.GenerativeModel("gemini-1.5-flash-latest")
 
@@ -144,7 +144,7 @@ if card_html:
 
 # 5. 카카오톡 본인에게 링크 전송
 def send_kakao_message(link_url, title_text):
-    token_url = "[https://kauth.kakao.com/oauth/token](https://kauth.kakao.com/oauth/token)"
+    token_url = "https://" + "kauth.kakao.com" + "/oauth/token"
     token_data = {
         "grant_type": "refresh_token",
         "client_id": KAKAO_REST_KEY,
@@ -157,7 +157,7 @@ def send_kakao_message(link_url, title_text):
         print("카카오 토큰 갱신 실패:", token_res)
         return
 
-    msg_url = "[https://kapi.kakao.com/v2/api/talk/memo/default/send](https://kapi.kakao.com/v2/api/talk/memo/default/send)"
+    msg_url = "https://" + "kapi.kakao.com" + "/v2/api/talk/memo/default/send"
     headers = {
         "Authorization": f"Bearer {access_token}",
         "Content-Type": "application/x-www-form-urlencoded"
@@ -191,5 +191,6 @@ def send_kakao_message(link_url, title_text):
     res = requests.post(msg_url, headers=headers, data={"template_object": json.dumps(template, ensure_ascii=False)})
     print("카카오톡 전송 결과:", res.status_code, res.text)
 
-MY_GITHUB_PAGES_URL = "https://docdaelove-sketch.github.io/english-day1-/"
+# 시스템 자동 마크다운 변환을 방지하기 위한 안전한 결합 방식
+MY_GITHUB_PAGES_URL = "https://" + "docdaelove-sketch.github.io" + "/english-day1-/"
 send_kakao_message(MY_GITHUB_PAGES_URL, f"[{day_title}] {topic_desc}")
