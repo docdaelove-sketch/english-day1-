@@ -2,6 +2,7 @@ import os
 import datetime
 import requests
 import json
+import time
 
 # 1. 환경 변수
 GEMINI_KEY = os.getenv("GEMINI_API_KEY")
@@ -50,7 +51,7 @@ else:
 
 date_str = now_dt.strftime("%Y년 %m월 %d일")
 
-# 3. Gemini REST API 직접 호출
+# 3. Gemini REST API 프롬프트 (정확한 클래스명 강제 템플릿 포함)
 prompt = f"""
 당신은 말레이시아 거주 한국인 학부모를 위한 실전 영어 교육 전문가입니다.
 날짜: {date_str}
@@ -61,13 +62,20 @@ prompt = f"""
 - 주인공 자녀 이름: 항상 'Mike' 또는 'Clara' 사용
 - 친구 자녀 이름: 항상 'Sinwoo' 또는 'Eunchan' 사용
 - 학교명: 'Sunway International School'
-- 픽업 장소 언급 시: 'Block B' 사용 (Bay 2 사용 금지)
-- 어휘 및 대화문: 교과서식 표현 금지, 말레이시아 거주 학부모들이 실생활에서 매일 쓰는 고빈도 실전 표현만 엄선
+- 픽업 장소 언급 시: 'Block B' 사용
+- 어휘 및 대화문: 말레이시아 거주 학부모들이 실생활에서 매일 쓰는 고빈도 실전 표현만 엄선
 
-[필수 HTML 구조]
+[필수 CSS 클래스 준수 규칙 - Day 1 디자인과 100% 동일하게 생성할 것]
+- 어휘 아이템은 반드시 다음 태그 구조를 지키세요:
+  <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">번호. 단어</div><div class="vocab-meaning">한글뜻</div><div class="vocab-tip">💡 실생활 팁</div></div><button class="speak-btn" onclick="playAudio('단어')">🔊</button></div>
+- 패턴 아이템은 반드시 다음 태그 구조를 지키세요:
+  <div class="pattern-item"><div class="pattern-title">Pattern 번호. 영어문장 <button class="speak-btn" onclick="playAudio('영어문장')">🔊</button></div><div class="pattern-example">한글 해석</div></div>
+- 대화문은 반드시 다음 태그 구조를 지키세요:
+  <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">화자:</span> 대화 내용</div><button class="speak-btn" onclick="playAudio('대화 내용')">🔊</button></div>
+
+[HTML 뼈대 구조]
 <!DOCTYPE html>, <html>, <body>, <style> 태그는 절대로 쓰지 마세요.
-오직 아래의 <article class="report-card">...</article> 단일 HTML 코드 조각만 생성하세요.
-반드시 모든 영어 단어와 대화 문장 뒤에 <button class="speak-btn" onclick="playAudio('영어문장')">🔊</button>을 넣어주세요.
+오직 아래의 <article class="report-card">...</article> 단일 조각만 마크다운(```html) 없이 순수한 텍스트로 출력하세요.
 
 <article class="report-card">
     <div class="card-header">
@@ -79,23 +87,23 @@ prompt = f"""
         <section>
             <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
             <div class="vocab-grid">
-                <!-- 정확히 10개의 vocab-item 생성 (단어, 의미, 말레이시아 실생활 팁, playAudio 버튼) -->
+                <!-- 정확히 10개의 vocab-item 생성 -->
             </div>
         </section>
         <section>
             <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
             <div class="pattern-box">
-                <!-- 정확히 3개의 pattern-item 생성 (Mike/Clara/Sinwoo/Eunchan 활용 예문 및 playAudio 버튼) -->
+                <!-- 정확히 3개의 pattern-item 생성 -->
             </div>
         </section>
         <section>
             <div class="section-title">💬 실전 롤플레잉 대화문</div>
             <div class="dialogue-box">
-                <!-- 현지 상황에 맞는 생생한 A/B 대화문 4~6줄, 각 줄마다 playAudio 버튼 포함 -->
+                <!-- 4~6개의 dialogue-line 생성 -->
             </div>
         </section>
         <section>
-            <div class="section-title">✍ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
             <div class="quiz-box">
                 <details class="quiz-item">
                     <summary>Q1. 질문 내용</summary>
@@ -106,12 +114,9 @@ prompt = f"""
         </section>
     </div>
 </article>
-
-마크다운(```html) 없이 순수한 HTML 태그 조각만 출력하세요.
 """
 
 card_html = ""
-# 마크다운 자동 링크 변환을 100% 무력화하는 조립형 주소
 p_https = "h" + "ttps://"
 gemini_host = "generativelanguage.googleapis.com"
 gemini_path = f"/v1beta/models/gemini-3.8-flash:generateContent?key={GEMINI_KEY}"
@@ -121,17 +126,26 @@ payload = {
     "contents": [{"parts": [{"text": prompt}]}]
 }
 
-try:
-    api_res = requests.post(gemini_api_url, json=payload, timeout=45)
-    if api_res.status_code == 200:
-        res_json = api_res.json()
-        raw_text = res_json['candidates'][0]['content']['parts'][0]['text']
-        card_html = raw_text.strip().removeprefix("```html").removesuffix("```").strip()
-        print("Gemini 생성 성공!")
-    else:
-        print("Gemini API 호출 실패 코드:", api_res.status_code, api_res.text)
-except Exception as e:
-    print("Gemini 네트워크 오류:", e)
+# 503 과부하 방어: 최대 3회 재시도 (5초 대기)
+for attempt in range(1, 4):
+    try:
+        print(f"Gemini 호출 시도 중 ({attempt}/3)...")
+        api_res = requests.post(gemini_api_url, json=payload, timeout=45)
+        if api_res.status_code == 200:
+            res_json = api_res.json()
+            raw_text = res_json['candidates'][0]['content']['parts'][0]['text']
+            card_html = raw_text.strip().removeprefix("```html").removesuffix("```").strip()
+            print("Gemini 생성 성공!")
+            break
+        elif api_res.status_code == 503:
+            print(f"구글 서버 과부하(503). 5초 대기 후 재시도합니다 ({attempt}/3)...")
+            time.sleep(5)
+        else:
+            print("Gemini API 호출 실패 코드:", api_res.status_code, api_res.text)
+            break
+    except Exception as e:
+        print("Gemini 네트워크 오류:", e)
+        time.sleep(3)
 
 # 4. 기존 index.html에 새 Day 카드 누적 삽입
 if card_html:
@@ -204,6 +218,6 @@ def send_kakao_message(link_url, title_text):
     res = requests.post(msg_url, headers=headers, data={"template_object": json.dumps(template, ensure_ascii=False)})
     print("카카오톡 전송 결과:", res.status_code, res.text)
 
-# 웹사이트 주소도 조립형으로 완전 방어
+# 웹사이트 주소 결합 방식
 MY_GITHUB_PAGES_URL = p_https + "docdaelove-sketch.github.io/english-day1-/"
 send_kakao_message(MY_GITHUB_PAGES_URL, f"[{day_title}] {topic_desc}")
