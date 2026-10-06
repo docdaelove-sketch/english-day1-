@@ -30,6 +30,7 @@ if weekday == 5:
     start_day_of_week = (week_num - 1) * 5 + 1
     end_day_of_week = week_num * 5
     topic_desc = f"{week_num}주차 통합 복습 테스트 (Day {start_day_of_week}~{end_day_of_week} 핵심 어휘 25개 및 실전 퀴즈 총정리)"
+    partner_kid = "Sinwoo and Eunchan"
 else:
     current_day_number = (week_num - 1) * 5 + (weekday + 1)
     day_title = f"Day {current_day_number}"
@@ -48,6 +49,9 @@ else:
         11: "차량 정비 및 주유소 이용 (세차, 엔진오일 교환, 타이어 공기압 점검)"
     }
     topic_desc = topic_pool.get(current_day_number, f"말레이시아 생활 실전 회화 (Day {current_day_number})")
+    
+    # 짝수 Day는 Eunchan, 홀수 Day는 Sinwoo 번갈아 배정
+    partner_kid = "Eunchan" if current_day_number % 2 == 0 else "Sinwoo"
 
 date_str = now_dt.strftime("%Y년 %m월 %d일")
 
@@ -59,7 +63,8 @@ prompt = f"""
 주제: {topic_desc}
 
 [필수 캐릭터 및 배경 규칙]
-- 등장인물/아이 이름: 'Mike', 'Clara', 'Sinwoo', 'Eunchan'을 대화 맥락에 맞게 자연스럽게 사용
+- 오늘의 주인공 자녀: 'Mike' 또는 'Clara'
+- 오늘의 상대방 친구 자녀: 반드시 오늘은 '{partner_kid}' (Parent of {partner_kid}) 등장시킬 것 (다른 친구 이름 혼용 금지)
 - 학교명 및 장소(Sunway International School, Block B): 오직 등하원이나 학교 관련 주제일 때만 사용하고, 일반 식당/카페/쇼핑몰/병원 등의 주제에서는 절대 억지로 언급하지 말 것
 - 대화의 자연스러움 최우선: 직원의 질문이나 상황에 맞지 않는 엉뚱한 정보(픽업 이야기 등)는 절대 넣지 말고 현지 실제 대화처럼 구성할 것
 - 어휘 및 대화문: 말레이시아 거주 학부모들이 실생활에서 매일 쓰는 고빈도 실전 표현만 엄선
