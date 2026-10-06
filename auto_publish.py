@@ -125,10 +125,10 @@ payload = {
     "contents": [{"parts": [{"text": prompt}]}]
 }
 
-# 503 과부하 방어: 최대 3회 재시도 (5초 대기)
-for attempt in range(1, 4):
+# 503 과부하 방어 강화: 대기 시간을 15초로 늘리고 최대 5회까지 재시도
+for attempt in range(1, 6):
     try:
-        print(f"Gemini 호출 시도 중 ({attempt}/3)...")
+        print(f"Gemini 호출 시도 중 ({attempt}/5)...")
         api_res = requests.post(gemini_api_url, json=payload, timeout=45)
         if api_res.status_code == 200:
             res_json = api_res.json()
@@ -137,16 +137,17 @@ for attempt in range(1, 4):
             print("Gemini 생성 성공!")
             break
         elif api_res.status_code == 503:
-            print(f"구글 서버 과부하(503). 5초 대기 후 재시도합니다 ({attempt}/3)...")
-            time.sleep(5)
+            print(f"구글 서버 과부하(503). 15초 대기 후 재시도합니다 ({attempt}/5)...")
+            time.sleep(15)
         else:
             print("Gemini API 호출 실패 코드:", api_res.status_code, api_res.text)
             break
     except Exception as e:
         print("Gemini 네트워크 오류:", e)
-        time.sleep(3)
+        time.sleep(5)
 
 # 4. 기존 index.html에 새 Day 카드 누적 삽입
+update_success = False
 if card_html:
     placeholder = "<!-- NEW_CARD_PLACEHOLDER -->"
     with open("index.html", "r", encoding="utf-8") as f:
@@ -161,8 +162,10 @@ if card_html:
             with open("index.html", "w", encoding="utf-8") as f:
                 f.write(updated_html)
             print(f"index.html 업데이트 완료: {day_title} 누적 추가됨")
+            update_success = True
         else:
             print(f"{day_title} 카드가 이미 존재합니다.")
+            update_success = True
     else:
         print("경고: index.html에 <!-- NEW_CARD_PLACEHOLDER --> 태그를 찾을 수 없습니다.")
 else:
@@ -217,6 +220,9 @@ def send_kakao_message(link_url, title_text):
     res = requests.post(msg_url, headers=headers, data={"template_object": json.dumps(template, ensure_ascii=False)})
     print("카카오톡 전송 결과:", res.status_code, res.text)
 
-# 웹사이트 주소 결합 방식
+# 웹사이트 주소 결합 방식 및 정상 업데이트 시에만 카카오톡 발송
 MY_GITHUB_PAGES_URL = p_https + "docdaelove-sketch.github.io/english-day1-/"
-send_kakao_message(MY_GITHUB_PAGES_URL, f"[{day_title}] {topic_desc}")
+if update_success:
+    send_kakao_message(MY_GITHUB_PAGES_URL, f"[{day_title}] {topic_desc}")
+else:
+    print("카드 생성 실패로 인해 카카오톡 알림 발송을 건너뜁니다.")
