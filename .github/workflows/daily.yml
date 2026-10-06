@@ -3,7 +3,7 @@ name: Daily English Auto Publish
 on:
   schedule:
     # UTC 기준 21:50 = 말레이시아/한국 시간 기준 매일 아침 05:50
-    - cron: '50 21 * * *'
+    - cron: '13 22 * * *'
   workflow_dispatch: # Actions 탭에서 수동으로 즉시 테스트 실행 가능하게 해주는 설정
 
 permissions:
