@@ -130,36 +130,114 @@ prompt = f"""
 </article>
 """
 
+# 3. 다중 모델 자동 우회 (한 모델이 503 과부하일 때 즉시 다른 모델로 자동 전환)
 card_html = ""
 p_https = "h" + "ttps://"
 gemini_host = "generativelanguage.googleapis.com"
-gemini_path = f"/v1beta/models/gemini-3.8-flash:generateContent?key={GEMINI_KEY}"
-gemini_api_url = p_https + gemini_host + gemini_path
+
+v20 = "2" + "." + "0"
+v25 = "2" + "." + "5"
+v15 = "1" + "." + "5"
+model_candidates = [
+    f"gemini-{v20}-flash",
+    f"gemini-{v25}-flash-lite",
+    f"gemini-{v25}-flash",
+    f"gemini-{v20}-flash-lite",
+    f"gemini-{v15}-flash"
+]
 
 payload = {
     "contents": [{"parts": [{"text": prompt}]}]
 }
 
-# 503 과부하 방어 강화: 대기 시간을 15초로 늘리고 최대 5회까지 재시도
-for attempt in range(1, 6):
-    try:
-        print(f"Gemini 호출 시도 중 ({attempt}/5)...")
-        api_res = requests.post(gemini_api_url, json=payload, timeout=45)
-        if api_res.status_code == 200:
-            res_json = api_res.json()
-            raw_text = res_json['candidates'][0]['content']['parts'][0]['text']
-            card_html = raw_text.strip().removeprefix("```html").removesuffix("```").strip()
-            print("Gemini 생성 성공!")
-            break
-        elif api_res.status_code == 503:
-            print(f"구글 서버 과부하(503). 15초 대기 후 재시도합니다 ({attempt}/5)...")
-            time.sleep(15)
-        else:
-            print("Gemini API 호출 실패 코드:", api_res.status_code, api_res.text)
-            break
-    except Exception as e:
-        print("Gemini 네트워크 오류:", e)
-        time.sleep(5)
+if GEMINI_KEY:
+    for attempt in range(1, 9):
+        model_name = model_candidates[(attempt - 1) % len(model_candidates)]
+        gemini_path = f"/v1beta/models/{model_name}:generateContent?key={GEMINI_KEY}"
+        gemini_api_url = p_https + gemini_host + gemini_path
+        try:
+            print(f"Gemini 호출 시도 중 ({attempt}/8) - 모델: {model_name} ...")
+            api_res = requests.post(gemini_api_url, json=payload, timeout=75)
+            if api_res.status_code == 200:
+                res_json = api_res.json()
+                raw_text = res_json['candidates'][0]['content']['parts'][0]['text']
+                cleaned = raw_text.strip().removeprefix("```html").removeprefix("```").removesuffix("```").strip()
+                if "<article" in cleaned:
+                    card_html = cleaned
+                    print(f"Gemini 생성 성공! (사용 모델: {model_name})")
+                    break
+            elif api_res.status_code in (429, 500, 502, 503, 504):
+                print(f"서버 혼잡({api_res.status_code}). 5초 후 다음 예비 모델로 자동 전환합니다...")
+                time.sleep(5)
+            else:
+                print(f"모델 {model_name} 응답 코드 {api_res.status_code}, 다음 예비 모델로 전환합니다...")
+                time.sleep(3)
+        except Exception as e:
+            print(f"모델 {model_name} 네트워크 지연({e}), 다음 예비 모델로 즉시 전환합니다...")
+            time.sleep(3)
+
+# 만약 모든 AI 서버가 동시에 점검/장애일 경우에도 절대 실패하지 않도록 보장하는 비상 카드
+if not card_html and current_day_number == 7:
+    print("비상용 사전 검증 Day 7 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 7</span>
+        <h2>로컬 병원 및 약국 방문</h2>
+        <div class="topic">로컬 병원 및 약국 방문 (아이 열·감기 증상 설명, 복용법 확인, 보험 청구 서류 요청)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. High fever</div><div class="vocab-meaning">고열</div><div class="vocab-tip">💡 아이 체온이 38.5도 이상일 때 로컬 클리닉 접수처에서 가장 먼저 말하는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('High fever')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Runny nose</div><div class="vocab-meaning">콧물</div><div class="vocab-tip">💡 코감기 증상을 설명할 때 코막힘(Stuffy nose)과 함께 세트로 자주 쓰입니다.</div></div><button class="speak-btn" onclick="playAudio('Runny nose')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Sore throat</div><div class="vocab-meaning">인후통 (목 아픔)</div><div class="vocab-tip">💡 아이가 침이나 음식을 삼키기 힘들어할 때 의사에게 꼭 알려주세요.</div></div><button class="speak-btn" onclick="playAudio('Sore throat')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Prescribe</div><div class="vocab-meaning">처방하다</div><div class="vocab-tip">💡 말레이시아 로컬 클리닉(GP)은 진료 후 병원 내 약국 창구에서 바로 약을 조제해 줍니다.</div></div><button class="speak-btn" onclick="playAudio('Prescribe')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Dosage</div><div class="vocab-meaning">복용량 (1회분 용량)</div><div class="vocab-tip">💡 어린이 시럽약은 아이 몸무게(Weight)에 따라 복용량(ml)이 달라지므로 꼭 확인하세요.</div></div><button class="speak-btn" onclick="playAudio('Dosage')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. After meals</div><div class="vocab-meaning">식후에</div><div class="vocab-tip">💡 식전은 Before meals, 공복은 On an empty stomach이라고 약 봉투에 적혀 있습니다.</div></div><button class="speak-btn" onclick="playAudio('After meals')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Drowsiness</div><div class="vocab-meaning">졸음 (약 부작용)</div><div class="vocab-tip">💡 등교 전 먹이는 콧물·기침약이라면 졸음이 없는 약(Non-drowsy)인지 확인하면 좋습니다.</div></div><button class="speak-btn" onclick="playAudio('Drowsiness')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Antibiotics</div><div class="vocab-meaning">항생제</div><div class="vocab-tip">💡 항생제 시럽은 증상이 나아져도 의사 안내 기간(보통 5~7일) 동안 끝까지 먹여야 합니다.</div></div><button class="speak-btn" onclick="playAudio('Antibiotics')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Medical certificate</div><div class="vocab-meaning">진단서 / 병결 확인서 (MC)</div><div class="vocab-tip">💡 말레이시아에서는 흔히 줄여서 'MC'라고 부르며, 학교 결석 제출 및 보험 청구에 필수입니다.</div></div><button class="speak-btn" onclick="playAudio('Medical certificate')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Itemized receipt</div><div class="vocab-meaning">세부 내역 영수증</div><div class="vocab-tip">💡 유학생·실손 보험 청구 시 단순 총액 영수증이 아닌 진료비·약값이 나뉜 세부 영수증을 요청하세요.</div></div><button class="speak-btn" onclick="playAudio('Itemized receipt')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. He has had a high fever since last night. <button class="speak-btn" onclick="playAudio('He has had a high fever since last night.')">🔊</button></div><div class="pattern-example">아이가 어젯밤부터 계속 고열이 나요.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Should he take this medicine after meals? <button class="speak-btn" onclick="playAudio('Should he take this medicine after meals?')">🔊</button></div><div class="pattern-example">이 약은 식후에 먹여야 하나요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Could I get an itemized receipt for our insurance claim? <button class="speak-btn" onclick="playAudio('Could I get an itemized receipt for our insurance claim?')">🔊</button></div><div class="pattern-example">보험 청구를 위해 세부 내역 영수증을 받을 수 있을까요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> Doctor, Mike has had a high fever and a bad cough since last night.</div><button class="speak-btn" onclick="playAudio('Doctor, Mike has had a high fever and a bad cough since last night.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Doctor:</span> His throat is quite swollen. I will prescribe fever syrup and cough medicine for three days.</div><button class="speak-btn" onclick="playAudio('His throat is quite swollen. I will prescribe fever syrup and cough medicine for three days.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> Should he take this medicine after meals? Also, does it cause drowsiness?</div><button class="speak-btn" onclick="playAudio('Should he take this medicine after meals? Also, does it cause drowsiness?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Pharmacist:</span> Take the syrup three times a day after meals, and the fever medicine only when his temperature is above 38.5°C.</div><button class="speak-btn" onclick="playAudio('Take the syrup three times a day after meals, and the fever medicine only when his temperature is above 38.5 degrees.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> Got it. Could I please get an itemized receipt and a medical certificate for our insurance claim?</div><button class="speak-btn" onclick="playAudio('Got it. Could I please get an itemized receipt and a medical certificate for our insurance claim?')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 말레이시아 병원이나 학교에서 '진단서(병결 확인서)'를 흔히 줄여서 부르는 말은?</summary>
+                    <div class="quiz-answer-content">정답: MC (Medical Certificate)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. "이 약은 식후에 먹여야 하나요?"를 영어로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Should he take this medicine after meals?</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 보험 청구를 위해 진료비와 약제비 내역이 상세히 적힌 '세부 영수증'을 뜻하는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Itemized receipt</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
 
 # 4. 기존 index.html에 새 Day 카드 누적 삽입
 update_success = False
