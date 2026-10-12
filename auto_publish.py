@@ -31,10 +31,11 @@ if weekday == 5:
     end_day_of_week = week_num * 5
     topic_desc = f"{week_num}주차 통합 복습 테스트 (Day {start_day_of_week}~{end_day_of_week} 핵심 어휘 25개 및 실전 퀴즈 총정리)"
     partner_kid = "Sinwoo and Eunchan"
+    current_day_number = 0
 else:
     current_day_number = (week_num - 1) * 5 + (weekday + 1)
     day_title = f"Day {current_day_number}"
-    
+
     topic_pool = {
         1: "Sunway International School 등하원 & 픽업 실전 회화 (드롭존 소통, 학부모 ID 확인, Block B 픽업)",
         2: "레스토랑 주문하기 (인원 안내, 맵기·얼음 조절, 계산서 분할 요청)",
@@ -49,13 +50,22 @@ else:
         11: "차량 정비 및 주유소 이용 (세차, 엔진오일 교환, 타이어 공기압 점검)"
     }
     topic_desc = topic_pool.get(current_day_number, f"말레이시아 생활 실전 회화 (Day {current_day_number})")
-    
-    # 짝수 Day는 Eunchan, 홀수 Day는 Sinwoo 번갈아 배정
+
+    # 짝수 Day는 Eunchan, 홀수 Day는 Sinwoo (단, 친구/학부모가 필요한 주제일 때만 사용)
     partner_kid = "Eunchan" if current_day_number % 2 == 0 else "Sinwoo"
 
 date_str = now_dt.strftime("%Y년 %m월 %d일")
 
-# 3. Gemini REST API 프롬프트 (정확한 클래스명 강제 템플릿 포함)
+if current_day_number == 7:
+    dialogue_guide = """                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> Doctor, Mike has had a high fever and a bad cough since last night.</div><button class="speak-btn" onclick="playAudio('Doctor, Mike has had a high fever and a bad cough since last night.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Doctor:</span> His throat is quite swollen. I will prescribe fever syrup and cough medicine for three days.</div><button class="speak-btn" onclick="playAudio('His throat is quite swollen. I will prescribe fever syrup and cough medicine for three days.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> Should he take this medicine after meals? Also, does it cause drowsiness?</div><button class="speak-btn" onclick="playAudio('Should he take this medicine after meals? Also, does it cause drowsiness?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Pharmacist:</span> Take the syrup three times a day after meals, and the fever medicine only when his temperature is above 38.5°C.</div><button class="speak-btn" onclick="playAudio('Take the syrup three times a day after meals, and the fever medicine only when his temperature is above 38.5 degrees.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> Got it. Could I please get an itemized receipt and a medical certificate for our insurance claim?</div><button class="speak-btn" onclick="playAudio('Got it. Could I please get an itemized receipt and a medical certificate for our insurance claim?')">🔊</button></div>
+                <!-- 주의: Day 7의 dialogue-box 안에는 Parent of Sinwoo 없이 위 5개의 dialogue-line을 정확히 그대로 출력하세요. -->"""
+else:
+    dialogue_guide = "                <!-- 4~6개의 dialogue-line 생성 (학부모 모임/플레이데이트 등 친구 학부모가 꼭 필요한 주제만 친구 학부모 등장, 그 외 병원/상점/식당 등에서는 주인공 학부모와 현지 직원만 등장) -->"
+
 prompt = f"""
 당신은 말레이시아 거주 한국인 학부모를 위한 실전 영어 교육 전문가입니다.
 날짜: {date_str}
@@ -64,9 +74,9 @@ prompt = f"""
 
 [필수 캐릭터 및 배경 규칙]
 - 오늘의 주인공 자녀: 'Mike' 또는 'Clara'
-- 오늘의 상대방 친구 자녀: 반드시 오늘은 '{partner_kid}' (Parent of {partner_kid}) 등장시킬 것 (다른 친구 이름 혼용 금지)
+- 상대방 친구 자녀('{partner_kid}' / Parent of {partner_kid}) 등장 규칙: 굳이 모든 롤플레잉에 Sinwoo나 Eunchan이가 등장할 필요는 없습니다. 오직 '학부모 모임, 카페 스몰톡, 생일 파티 초대, 플레이데이트 조율' 등 친구 학부모와의 대화가 문맥상 자연스럽고 꼭 필요한 주제일 때만 '{partner_kid}' (Parent of {partner_kid})를 등장시키세요. 병원, 약국, 쇼핑몰, 식당, 그로서리, 관리사무소, 차량 정비 등 현지 직원(의사, 약사, 점원 등)과 소통하는 주제에서는 친구 학부모를 절대 억지로 등장시키지 말고 주인공 학부모와 현지 직원 간의 대화로만 자연스럽게 구성하세요.
 - 학교명 및 장소(Sunway International School, Block B): 오직 등하원이나 학교 관련 주제일 때만 사용하고, 일반 식당/카페/쇼핑몰/병원 등의 주제에서는 절대 억지로 언급하지 말 것
-- 대화의 자연스러움 최우선: 직원의 질문이나 상황에 맞지 않는 엉뚱한 정보(픽업 이야기 등)는 절대 넣지 말고 현지 실제 대화처럼 구성할 것
+- 대화의 자연스러움 최우선: 직원의 질문이나 상황에 맞지 않는 엉뚱한 정보(픽업 이야기, 불필요한 친구 학부모 끼어들기 등)는 절대 넣지 말고 현지 실제 대화처럼 구성할 것
 - 어휘 및 대화문: 말레이시아 거주 학부모들이 실생활에서 매일 쓰는 고빈도 실전 표현만 엄선
 
 [필수 CSS 클래스 준수 규칙 - Day 1 디자인과 100% 동일하게 생성할 것]
@@ -103,7 +113,7 @@ prompt = f"""
         <section>
             <div class="section-title">💬 실전 롤플레잉 대화문</div>
             <div class="dialogue-box">
-                <!-- 4~6개의 dialogue-line 생성 -->
+{dialogue_guide}
             </div>
         </section>
         <section>
@@ -196,14 +206,14 @@ def send_kakao_message(link_url, title_text):
         "Authorization": f"Bearer {access_token}",
         "Content-Type": "application/x-www-form-urlencoded"
     }
-    
+
     message_text = (
         f"[오늘의 영어 리포트 도착]\n"
         f"{title_text}\n\n"
         f"오늘의 리포트 바로가기:\n"
         f"{link_url}"
     )
-    
+
     template = {
         "object_type": "text",
         "text": message_text,
@@ -221,7 +231,7 @@ def send_kakao_message(link_url, title_text):
             }
         ]
     }
-    
+
     res = requests.post(msg_url, headers=headers, data={"template_object": json.dumps(template, ensure_ascii=False)})
     print("카카오톡 전송 결과:", res.status_code, res.text)
 
