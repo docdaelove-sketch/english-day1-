@@ -135,15 +135,11 @@ card_html = ""
 p_https = "h" + "ttps://"
 gemini_host = "generativelanguage.googleapis.com"
 
-v20 = "2" + "." + "0"
-v25 = "2" + "." + "5"
-v15 = "1" + "." + "5"
 model_candidates = [
-    f"gemini-{v20}-flash",
-    f"gemini-{v25}-flash-lite",
-    f"gemini-{v25}-flash",
-    f"gemini-{v20}-flash-lite",
-    f"gemini-{v15}-flash"
+    "gemini-3.8-flash",
+    "gemini-3.5-flash-lite",
+    "gemini-3.1-pro",
+    "gemini-4-argon"
 ]
 
 payload = {
@@ -296,6 +292,67 @@ elif not card_html and current_day_number == 8:
                 <details class="quiz-item">
                     <summary>Q3. 가격표가 떼어지지 않고 옷에 달려 있는 상태를 뜻하는 표현은?</summary>
                     <div class="quiz-answer-content">정답: Tag attached (The tag is attached)</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 9:
+    print("비상용 사전 검증 Day 9 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 9</span>
+        <h2>학부모 모임 &amp; 카페 스몰톡</h2>
+        <div class="topic">학부모 모임 &amp; 카페 스몰톡 (아이들 방과후 이야기, 주말 골프 및 브런치 대화)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Catch up</div><div class="vocab-meaning">밀린 이야기를 나누다 / 안부를 묻다</div><div class="vocab-tip">💡 오랜만에 만난 학부모들과 카페에서 이야기 나눌 때 가장 대표적으로 쓰는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Catch up')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Settle in</div><div class="vocab-meaning">새 환경에 잘 적응하다 / 자리잡다</div><div class="vocab-tip">💡 새 학기나 방과 후 활동에 아이가 잘 적응하고 있는지 물어볼 때 자주 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Settle in')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. After-school club</div><div class="vocab-meaning">방과 후 활동 / 클럽 (CCAs)</div><div class="vocab-tip">💡 국제학교에서는 방과 후 액티비티를 CCA(Co-Curricular Activities)나 Club이라고 부릅니다.</div></div><button class="speak-btn" onclick="playAudio('After-school club')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Exhausted</div><div class="vocab-meaning">기진맥진한 / 몹시 지친</div><div class="vocab-tip">💡 격렬한 운동 수업이나 방과 후 스포츠 후 아이가 곯아떨어졌을 때 표현합니다.</div></div><button class="speak-btn" onclick="playAudio('Exhausted')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Round of golf</div><div class="vocab-meaning">골프 한 라운딩 (18홀 경기)</div><div class="vocab-tip">💡 주말에 함께 골프 치자고 제안할 때 'play a round of golf' 형태로 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Round of golf')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Tee time</div><div class="vocab-meaning">티오프 시간 (골프 예약 시간)</div><div class="vocab-tip">💡 말레이시아는 더위를 피해 주로 오전 7~8시대 모닝 티타임을 선호합니다.</div></div><button class="speak-btn" onclick="playAudio('Tee time')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Driving range</div><div class="vocab-meaning">골프 인도어/야외 연습장</div><div class="vocab-tip">💡 주중에 가볍게 샷 연습하러 갈 때 학부모들끼리 연습장 같이 가자고 할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Driving range')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Brunch spot</div><div class="vocab-meaning">브런치 맛집 / 좋은 카페</div><div class="vocab-tip">💡 모임 장소를 정할 때 분위기 좋고 맛있는 브런치 카페를 추천하거나 물어볼 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Brunch spot')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Playdate</div><div class="vocab-meaning">아이들 놀이 약속 (플레이데이트)</div><div class="vocab-tip">💡 주말이나 하교 후 서로 집을 오가거나 키즈카페에서 만날 때 자주 쓰입니다.</div></div><button class="speak-btn" onclick="playAudio('Playdate')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Carpool</div><div class="vocab-meaning">카풀 (등하원 함께 태우기)</div><div class="vocab-tip">💡 같은 콘도나 동네에 사는 학부모들끼리 번갈아 가며 아이들을 픽업할 때 유용합니다.</div></div><button class="speak-btn" onclick="playAudio('Carpool')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. It's so good to finally catch up over coffee! <button class="speak-btn" onclick="playAudio('It is so good to finally catch up over coffee!')">🔊</button></div><div class="pattern-example">커피 한잔하면서 드디어 밀린 이야기 나누니 너무 좋아요!</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. How is your child settling in with the new schedule? <button class="speak-btn" onclick="playAudio('How is your child settling in with the new schedule?')">🔊</button></div><div class="pattern-example">아이가 새 일정(수업)에 잘 적응하고 있나요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Are you free for a round of golf this weekend? <button class="speak-btn" onclick="playAudio('Are you free for a round of golf this weekend?')">🔊</button></div><div class="pattern-example">이번 주말에 골프 라운딩 갈 시간 괜찮으세요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> Hi Jenny! Thanks for meeting up today. It's so nice to sit down and catch up over iced Americanos. How is Sinwoo settling into his new term?</div><button class="speak-btn" onclick="playAudio('Hi Jenny! Thanks for meeting up today. It is so nice to sit down and catch up over iced Americanos. How is Sinwoo settling into his new term?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Sinwoo:</span> Hi Grace! He's doing great. He joined the soccer club this week, but he comes home completely exhausted every Tuesday. How about Mike?</div><button class="speak-btn" onclick="playAudio('Hi Grace! He is doing great. He joined the soccer club this week, but he comes home completely exhausted every Tuesday. How about Mike?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> Mike started swimming lessons twice a week, and he loves it! By the way, are you free for a round of golf or brunch this Sunday morning?</div><button class="speak-btn" onclick="playAudio('Mike started swimming lessons twice a week, and he loves it! By the way, are you free for a round of golf or brunch this Sunday morning?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Sinwoo:</span> I'd love that! My husband can look after Sinwoo on Sunday. Let's book an early morning tee time to beat the heat, and then grab brunch afterwards.</div><button class="speak-btn" onclick="playAudio('I would love that! My husband can look after Sinwoo on Sunday. Let us book an early morning tee time to beat the heat, and then grab brunch afterwards.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> That sounds like a wonderful plan! I know a fantastic new brunch spot near the golf club. I'll reserve our tee time right now.</div><button class="speak-btn" onclick="playAudio('That sounds like a wonderful plan! I know a fantastic new brunch spot near the golf club. I will reserve our tee time right now.')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 카페에서 "커피 한잔하며 밀린 이야기를 나누다"를 영어로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Catch up over coffee (It's so good to catch up over coffee)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 아이가 새로운 학교 환경이나 클럽에 "잘 적응하다 / 자리잡다"를 뜻하는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Settle in (Settling in)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. "이번 주말에 골프 한 라운딩(게임) 할 시간 괜찮으세요?"를 영어로 표현해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Are you free for a round of golf this weekend?</div>
                 </details>
             </div>
         </section>
