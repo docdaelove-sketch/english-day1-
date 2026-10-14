@@ -238,6 +238,69 @@ if not card_html and current_day_number == 7:
         </section>
     </div>
 </article>"""
+elif not card_html and current_day_number == 8:
+    print("비상용 사전 검증 Day 8 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 8</span>
+        <h2>쇼핑몰 교환 및 환불</h2>
+        <div class="topic">쇼핑몰 교환 및 환불 (영수증 제시, 사이즈 변경, 결제 취소 요청)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Receipt</div><div class="vocab-meaning">영수증</div><div class="vocab-tip">💡 말레이시아 매장에서는 교환/환불 시 실물 종이 영수증 지참이 필수입니다.</div></div><button class="speak-btn" onclick="playAudio('Receipt')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Exchange</div><div class="vocab-meaning">교환</div><div class="vocab-tip">💡 구매 후 보통 7~14일 이내 영수증과 함께 가져가면 다른 사이즈나 색상으로 교환 가능합니다.</div></div><button class="speak-btn" onclick="playAudio('Exchange')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Refund</div><div class="vocab-meaning">환불</div><div class="vocab-tip">💡 말레이시아 많은 브랜드는 단순 변심 시 현금 환불 대신 교환이나 크레딧 노트를 제공합니다.</div></div><button class="speak-btn" onclick="playAudio('Refund')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Tag attached</div><div class="vocab-meaning">가격표/태그가 붙어 있는</div><div class="vocab-tip">💡 상품 가격표(Price tag)가 훼손되지 않고 붙어 있어야 교환/환불이 접수됩니다.</div></div><button class="speak-btn" onclick="playAudio('Tag attached')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Defective</div><div class="vocab-meaning">불량의 / 하자가 있는</div><div class="vocab-tip">💡 박음질 불량이나 흠집 등 제품 하자가 있을 때는 규정과 상관없이 전액 환불/교환 대상입니다.</div></div><button class="speak-btn" onclick="playAudio('Defective')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Store credit</div><div class="vocab-meaning">매장 적립금 / 교환권 (Credit note)</div><div class="vocab-tip">💡 환불이 불가능할 때 해당 금액만큼 매장에서 나중에 쓸 수 있도록 발행해 주는 전표입니다.</div></div><button class="speak-btn" onclick="playAudio('Store credit')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Size up</div><div class="vocab-meaning">한 치수 크게 (사이즈 업)</div><div class="vocab-tip">💡 'Can I size up?' 형태로 일상에서 매장 직원에게 치수를 키워달라고 할 때 매우 자주 쓰입니다.</div></div><button class="speak-btn" onclick="playAudio('Size up')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Original packaging</div><div class="vocab-meaning">원래 제품 포장</div><div class="vocab-tip">💡 신발이나 잡화는 박스 및 포장 상태가 온전해야 교환이 승인됩니다.</div></div><button class="speak-btn" onclick="playAudio('Original packaging')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Fitting room</div><div class="vocab-meaning">탈의실 / 피팅룸</div><div class="vocab-tip">💡 교환하기 전 다른 사이즈나 색상을 직접 입어볼 때 직원에게 위치를 물어보세요.</div></div><button class="speak-btn" onclick="playAudio('Fitting room')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Transaction slip</div><div class="vocab-meaning">카드 결제 전표</div><div class="vocab-tip">💡 카드 결제 취소 시 영수증과 함께 결제했던 실물 카드 및 전표가 필요합니다.</div></div><button class="speak-btn" onclick="playAudio('Transaction slip')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. I'd like to exchange this for a bigger size. <button class="speak-btn" onclick="playAudio('I would like to exchange this for a bigger size.')">🔊</button></div><div class="pattern-example">이거 더 큰 사이즈로 교환하고 싶어요.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Can I get a refund on this? Here is the receipt. <button class="speak-btn" onclick="playAudio('Can I get a refund on this? Here is the receipt.')">🔊</button></div><div class="pattern-example">이거 환불받을 수 있을까요? 여기 영수증 있습니다.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Does your store issue a store credit note instead? <button class="speak-btn" onclick="playAudio('Does your store issue a store credit note instead?')">🔊</button></div><div class="pattern-example">환불 대신 매장 크레딧 노트(교환권)로 발행해 주시나요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> Hi, good afternoon. I bought this shirt for Mike yesterday, but it's a bit too small. I'd like to exchange it for a bigger size.</div><button class="speak-btn" onclick="playAudio('Hi, good afternoon. I bought this shirt for Mike yesterday, but it is a bit too small. I would like to exchange it for a bigger size.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Cashier:</span> Sure! May I see your receipt and check if the tag is still attached?</div><button class="speak-btn" onclick="playAudio('Sure! May I see your receipt and check if the tag is still attached?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> Here is the receipt. The tags are untouched, and it hasn't been worn.</div><button class="speak-btn" onclick="playAudio('Here is the receipt. The tags are untouched, and it has not been worn.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Cashier:</span> Thank you. Let me check our stock... I'm sorry, size L is sold out in navy. Would you like another color, or would you prefer a refund?</div><button class="speak-btn" onclick="playAudio('Thank you. Let me check our stock... I am sorry, size L is sold out in navy. Would you like another color, or would you prefer a refund?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> He really wanted navy. Can I get a refund to the card I used yesterday?</div><button class="speak-btn" onclick="playAudio('He really wanted navy. Can I get a refund to the card I used yesterday?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Cashier:</span> Under our store policy, we can issue a store credit note valid for 3 months at all branches.</div><button class="speak-btn" onclick="playAudio('Under our store policy, we can issue a store credit note valid for 3 months at all branches.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> That works for me. I'll take the store credit note then. Thank you!</div><button class="speak-btn" onclick="playAudio('That works for me. I will take the store credit note then. Thank you!')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 매장에서 "더 큰 사이즈로 교환하고 싶어요"를 영어로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: I'd like to exchange this for a bigger size.</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 환불 불가 시 매장에서 나중에 쓸 수 있도록 발행해 주는 '매장 적립/교환 전표'는?</summary>
+                    <div class="quiz-answer-content">정답: Store credit (또는 Credit note)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 가격표가 떼어지지 않고 옷에 달려 있는 상태를 뜻하는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Tag attached (The tag is attached)</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
 
 # 4. 기존 index.html에 새 Day 카드 누적 삽입
 update_success = False
