@@ -358,6 +358,69 @@ elif not card_html and current_day_number == 9:
         </section>
     </div>
 </article>"""
+elif not card_html and current_day_number == 10:
+    print("비상용 사전 검증 Day 10 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 10</span>
+        <h2>생일 파티 초대 및 플레이데이트 조율</h2>
+        <div class="topic">생일 파티 초대 및 플레이데이트 조율 (초대 수락, 알레르기 안내, 픽업 시간 상의)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. RSVP</div><div class="vocab-meaning">초대 회신 (참석 여부 알림)</div><div class="vocab-tip">💡 초대장에 적힌 회신 마감일까지 참석 인원과 함께 답장을 보내는 에티켓입니다.</div></div><button class="speak-btn" onclick="playAudio('RSVP')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Food allergy</div><div class="vocab-meaning">음식 알레르기</div><div class="vocab-tip">💡 땅콩, 유제품, 계란 등 아이가 피해야 하는 알레르기 유무를 미리 주최 학부모에게 알려줍니다.</div></div><button class="speak-btn" onclick="playAudio('Food allergy')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Dietary restrictions</div><div class="vocab-meaning">식단 제한 / 식이 요건</div><div class="vocab-tip">💡 할랄(Halal)이나 채식(Vegetarian) 등 특정 식이 요구 사항을 확인할 때 쓰는 정중한 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Dietary restrictions')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Drop-and-go</div><div class="vocab-meaning">아이만 내려주고 가기</div><div class="vocab-tip">💡 부모가 파티 내내 상주하지 않고 아이를 맡긴 후 끝나는 시간에 맞춰 데리러 올 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Drop and go')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Grip socks</div><div class="vocab-meaning">미끄럼 방지 양말</div><div class="vocab-tip">💡 말레이시아 실내 놀이터(Playground)나 트램펄린 파크는 미끄럼 방지 양말 착용이 필수입니다.</div></div><button class="speak-btn" onclick="playAudio('Grip socks')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Goodie bag</div><div class="vocab-meaning">파티 답례품 가방 (Party favor)</div><div class="vocab-tip">💡 파티가 끝날 때 참석해 준 친구들에게 과자나 작은 학용품, 장난감을 담아 선물합니다.</div></div><button class="speak-btn" onclick="playAudio('Goodie bag')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Wish list</div><div class="vocab-meaning">선물 희망 목록 (위시리스트)</div><div class="vocab-tip">💡 생일 주인공 아이가 원하는 장난감이나 테마가 있는지 사전에 물어볼 때 유용합니다.</div></div><button class="speak-btn" onclick="playAudio('Wish list')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Make it</div><div class="vocab-meaning">(파티/모임에) 갈 수 있다, 참석하다</div><div class="vocab-tip">💡 'We can make it!' 형태로 모임에 갈 수 있다고 확답할 때 일상에서 가장 흔히 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Make it')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Pick up time</div><div class="vocab-meaning">픽업 시간 (마치는 시간)</div><div class="vocab-tip">💡 파티가 몇 시에 마무리되어 아이를 데리러 가야 하는지 호스트와 조율할 때 확인합니다.</div></div><button class="speak-btn" onclick="playAudio('Pick up time')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Playdate</div><div class="vocab-meaning">플레이데이트 (놀이 약속)</div><div class="vocab-tip">💡 생일 파티 외에도 주말이나 하교 후 서로 집을 방문해 함께 놀도록 일정을 잡을 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Playdate')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. Thank you for the invitation! We'd love to make it. <button class="speak-btn" onclick="playAudio('Thank you for the invitation! We would love to make it.')">🔊</button></div><div class="pattern-example">초대해 주셔서 감사해요! 꼭 갈게요.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Does he have any food allergies or specific wish lists? <button class="speak-btn" onclick="playAudio('Does he have any food allergies or specific wish lists?')">🔊</button></div><div class="pattern-example">아이가 음식 알레르기가 있거나 특별히 원하는 선물 목록이 있나요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Should parents stay, or is it okay to just drop and go? <button class="speak-btn" onclick="playAudio('Should parents stay, or is it okay to just drop and go?')">🔊</button></div><div class="pattern-example">학부모가 함께 있어야 하나요, 아니면 아이만 맡겨두고 가도 괜찮을까요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Eunchan:</span> Hi Jenny! Thanks for the invitation to Mike's birthday party this Saturday. Eunchan would love to come!</div><button class="speak-btn" onclick="playAudio('Hi Jenny! Thanks for the invitation to Mike birthday party this Saturday. Eunchan would love to come!')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> Hi Sarah! That's wonderful news! Mike is so excited to celebrate with Eunchan and the class friends.</div><button class="speak-btn" onclick="playAudio('Hi Sarah! That is wonderful news! Mike is so excited to celebrate with Eunchan and the class friends.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Eunchan:</span> Just to check beforehand, does Mike have a favorite character or a gift wish list? And does he have any food allergies?</div><button class="speak-btn" onclick="playAudio('Just to check beforehand, does Mike have a favorite character or a gift wish list? And does he have any food allergies?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> He has no food allergies, and he's obsessed with Legos lately, but please don't feel pressured! Just having Eunchan there is the best gift.</div><button class="speak-btn" onclick="playAudio('He has no food allergies, and he is obsessed with Legos lately, but please do not feel pressured! Just having Eunchan there is the best gift.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Eunchan:</span> That's easy, Legos it is! By the way, should parents stay throughout, or is it okay to drop and go?</div><button class="speak-btn" onclick="playAudio('That is easy, Legos it is! By the way, should parents stay throughout, or is it okay to drop and go?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike:</span> Either is totally fine! The party runs from 2 PM to 4:30 PM. We'll have coffee and cake for parents who want to hang out.</div><button class="speak-btn" onclick="playAudio('Either is totally fine! The party runs from 2 PM to 4:30 PM. We will have coffee and cake for parents who want to hang out.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Eunchan:</span> Sounds great! I'll stay for a bit to say hi. See you guys at the party on Saturday!</div><button class="speak-btn" onclick="playAudio('Sounds great! I will stay for a bit to say hi. See you guys at the party on Saturday!')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 파티 초대장에 적힌 '참석 여부 회신(답장)'을 뜻하는 대표적인 약어는?</summary>
+                    <div class="quiz-answer-content">정답: RSVP (Please RSVP by [날짜])</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 키즈카페나 파티 장소에 부모가 머물지 않고 '아이만 맡기고 가다'를 영어로 뭐라고 할까요?</summary>
+                    <div class="quiz-answer-content">정답: Drop-and-go (또는 Drop off)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. "초대해 주셔서 감사해요! 꼭 갈게요."를 영어 패턴으로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Thank you for the invitation! We'd love to make it.</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
 
 # 4. 기존 index.html에 새 Day 카드 누적 삽입
 update_success = False
