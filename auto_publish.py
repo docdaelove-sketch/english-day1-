@@ -674,8 +674,10 @@ def send_whatsapp_message(link_url, title_text):
         "chatId": GREENAPI_CHAT_ID,
         "message": msg_text
     }
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
     try:
-        res = requests.post(api_url, json=payload, timeout=20)
+        res = requests.post(api_url, data=data, headers=headers, timeout=20)
         print("WhatsApp(Green API) 전송 결과:", res.status_code, res.text)
     except Exception as e:
         print("WhatsApp 전송 오류:", e)
