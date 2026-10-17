@@ -66,7 +66,57 @@ if current_day_number == 7:
 else:
     dialogue_guide = "                <!-- 4~6개의 dialogue-line 생성 (학부모 모임/플레이데이트 등 친구 학부모가 꼭 필요한 주제만 친구 학부모 등장, 그 외 병원/상점/식당 등에서는 주인공 학부모와 현지 직원만 등장) -->"
 
-prompt = f"""
+if weekday == 5:
+    prompt = f"""
+당신은 말레이시아 거주 한국인 학부모를 위한 실전 영어 교육 전문가입니다.
+날짜: {date_str}
+일차: {day_title}
+주제: {topic_desc}
+
+[토요일 주간 통합 복습 특별 규칙 - 1주차 총정리와 100% 동일한 구조로 생성할 것]
+- 이번 주차(Day {start_day_of_week}~{end_day_of_week})에 배운 핵심 내용을 총정리하는 복습 페이지입니다.
+- 대화문(dialogue-box) 섹션은 절대로 생성하지 마세요!
+- 📌 핵심 어휘 25선:
+  * Day {start_day_of_week}부터 Day {end_day_of_week}까지 각 Day별로 5개씩 총 25개의 핵심 어휘를 배치하세요 (1. ~ 25.).
+  * 각 어휘의 vocab-tip 시작 부분에는 반드시 '[Day X]'를 명시하세요 (예: 💡 [Day 6] 콘도 단지가 넓을 때는...).
+- 🗣️ 주간 베스트 핵심 패턴 5선:
+  * 각 Day별 대표 패턴 1개씩 총 5개의 pattern-item을 배치하세요 (Pattern 1 ~ Pattern 5).
+  * pattern-example 시작 부분에 반드시 '[Day X]'를 표기하세요 (예: [Day 6] Block A가 아니라...).
+- ✍️ 주간 실전 통합 퀴즈 (5문제):
+  * 각 Day별 1문제씩 총 5개의 details quiz-item을 배치하세요 (Q1 ~ Q5).
+  * 질문 summary 시작 부분에 반드시 '[Day X]'를 표기하세요 (예: Q1. [Day 6] ...).
+
+[HTML 뼈대 구조 - 마크다운(```html) 없이 순수한 텍스트로 출력할 것]
+<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">{day_title}</span>
+        <h2>{day_title.split(' ')[0]} 통합 복습 테스트</h2>
+        <div class="topic">{topic_desc}</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 Day {start_day_of_week}~{end_day_of_week} 핵심 어휘 25선</div>
+            <div class="vocab-grid">
+                <!-- Day별 5개씩 총 25개의 vocab-item 생성 -->
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 주간 베스트 핵심 패턴 5선</div>
+            <div class="pattern-box">
+                <!-- 각 Day별 대표 패턴 1개씩 총 5개의 pattern-item 생성 -->
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ {day_title.split(' ')[0]} 실전 통합 퀴즈 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <!-- 각 Day별 1문제씩 총 5개의 details quiz-item 생성 -->
+            </div>
+        </section>
+    </div>
+</article>
+"""
+else:
+    prompt = f"""
 당신은 말레이시아 거주 한국인 학부모를 위한 실전 영어 교육 전문가입니다.
 날짜: {date_str}
 일차: {day_title}
@@ -421,6 +471,108 @@ elif not card_html and current_day_number == 10:
                 <details class="quiz-item">
                     <summary>Q3. "초대해 주셔서 감사해요! 꼭 갈게요."를 영어 패턴으로 말해보세요.</summary>
                     <div class="quiz-answer-content">정답: Thank you for the invitation! We'd love to make it.</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and weekday == 5 and week_num == 2:
+    print("비상용 사전 검증 2주차 총정리 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">2주차 총정리</span>
+        <h2>2주차 통합 복습 테스트</h2>
+        <div class="topic">2주차 통합 복습 테스트 (Day 6~10 핵심 어휘 25개 및 실전 퀴즈 총정리)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 Day 6~10 핵심 어휘 25선</div>
+            <div class="vocab-grid">
+                <!-- Day 6 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Pick-up pin</div><div class="vocab-meaning">픽업 위치 핀 (앱 상의 탑승 위치)</div><div class="vocab-tip">💡 [Day 6] 콘도 단지가 넓을 때는 게이트가 아닌 동 이름(Block B)에 핀을 정확히 찍어야 기사가 헤매지 않습니다.</div></div><button class="speak-btn" onclick="playAudio('Pick-up pin')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Drop-off point</div><div class="vocab-meaning">하차 지점</div><div class="vocab-tip">💡 [Day 6] 목적지에 도착할 때 특정 로비나 출입구에 내려달라고 말할 때 자주 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Drop-off point')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Guardhouse</div><div class="vocab-meaning">경비실, 아파트 출입 게이트</div><div class="vocab-tip">💡 [Day 6] 말레이시아 콘도나 국제학교 게이트를 현지에서는 security보다 guardhouse라고 가장 많이 부릅니다.</div></div><button class="speak-btn" onclick="playAudio('Guardhouse')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Visitor lane</div><div class="vocab-meaning">방문객 전용 차선</div><div class="vocab-tip">💡 [Day 6] 콘도 게이트 진입 시 기사에게 "Please use the visitor lane"이라고 말해주면 통과가 빠릅니다.</div></div><button class="speak-btn" onclick="playAudio('Visitor lane')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. License plate</div><div class="vocab-meaning">차량 번호판</div><div class="vocab-tip">💡 [Day 6] 현지에서는 car plate 또는 plate number라고 부르며 차량 탑승 전 반드시 일치 여부를 확인하세요.</div></div><button class="speak-btn" onclick="playAudio('License plate')">🔊</button></div>
+
+                <!-- Day 7 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. High fever</div><div class="vocab-meaning">고열</div><div class="vocab-tip">💡 [Day 7] 아이 체온이 38.5도 이상일 때 로컬 클리닉 접수처에서 가장 먼저 말하는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('High fever')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Prescribe</div><div class="vocab-meaning">처방하다</div><div class="vocab-tip">💡 [Day 7] 말레이시아 로컬 클리닉(GP)은 진료 후 병원 내 약국 창구에서 바로 약을 조제해 줍니다.</div></div><button class="speak-btn" onclick="playAudio('Prescribe')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Dosage</div><div class="vocab-meaning">복용량 (1회분 용량)</div><div class="vocab-tip">💡 [Day 7] 어린이 시럽약은 아이 몸무게(Weight)에 따라 복용량(ml)이 달라지므로 꼭 확인하세요.</div></div><button class="speak-btn" onclick="playAudio('Dosage')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Medical certificate</div><div class="vocab-meaning">진단서 / 병결 확인서 (MC)</div><div class="vocab-tip">💡 [Day 7] 말레이시아에서는 흔히 줄여서 'MC'라고 부르며, 학교 결석 제출 및 보험 청구에 필수입니다.</div></div><button class="speak-btn" onclick="playAudio('Medical certificate')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Itemized receipt</div><div class="vocab-meaning">세부 내역 영수증</div><div class="vocab-tip">💡 [Day 7] 유학생·실손 보험 청구 시 단순 총액 영수증이 아닌 진료비·약값이 나뉜 세부 영수증을 요청하세요.</div></div><button class="speak-btn" onclick="playAudio('Itemized receipt')">🔊</button></div>
+
+                <!-- Day 8 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">11. Exchange</div><div class="vocab-meaning">교환</div><div class="vocab-tip">💡 [Day 8] 구매 후 보통 7~14일 이내 영수증과 함께 가져가면 다른 사이즈나 색상으로 교환 가능합니다.</div></div><button class="speak-btn" onclick="playAudio('Exchange')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">12. Refund</div><div class="vocab-meaning">환불</div><div class="vocab-tip">💡 [Day 8] 말레이시아 많은 브랜드는 단순 변심 시 현금 환불 대신 교환이나 크레딧 노트를 제공합니다.</div></div><button class="speak-btn" onclick="playAudio('Refund')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">13. Tag attached</div><div class="vocab-meaning">가격표/태그가 붙어 있는</div><div class="vocab-tip">💡 [Day 8] 상품 가격표(Price tag)가 훼손되지 않고 붙어 있어야 교환/환불이 접수됩니다.</div></div><button class="speak-btn" onclick="playAudio('Tag attached')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">14. Defective</div><div class="vocab-meaning">불량의 / 하자가 있는</div><div class="vocab-tip">💡 [Day 8] 박음질 불량이나 흠집 등 제품 하자가 있을 때는 규정과 상관없이 전액 환불/교환 대상입니다.</div></div><button class="speak-btn" onclick="playAudio('Defective')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">15. Store credit</div><div class="vocab-meaning">매장 적립금 / 교환권 (Credit note)</div><div class="vocab-tip">💡 [Day 8] 환불이 불가능할 때 해당 금액만큼 매장에서 나중에 쓸 수 있도록 발행해 주는 전표입니다.</div></div><button class="speak-btn" onclick="playAudio('Store credit')">🔊</button></div>
+
+                <!-- Day 9 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">16. After-school activities</div><div class="vocab-meaning">방과후 활동</div><div class="vocab-tip">💡 [Day 9] 아이들의 클럽이나 과외 활동을 논할 때 가장 자주 쓰이는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('After-school activities')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">17. Playdate</div><div class="vocab-meaning">아이들 놀이 약속</div><div class="vocab-tip">💡 [Day 9] 말레이시아 국제학교 학부모들 사이에서 친구 집 방문이나 키즈카페 약속을 잡을 때 필수 단어입니다.</div></div><button class="speak-btn" onclick="playAudio('Playdate')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">18. Tee time</div><div class="vocab-meaning">골프 티타임 (출발 시간)</div><div class="vocab-tip">💡 [Day 9] 주말 골프 모임을 조율할 때 꼭 필요한 필수 골프 용어입니다.</div></div><button class="speak-btn" onclick="playAudio('Tee time')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">19. Brunch spot</div><div class="vocab-meaning">브런치 장소 / 맛집</div><div class="vocab-tip">💡 [Day 9] KL 시내나 데사파크시티 등의 인기 카페/브런치 명소를 물어볼 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Brunch spot')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">20. Catch up</div><div class="vocab-meaning">근황을 나누다, 밀린 이야기를 하다</div><div class="vocab-tip">💡 [Day 9] 오랜만에 만난 학부모 친구에게 "그동안 잘 지냈어? 이야기 좀 하자"고 할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Catch up')">🔊</button></div>
+
+                <!-- Day 10 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">21. RSVP</div><div class="vocab-meaning">참석 여부를 회신하다</div><div class="vocab-tip">💡 [Day 10] 초대장 하단에 "RSVP by 날짜" 형태로 기한과 함께 적혀 있어요.</div></div><button class="speak-btn" onclick="playAudio('RSVP')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">22. Count someone in</div><div class="vocab-meaning">~를 참석 인원에 넣다</div><div class="vocab-tip">💡 [Day 10] "Count us in!"은 "우리도 갈게!"라는 아주 자연스러운 구어 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('count someone in')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">23. Dietary restriction</div><div class="vocab-meaning">식이 제한 (알레르기/종교적 이유)</div><div class="vocab-tip">💡 [Day 10] 다문화 국가인 말레이시아 파티 주최 시 반드시 확인하는 항목입니다.</div></div><button class="speak-btn" onclick="playAudio('dietary restriction')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">24. Drop-and-go</div><div class="vocab-meaning">아이만 내려주고 가기</div><div class="vocab-tip">💡 [Day 10] 부모가 파티 내내 상주하지 않고 아이를 맡긴 후 끝나는 시간에 맞춰 데리러 올 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('drop-off')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">25. Halal-certified</div><div class="vocab-meaning">할랄 인증을 받은</div><div class="vocab-tip">💡 [Day 10] 무슬림 친구들이 함께 오는 파티 음식이나 젤리를 고를 때 유의해야 합니다.</div></div><button class="speak-btn" onclick="playAudio('Halal-certified')">🔊</button></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">🗣️ 주간 베스트 핵심 패턴 5선</div>
+            <div class="pattern-box">
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 1. Please come to Block B lobby, not Block A. <button class="speak-btn" onclick="playAudio('Please come to Block B lobby, not Block A.')">🔊</button></div>
+                    <div class="pattern-example">[Day 6] Block A가 아니라 Block B 로비로 와주세요.</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 2. Could I get an itemized receipt for our insurance claim? <button class="speak-btn" onclick="playAudio('Could I get an itemized receipt for our insurance claim?')">🔊</button></div>
+                    <div class="pattern-example">[Day 7] 보험 청구를 위해 세부 내역 영수증을 받을 수 있을까요?</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 3. I'd like to exchange this for a bigger size. <button class="speak-btn" onclick="playAudio('I would like to exchange this for a bigger size.')">🔊</button></div>
+                    <div class="pattern-example">[Day 8] 이거 더 큰 사이즈로 교환하고 싶어요.</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 4. Are you up for a weekend round of golf this Saturday? <button class="speak-btn" onclick="playAudio('Are you up for a weekend round of golf this Saturday?')">🔊</button></div>
+                    <div class="pattern-example">[Day 9] 이번 주 토요일에 주말 골프 한 라운드 어떠세요?</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 5. What time should I drop him off and pick him up? <button class="speak-btn" onclick="playAudio('What time should I drop him off and pick him up?')">🔊</button></div>
+                    <div class="pattern-example">[Day 10] 아이를 몇 시에 데려다주고 몇 시쯤 데리러 가면 될까요?</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">✍️ 2주차 실전 통합 퀴즈 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. [Day 6] Grab 기사가 콘도 내 엉뚱한 동으로 가고 있을 때 "Block B 로비로 와주세요"를 영어로 말하면?</summary>
+                    <div class="quiz-answer-content">정답: Please come to Block B lobby, not Block A.</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. [Day 7] 말레이시아 병원이나 학교에서 출결 증빙 및 보험 청구에 쓰는 '진단서(병결 확인서)'를 줄여 부르는 말은?</summary>
+                    <div class="quiz-answer-content">정답: MC (Medical Certificate)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. [Day 8] 매장에서 환불 규정상 현금 환불이 어려울 때 대신 발행해 주는 '매장 교환권/적립 전표'를 무엇이라고 할까요?</summary>
+                    <div class="quiz-answer-content">정답: Store credit (또는 Credit note)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q4. [Day 9] 카페 등에서 오랜만에 만난 학부모에게 "커피 한잔하며 그동안 밀린 이야기를 나누다"라고 할 때 쓰는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Catch up over coffee (Catch up)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q5. [Day 10] 생일 파티 초대장에 적힌 "참석 여부를 회신해 주세요"를 뜻하는 국제 에티켓 약어는?</summary>
+                    <div class="quiz-answer-content">정답: RSVP (Repondez s'il vous plait)</div>
                 </details>
             </div>
         </section>
