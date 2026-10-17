@@ -653,9 +653,34 @@ def send_kakao_message(link_url, title_text):
     res = requests.post(msg_url, headers=headers, data={"template_object": json.dumps(template, ensure_ascii=False)})
     print("카카오톡 전송 결과:", res.status_code, res.text)
 
-# 웹사이트 주소 결합 방식 및 정상 업데이트 시에만 카카오톡 발송
+# 6. 왓츠앱(WhatsApp) 알림 전송 (말레이시아 번호: +601123906456)
+WHATSAPP_PHONE = "601123906456"
+WHATSAPP_API_KEY = os.getenv("WHATSAPP_API_KEY")
+
+def send_whatsapp_message(link_url, title_text):
+    if not WHATSAPP_API_KEY:
+        print("WhatsApp API Key가 설정되지 않아 발송을 건너뜁니다.")
+        return
+
+    msg_text = (
+        f"🌟 *[오늘의 영어 리포트 도착]*\n"
+        f"{title_text}\n\n"
+        f"👉 *오늘의 리포트 바로가기:*\n"
+        f"{link_url}"
+    )
+    import urllib.parse
+    encoded_text = urllib.parse.quote(msg_text)
+    api_url = f"https://api.callmebot.com/whatsapp.php?phone={WHATSAPP_PHONE}&text={encoded_text}&apikey={WHATSAPP_API_KEY}"
+    try:
+        res = requests.get(api_url, timeout=20)
+        print("WhatsApp 전송 결과:", res.status_code, res.text)
+    except Exception as e:
+        print("WhatsApp 전송 오류:", e)
+
+# 웹사이트 주소 결합 방식 및 정상 업데이트 시에만 카카오톡 및 왓츠앱 발송
 MY_GITHUB_PAGES_URL = p_https + "docdaelove-sketch.github.io/english-day1-/"
 if update_success:
     send_kakao_message(MY_GITHUB_PAGES_URL, f"[{day_title}] {topic_desc}")
+    send_whatsapp_message(MY_GITHUB_PAGES_URL, f"[{day_title}] {topic_desc}")
 else:
-    print("카드 생성 실패로 인해 카카오톡 알림 발송을 건너뜁니다.")
+    print("카드 생성 실패로 인해 알림 발송을 건너뜁니다.")
