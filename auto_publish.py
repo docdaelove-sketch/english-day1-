@@ -653,13 +653,14 @@ def send_kakao_message(link_url, title_text):
     res = requests.post(msg_url, headers=headers, data={"template_object": json.dumps(template, ensure_ascii=False)})
     print("카카오톡 전송 결과:", res.status_code, res.text)
 
-# 6. 왓츠앱(WhatsApp) 알림 전송 (말레이시아 번호: +601123906456)
-WHATSAPP_PHONE = "601123906456"
-WHATSAPP_API_KEY = os.getenv("WHATSAPP_API_KEY")
+# 6. 왓츠앱(WhatsApp) 알림 전송 (Green API 연동 - 말레이시아 번호: +601123906456)
+GREENAPI_ID_INSTANCE = os.getenv("GREENAPI_ID_INSTANCE", "710722770876")
+GREENAPI_API_TOKEN = os.getenv("GREENAPI_API_TOKEN", "9fe88468b24248fd88bc903bfa5f8669c833de4baa8d4ccb97")
+GREENAPI_CHAT_ID = os.getenv("GREENAPI_CHAT_ID", "601123906456@c.us")
 
 def send_whatsapp_message(link_url, title_text):
-    if not WHATSAPP_API_KEY:
-        print("WhatsApp API Key가 설정되지 않아 발송을 건너뜁니다.")
+    if not GREENAPI_ID_INSTANCE or not GREENAPI_API_TOKEN:
+        print("WhatsApp(Green API) 인증 정보가 설정되지 않아 발송을 건너뜁니다.")
         return
 
     msg_text = (
@@ -668,12 +669,14 @@ def send_whatsapp_message(link_url, title_text):
         f"👉 *오늘의 리포트 바로가기:*\n"
         f"{link_url}"
     )
-    import urllib.parse
-    encoded_text = urllib.parse.quote(msg_text)
-    api_url = f"https://api.callmebot.com/whatsapp.php?phone={WHATSAPP_PHONE}&text={encoded_text}&apikey={WHATSAPP_API_KEY}"
+    api_url = f"{p_https}api.green-api.com/waInstance{GREENAPI_ID_INSTANCE}/sendMessage/{GREENAPI_API_TOKEN}"
+    payload = {
+        "chatId": GREENAPI_CHAT_ID,
+        "message": msg_text
+    }
     try:
-        res = requests.get(api_url, timeout=20)
-        print("WhatsApp 전송 결과:", res.status_code, res.text)
+        res = requests.post(api_url, json=payload, timeout=20)
+        print("WhatsApp(Green API) 전송 결과:", res.status_code, res.text)
     except Exception as e:
         print("WhatsApp 전송 오류:", e)
 
