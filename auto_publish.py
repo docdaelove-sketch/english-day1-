@@ -47,7 +47,11 @@ else:
         8: "쇼핑몰 교환 및 환불 (영수증 제시, 사이즈 변경, 결제 취소 요청)",
         9: "학부모 모임 & 카페 스몰톡 (아이들 방과후 이야기, 주말 골프 및 브런치 대화)",
         10: "생일 파티 초대 및 플레이데이트 조율 (초대 수락, 알레르기 안내, 픽업 시간 상의)",
-        11: "차량 정비 및 주유소 이용 (세차, 엔진오일 교환, 타이어 공기압 점검)"
+        11: "차량 정비 및 주유소 이용 (세차, 엔진오일 교환, 타이어 공기압 점검)",
+        12: "학교 담임선생님 면담 및 출결·생활 문의 (PTC/PTM 학부모 상담, 학교 적응 확인, 조퇴·결석 안내)",
+        13: "미용실 및 바버샵 방문 (아이 헤어컷 스타일 요청, 기장 조절, 앞머리 및 숱 정리)",
+        14: "현지 은행 및 통신사·결제 서비스 이용 (계좌 개설 문의, TNG eWallet·DuitNow 충전 및 한도 설정, 유심 요금제)",
+        15: "주말 가족 여행 및 호텔·리조트 체크인 (얼리 체크인, 커넥팅룸·엑스트라 베드 요청, 수영장 및 조식 문의)"
     }
     topic_desc = topic_pool.get(current_day_number, f"말레이시아 생활 실전 회화 (Day {current_day_number})")
 
@@ -201,7 +205,7 @@ payload = {
     "contents": [{"parts": [{"text": prompt}]}]
 }
 
-if GEMINI_KEY:
+if GEMINI_KEY and current_day_number != 12:
     for attempt in range(1, 9):
         model_name = model_candidates[(attempt - 1) % len(model_candidates)]
         gemini_path = f"/v1beta/models/{model_name}:generateContent?key={GEMINI_KEY}"
@@ -573,6 +577,68 @@ elif not card_html and weekday == 5 and week_num == 2:
                 <details class="quiz-item">
                     <summary>Q5. [Day 10] 생일 파티 초대장에 적힌 "참석 여부를 회신해 주세요"를 뜻하는 국제 에티켓 약어는?</summary>
                     <div class="quiz-answer-content">정답: RSVP (Repondez s'il vous plait)</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 12:
+    print("비상용 사전 검증 Day 12 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 12</span>
+        <h2>학교 담임선생님 면담 및 출결·생활 문의</h2>
+        <div class="topic">학교 담임선생님 면담 및 출결·생활 문의 (PTC/PTM 학부모 상담, 학교 적응 확인, 조퇴·결석 안내)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Parent-Teacher Conference (PTC)</div><div class="vocab-meaning">학부모-교사 정기 상담</div><div class="vocab-tip">💡 국제학교에서는 학기별 정기 면담을 줄여서 'PTC' 또는 'PTM (Parent-Teacher Meeting)'이라고 부르며, 아이가 직접 주도하는 상담은 'SLC (Student-Led Conference)'라고 합니다.</div></div><button class="speak-btn" onclick="playAudio('Parent-Teacher Conference')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Homeroom teacher</div><div class="vocab-meaning">담임 선생님 (Form tutor / Class teacher)</div><div class="vocab-tip">💡 아이의 전반적인 학교생활과 출결을 가장 먼저 상의하는 담당 선생님입니다.</div></div><button class="speak-btn" onclick="playAudio('Homeroom teacher')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Keep up with</div><div class="vocab-meaning">(수업 진도 등을) 잘 따라가다</div><div class="vocab-tip">💡 'Is Mike keeping up with the class?'처럼 아이가 영어 수업 진도를 잘 따라가는지 물어볼 때 필수입니다.</div></div><button class="speak-btn" onclick="playAudio('Keep up with')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Get along with</div><div class="vocab-meaning">~와 잘 어울리다 / 친하게 지내다</div><div class="vocab-tip">💡 새 학기나 전학 초기, 교우 관계를 물어볼 때 가장 자연스럽게 쓰는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Get along with')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Sick leave / Absence</div><div class="vocab-meaning">병결 / 결석</div><div class="vocab-tip">💡 아이가 아파서 결석할 때 아침 일찍 학교 포털 앱이나 이메일로 알릴 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Sick leave')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Early pick-up</div><div class="vocab-meaning">조퇴 (정규 하교 전 픽업 / Early dismissal)</div><div class="vocab-tip">💡 병원 예약 등으로 아이를 일찍 데리고 나와야 할 때 행정실(Admin office)과 담임선생님께 미리 알립니다.</div></div><button class="speak-btn" onclick="playAudio('Early pick-up')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Homework load</div><div class="vocab-meaning">숙제량</div><div class="vocab-tip">💡 아이가 과제를 버거워하거나 반대로 추가 학습 자료가 필요할 때 상담하는 단어입니다.</div></div><button class="speak-btn" onclick="playAudio('Homework load')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Participate in</div><div class="vocab-meaning">(수업/활동에) 참여하다</div><div class="vocab-tip">💡 수업 시간에 발표나 모둠 활동에 적극적으로 참여(actively participate)하는지 확인할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Participate in')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Strengths and weaknesses</div><div class="vocab-meaning">강점과 보완할 점(약점)</div><div class="vocab-tip">💡 면담 시 아이가 잘하는 과목과 집에서 더 신경 써주어야 할 부분을 여쭤볼 때 유용합니다.</div></div><button class="speak-btn" onclick="playAudio('Strengths and weaknesses')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. School portal</div><div class="vocab-meaning">학교 포털 앱 / 학사 시스템</div><div class="vocab-tip">💡 국제학교는 모든 공지와 상담 신청, 성적표 확인이 전용 포털(Seesaw, Toddle, Engage 등)로 이루어집니다.</div></div><button class="speak-btn" onclick="playAudio('School portal')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. How is Mike keeping up with his classes lately? <button class="speak-btn" onclick="playAudio('How is Mike keeping up with his classes lately?')">🔊</button></div><div class="pattern-example">요즘 마이크가 수업 진도는 잘 따라가고 있나요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Is there anything we can do at home to support his learning? <button class="speak-btn" onclick="playAudio('Is there anything we can do at home to support his learning?')">🔊</button></div><div class="pattern-example">아이 학습을 돕기 위해 집에서 저희가 해줄 수 있는 게 있을까요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. I'd like to request an early pick-up for Clara at 1:30 PM tomorrow. <button class="speak-btn" onclick="playAudio('I would like to request an early pick-up for Clara at 1:30 PM tomorrow.')">🔊</button></div><div class="pattern-example">내일 오후 1시 30분에 클라라 조퇴(일찍 픽업)를 신청하고 싶습니다.</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Good afternoon, Ms. Rachel! Thank you for taking the time to meet with me today. How is Mike keeping up with his classes this term?</div><button class="speak-btn" onclick="playAudio('Good afternoon, Ms. Rachel! Thank you for taking the time to meet with me today. How is Mike keeping up with his classes this term?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Teacher (Ms. Rachel):</span> Good afternoon, Tina! Mike is doing wonderfully. He gets along very well with his classmates and actively participates in math and science.</div><button class="speak-btn" onclick="playAudio('Good afternoon, Tina! Mike is doing wonderfully. He gets along very well with his classmates and actively participates in math and science.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> I'm so relieved to hear that! He sometimes feels a bit shy when speaking English in front of a large group. Is there anything we can do at home to help him?</div><button class="speak-btn" onclick="playAudio('I am so relieved to hear that! He sometimes feels a bit shy when speaking English in front of a large group. Is there anything we can do at home to help him?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Teacher (Ms. Rachel):</span> Reading aloud together for 15 minutes a day will boost his confidence a lot. I'll also pair him with a friendly buddy for next week's presentation.</div><button class="speak-btn" onclick="playAudio('Reading aloud together for 15 minutes a day will boost his confidence a lot. I will also pair him with a friendly buddy for next week presentation.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> That's a great idea, thank you so much! Also, just to let you know, Mike has a dentist appointment this Friday, so I'll request an early pick-up at 2:00 PM through the school portal.</div><button class="speak-btn" onclick="playAudio('That is a great idea, thank you so much! Also, just to let you know, Mike has a dentist appointment this Friday, so I will request an early pick-up at 2 PM through the school portal.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Teacher (Ms. Rachel):</span> Noted! I'll make sure he packs his belongings and heads to the Block B pick-up zone by 2:00 PM on Friday.</div><button class="speak-btn" onclick="playAudio('Noted! I will make sure he packs his belongings and heads to the Block B pick-up zone by 2 PM on Friday.')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 선생님께 "마이크가 수업 진도를 잘 따라가고 있나요?"를 영어로 물어보세요.</summary>
+                    <div class="quiz-answer-content">정답: How is Mike keeping up with his classes?</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 병원 예약 등으로 정규 하교 시간보다 "일찍 데리러 가기(조퇴)"를 뜻하는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Early pick-up (또는 Early dismissal)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. "아이 학습을 돕기 위해 집에서 저희가 해줄 수 있는 게 있을까요?"를 영어로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Is there anything we can do at home to support his learning?</div>
                 </details>
             </div>
         </section>
