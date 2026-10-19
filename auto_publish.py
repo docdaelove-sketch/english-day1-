@@ -205,7 +205,7 @@ payload = {
     "contents": [{"parts": [{"text": prompt}]}]
 }
 
-if GEMINI_KEY and current_day_number != 12:
+if GEMINI_KEY and current_day_number not in (12, 13, 14, 15) and not (weekday == 5 and week_num == 3):
     for attempt in range(1, 9):
         model_name = model_candidates[(attempt - 1) % len(model_candidates)]
         gemini_path = f"/v1beta/models/{model_name}:generateContent?key={GEMINI_KEY}"
@@ -639,6 +639,294 @@ elif not card_html and current_day_number == 12:
                 <details class="quiz-item">
                     <summary>Q3. "아이 학습을 돕기 위해 집에서 저희가 해줄 수 있는 게 있을까요?"를 영어로 말해보세요.</summary>
                     <div class="quiz-answer-content">정답: Is there anything we can do at home to support his learning?</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 13:
+    print("비상용 사전 검증 Day 13 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 13</span>
+        <h2>미용실 및 바버샵 방문</h2>
+        <div class="topic">미용실 및 바버샵 방문 (아이 헤어컷 스타일 요청, 기장 조절, 앞머리 및 숱 정리)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Trim</div><div class="vocab-meaning">(끝부분만 살짝) 다듬다</div><div class="vocab-tip">💡 전체 스타일은 유지하고 지저분하게 자란 끝부분만 조금 자를 때 'Just a trim, please'라고 합니다.</div></div><button class="speak-btn" onclick="playAudio('Trim')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Bangs / Fringe</div><div class="vocab-meaning">앞머리</div><div class="vocab-tip">💡 미국식으로는 Bangs, 영국·말레이시아식으로는 Fringe라고도 많이 부릅니다.</div></div><button class="speak-btn" onclick="playAudio('Bangs and Fringe')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Thin out</div><div class="vocab-meaning">머리 숱을 치다</div><div class="vocab-tip">💡 더운 말레이시아 날씨 때문에 아이 머리 숱이 많아 답답할 때 'thin out the hair'라고 요청하세요.</div></div><button class="speak-btn" onclick="playAudio('Thin out')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Clippers (Guard number)</div><div class="vocab-meaning">바리깡 / 클리퍼 (미는 길이 단계)</div><div class="vocab-tip">💡 남자아이 옆·뒷머리를 밀 때 클리퍼 탭 번호(예: Number 2 또는 Number 3)를 말하면 실패가 없습니다.</div></div><button class="speak-btn" onclick="playAudio('Clippers')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Sideburns</div><div class="vocab-meaning">구레나룻</div><div class="vocab-tip">💡 귀 옆 라인과 구레나룻을 깔끔하게 정리해 달라고 할 때 쓰는 필수 단어입니다.</div></div><button class="speak-btn" onclick="playAudio('Sideburns')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Nape (of the neck)</div><div class="vocab-meaning">뒷목 라인 (목덜미)</div><div class="vocab-tip">💡 뒷머리가 목을 덮지 않게 'clean up the nape'라고 하면 단정하게 다듬어 줍니다.</div></div><button class="speak-btn" onclick="playAudio('Nape of the neck')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Layered cut</div><div class="vocab-meaning">층을 낸 커트 (레이어드 컷)</div><div class="vocab-tip">💡 여자아이 긴 머리가 너무 무거워 보이지 않게 자연스럽게 층을 내달라고 할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Layered cut')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Part (Side part)</div><div class="vocab-meaning">가르마 (옆 가르마)</div><div class="vocab-tip">💡 평소 아이가 타는 가르마 방향(Side part / Middle part)을 디자이너에게 미리 알려줄 때 유용합니다.</div></div><button class="speak-btn" onclick="playAudio('Side part')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Eyebrow level</div><div class="vocab-meaning">눈썹 높이(길이)</div><div class="vocab-tip">💡 앞머리가 너무 짧아지지 않도록 'right at the eyebrow level(눈썹 라인에 맞춰서)'처럼 기준점을 잡아주세요.</div></div><button class="speak-btn" onclick="playAudio('Eyebrow level')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Blow-dry</div><div class="vocab-meaning">드라이 (머리를 말리며 스타일링하기)</div><div class="vocab-tip">💡 샴푸 후 간단히 말리기만 할지, 스타일링 드라이를 할지 물어볼 때 자주 등장합니다.</div></div><button class="speak-btn" onclick="playAudio('Blow-dry')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. Just a trim on the top, and keep the sides neat and short. <button class="speak-btn" onclick="playAudio('Just a trim on the top, and keep the sides neat and short.')">🔊</button></div><div class="pattern-example">윗머리는 살짝만 다듬어 주시고, 옆머리는 깔끔하고 짧게 해주세요.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Could you thin out his hair a bit? It gets too hot here. <button class="speak-btn" onclick="playAudio('Could you thin out his hair a bit? It gets too hot here.')">🔊</button></div><div class="pattern-example">아이 머리 숱을 조금 쳐주시겠어요? 여기 날씨가 더워서 땀이 많이 나요.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Please cut her bangs right to the eyebrow level, not too short. <button class="speak-btn" onclick="playAudio('Please cut her bangs right to the eyebrow level, not too short.')">🔊</button></div><div class="pattern-example">앞머리는 너무 짧지 않게 딱 눈썹 위치까지만 잘라주세요.</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Hi! We have a haircut appointment for Mike and Clara at 3:30 PM.</div><button class="speak-btn" onclick="playAudio('Hi! We have a haircut appointment for Mike and Clara at 3:30 PM.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Hairstylist:</span> Welcome! Please have a seat here. How would you like Mike's hair done today?</div><button class="speak-btn" onclick="playAudio('Welcome! Please have a seat here. How would you like Mike hair done today?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> I'd like to show you this photo. Please keep the sides neat and short around his ears, and just a trim on the top.</div><button class="speak-btn" onclick="playAudio('I would like to show you this photo. Please keep the sides neat and short around his ears, and just a trim on the top.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Hairstylist:</span> Sure, I can use a number 3 clipper on the sides and blend it naturally. His hair is quite thick—should I thin it out a little?</div><button class="speak-btn" onclick="playAudio('Sure, I can use a number 3 clipper on the sides and blend it naturally. His hair is quite thick. Should I thin it out a little?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Yes, please thin out his hair a bit so it's easier to dry after swimming. And for Clara later, please just trim the ends and cut her bangs to the eyebrow level.</div><button class="speak-btn" onclick="playAudio('Yes, please thin out his hair a bit so it is easier to dry after swimming. And for Clara later, please just trim the ends and cut her bangs to the eyebrow level.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Hairstylist:</span> Got it! Not too short on the bangs. Let's start with Mike first!</div><button class="speak-btn" onclick="playAudio('Got it! Not too short on the bangs. Let us start with Mike first!')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 미용실에서 "아이 머리 숱을 조금 쳐주시겠어요?"를 영어로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Could you thin out his/her hair a bit?</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 전체 길이를 많이 자르지 않고 "끝만 살짝 다듬다"를 뜻하는 단어는?</summary>
+                    <div class="quiz-answer-content">정답: Trim (Just a trim, please.)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 앞머리를 자를 때 "눈썹 위치(높이)까지만 잘라주세요"라고 기준을 말할 때 쓰는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Please cut her bangs right to the eyebrow level.</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 14:
+    print("비상용 사전 검증 Day 14 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 14</span>
+        <h2>현지 은행 및 통신사·결제 서비스 이용</h2>
+        <div class="topic">현지 은행 및 통신사·결제 서비스 이용 (계좌 개설 문의, TNG eWallet·DuitNow 충전 및 한도 설정, 유심 요금제)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. DuitNow QR</div><div class="vocab-meaning">말레이시아 통합 QR 결제·송금 시스템</div><div class="vocab-tip">💡 말레이시아 식당, 야시장, 학원비 이체까지 분홍색 DuitNow QR 하나로 모든 은행·페이 결제가 가능합니다.</div></div><button class="speak-btn" onclick="playAudio('DuitNow QR')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. TNG (Touch 'n Go) eWallet</div><div class="vocab-meaning">터치앤고 전자지갑 앱 (및 톨게이트·주차 카드)</div><div class="vocab-tip">💡 현지 생활 필수 앱으로, 여권 인증을 완료해야 한도 증액과 DuitNow 계좌 이체가 활성화됩니다.</div></div><button class="speak-btn" onclick="playAudio('Touch and Go eWallet')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Top up / Reload</div><div class="vocab-meaning">(선불 유심·페이 잔액 등을) 충전하다</div><div class="vocab-tip">💡 톨게이트용 TNG 카드나 선불 유심 잔액을 충전할 때 현지에서는 'Top up' 또는 'Reload'라고 합니다.</div></div><button class="speak-btn" onclick="playAudio('Top up and Reload')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Daily transfer limit</div><div class="vocab-meaning">일일 이체 한도</div><div class="vocab-tip">💡 집세(Rent)나 학원비를 송금할 때 일일 한도에 걸리면 은행 앱에서 한도(Limit)를 상향해야 합니다.</div></div><button class="speak-btn" onclick="playAudio('Daily transfer limit')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Guardian visa / Student pass</div><div class="vocab-meaning">가디언 비자(동반 부모 비자) / 학생 비자</div><div class="vocab-tip">💡 현지 은행 계좌(Maybank, CIMB 등) 개설 시 여권에 부착된 유효한 비자 스티커와 학교 재학증명서가 필수입니다.</div></div><button class="speak-btn" onclick="playAudio('Guardian visa')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Bank statement</div><div class="vocab-meaning">은행 거래내역서 (잔고·입출금 증명서)</div><div class="vocab-tip">💡 비자 연장이나 국제학교 서류 제출 시 최근 3개월 치 은행 거래내역서를 요청할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Bank statement')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Postpaid / Prepaid plan</div><div class="vocab-meaning">후불 요금제 / 선불 요금제</div><div class="vocab-tip">💡 장기 거주 학부모님은 매월 자동 결제되는 Postpaid(후불) 요금제로 전환하면 번호 유지가 편합니다.</div></div><button class="speak-btn" onclick="playAudio('Postpaid and Prepaid plan')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Data roaming / Hotspot</div><div class="vocab-meaning">데이터 로밍 / 핫스팟 테더링</div><div class="vocab-tip">💡 방학 때 한국이나 싱가포르 등에 다녀올 때 통신사 앱에서 로밍 패스를 신청할 때 확인하는 용어입니다.</div></div><button class="speak-btn" onclick="playAudio('Data roaming')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Verification (eKYC)</div><div class="vocab-meaning">본인 인증 (비대면 여권·얼굴 인식 인증)</div><div class="vocab-tip">💡 앱에서 여권 스캔 후 수동 승인(Manual verification)이 지연될 때 고객센터에 문의하는 단어입니다.</div></div><button class="speak-btn" onclick="playAudio('Verification')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Minimum balance</div><div class="vocab-meaning">계좌 최소 유지 잔액</div><div class="vocab-tip">💡 말레이시아 일반 예금 계좌(Savings account)는 보통 RM 20~250의 최소 잔액을 유지해야 계좌가 활성 상태로 유지됩니다.</div></div><button class="speak-btn" onclick="playAudio('Minimum balance')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. I'd like to open a savings account. I hold a guardian visa. <button class="speak-btn" onclick="playAudio('I would like to open a savings account. I hold a guardian visa.')">🔊</button></div><div class="pattern-example">예금 계좌를 개설하고 싶습니다. 저는 가디언 비자를 소지하고 있어요.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. How can I increase my daily transfer limit on the mobile app? <button class="speak-btn" onclick="playAudio('How can I increase my daily transfer limit on the mobile app?')">🔊</button></div><div class="pattern-example">모바일 앱에서 일일 이체 한도를 어떻게 늘릴 수 있나요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Can I pay with DuitNow QR or Touch 'n Go eWallet? <button class="speak-btn" onclick="playAudio('Can I pay with DuitNow QR or Touch and Go eWallet?')">🔊</button></div><div class="pattern-example">DuitNow QR이나 터치앤고 이월렛으로 결제할 수 있나요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Good morning! I'd like to open a savings account here. I hold a guardian visa, and my children go to Sunway International School.</div><button class="speak-btn" onclick="playAudio('Good morning! I would like to open a savings account here. I hold a guardian visa, and my children go to Sunway International School.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Bank Officer:</span> Good morning, ma'am! Sure, may I see your passport, valid visa sticker, and the school confirmation letter?</div><button class="speak-btn" onclick="playAudio('Good morning, maam! Sure, may I see your passport, valid visa sticker, and the school confirmation letter?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Here are all the documents. Once the account is opened, can I link it to DuitNow and Touch 'n Go eWallet right away?</div><button class="speak-btn" onclick="playAudio('Here are all the documents. Once the account is opened, can I link it to DuitNow and Touch and Go eWallet right away?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Bank Officer:</span> Yes, we'll set up your mobile banking app today so you can scan DuitNow QR codes immediately. A minimum deposit of 250 Ringgit is required to activate the account.</div><button class="speak-btn" onclick="playAudio('Yes, we will set up your mobile banking app today so you can scan DuitNow QR codes immediately. A minimum deposit of 250 Ringgit is required to activate the account.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Great! Also, how can I increase my daily transfer limit? I need to transfer our monthly condo rent next week.</div><button class="speak-btn" onclick="playAudio('Great! Also, how can I increase my daily transfer limit? I need to transfer our monthly condo rent next week.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Bank Officer:</span> Let me help you set the daily transfer limit to 20,000 Ringgit directly at the counter now so you won't have any issues.</div><button class="speak-btn" onclick="playAudio('Let me help you set the daily transfer limit to 20000 Ringgit directly at the counter now so you will not have any issues.')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 말레이시아 상점이나 식당에서 "DuitNow QR이나 터치앤고로 결제할 수 있나요?"를 영어로 물어보세요.</summary>
+                    <div class="quiz-answer-content">정답: Can I pay with DuitNow QR or Touch 'n Go eWallet?</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 터치앤고 카드나 선불 유심에 "잔액을 충전하다"를 뜻하는 현지 표현 두 가지는?</summary>
+                    <div class="quiz-answer-content">정답: Top up 또는 Reload</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 월세나 학비를 보내기 위해 모바일 뱅킹의 "일일 이체 한도를 늘리다"를 영어로 표현하면?</summary>
+                    <div class="quiz-answer-content">정답: Increase my daily transfer limit</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 15:
+    print("비상용 사전 검증 Day 15 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 15</span>
+        <h2>주말 가족 여행 및 호텔·리조트 체크인</h2>
+        <div class="topic">주말 가족 여행 및 호텔·리조트 체크인 (얼리 체크인, 커넥팅룸·엑스트라 베드 요청, 수영장 및 조식 문의)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Early check-in / Late check-out</div><div class="vocab-meaning">얼리 체크인 (일찍 입실) / 레이트 체크아웃 (늦은 퇴실)</div><div class="vocab-tip">💡 아이들과 수영장을 더 이용하고 싶을 때 객실 여유(Subject to availability)에 따라 요청해 볼 수 있습니다.</div></div><button class="speak-btn" onclick="playAudio('Early check-in and Late check-out')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Connecting rooms</div><div class="vocab-meaning">커넥팅 룸 (방 사이에 내부 문이 연결된 객실)</div><div class="vocab-tip">💡 아이들이 크거나 두 가족이 함께 여행 갈 때 'Adjoining rooms(이웃한 방)'와 구분해 '내부 문이 연결된 방'을 뜻합니다.</div></div><button class="speak-btn" onclick="playAudio('Connecting rooms')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Extra bed / Rollaway bed</div><div class="vocab-meaning">추가 침대 (이동식 간이침대)</div><div class="vocab-tip">💡 아이 두 명과 함께 묵을 때 객실에 간이침대 추가가 가능한지 물어볼 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Extra bed')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Complimentary breakfast</div><div class="vocab-meaning">무료 포함 조식</div><div class="vocab-tip">💡 예약에 포함된 성인 조식 외에 아동 조식 추가 요금(Child rate) 기준 나이를 확인할 때 유용합니다.</div></div><button class="speak-btn" onclick="playAudio('Complimentary breakfast')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Security deposit</div><div class="vocab-meaning">객실 보증금 (디파짓)</div><div class="vocab-tip">💡 체크인 시 카드 가승인이나 현금으로 맡겼다가 체크아웃 시 환불(Refunded upon check-out)받는 보증금입니다.</div></div><button class="speak-btn" onclick="playAudio('Security deposit')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Tourism tax</div><div class="vocab-meaning">관광세 (박당 RM 10)</div><div class="vocab-tip">💡 말레이시아 호텔에서는 외국인 투숙객에게 1박당 RM 10의 관광세를 부과하나, 장기 비자 소지 여부에 따라 확인하기도 합니다.</div></div><button class="speak-btn" onclick="playAudio('Tourism tax')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Pool towel</div><div class="vocab-meaning">수영장 타월</div><div class="vocab-tip">💡 객실 수건 대신 수영장 옆 Towel counter에서 객실 번호를 적고 대여하는 타월입니다.</div></div><button class="speak-btn" onclick="playAudio('Pool towel')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Kids' club</div><div class="vocab-meaning">키즈 클럽 (어린이 체험·놀이 공간)</div><div class="vocab-tip">💡 페낭, 코타키나발루, 데사루 등의 리조트에서 시간대별 키즈 액티비티 프로그램을 물어볼 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Kids club')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Luggage storage</div><div class="vocab-meaning">짐 보관 서비스</div><div class="vocab-tip">💡 체크인 시간 전 도착했거나 체크아웃 후 차량 탑승 전까지 컨시어지에 짐을 맡길 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Luggage storage')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Housekeeping (Make up the room)</div><div class="vocab-meaning">객실 청소 (방 정리 요청)</div><div class="vocab-tip">💡 외출하면서 방 청소와 수건 교체를 부탁할 때 'Could you make up our room, please?'라고 말합니다.</div></div><button class="speak-btn" onclick="playAudio('Housekeeping')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. Hi, I'd like to check in under the name Tina. Is early check-in available? <button class="speak-btn" onclick="playAudio('Hi, I would like to check in under the name Tina. Is early check-in available?')">🔊</button></div><div class="pattern-example">안녕하세요, 티나 이름으로 체크인하려고 합니다. 혹시 얼리 체크인이 가능할까요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Could we get an extra bed and extra towels for the kids, please? <button class="speak-btn" onclick="playAudio('Could we get an extra bed and extra towels for the kids, please?')">🔊</button></div><div class="pattern-example">아이들을 위해 엑스트라 베드 하나와 수건을 좀 더 받을 수 있을까요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. What time is breakfast served, and where is the kids' pool located? <button class="speak-btn" onclick="playAudio('What time is breakfast served, and where is the kids pool located?')">🔊</button></div><div class="pattern-example">조식 시간은 몇 시부터이고, 어린이 수영장은 어디에 있나요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Good afternoon! I'd like to check in. I have a reservation for two nights under the name Tina.</div><button class="speak-btn" onclick="playAudio('Good afternoon! I would like to check in. I have a reservation for two nights under the name Tina.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Receptionist:</span> Welcome to our resort, Ms. Tina! May I have your passport for registration? I see you booked a Family Suite for two adults and two children.</div><button class="speak-btn" onclick="playAudio('Welcome to our resort, Ms. Tina! May I have your passport for registration? I see you booked a Family Suite for two adults and two children.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Here is my passport. I know it's an hour before the official check-in time, but is early check-in available by any chance? Mike and Clara can't wait to jump into the pool!</div><button class="speak-btn" onclick="playAudio('Here is my passport. I know it is an hour before the official check-in time, but is early check-in available by any chance? Mike and Clara cannot wait to jump into the pool!')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Receptionist:</span> Good news! Your room on the 5th floor overlooking the ocean is already ready. Would you still like the extra bed we noted in your booking request?</div><button class="speak-btn" onclick="playAudio('Good news! Your room on the 5th floor overlooking the ocean is already ready. Would you still like the extra bed we noted in your booking request?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Yes, please! Could we also get two extra bath towels sent to the room? And what time is breakfast served tomorrow morning?</div><button class="speak-btn" onclick="playAudio('Yes, please! Could we also get two extra bath towels sent to the room? And what time is breakfast served tomorrow morning?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Receptionist:</span> Certainly, housekeeping will bring the extra bed and towels right up. Breakfast is served from 6:30 AM to 10:30 AM at the main restaurant on the ground floor. Enjoy your stay!</div><button class="speak-btn" onclick="playAudio('Certainly, housekeeping will bring the extra bed and towels right up. Breakfast is served from 6:30 AM to 10:30 AM at the main restaurant on the ground floor. Enjoy your stay!')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 호텔 프런트에서 "혹시 얼리 체크인(일찍 입실)이 가능할까요?"를 영어로 물어보세요.</summary>
+                    <div class="quiz-answer-content">정답: Is early check-in available (by any chance)?</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 아이들을 위해 객실에 "추가 간이침대와 수건을 더 받을 수 있을까요?"를 영어로 말하면?</summary>
+                    <div class="quiz-answer-content">정답: Could we get an extra bed and extra towels for the kids, please?</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 외출할 때 하우스키핑 직원에게 "객실 청소(방 정리) 좀 해주시겠어요?"를 뜻하는 자연스러운 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Could you make up our room, please?</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and weekday == 5 and week_num == 3:
+    print("비상용 사전 검증 3주차 총정리 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">3주차 총정리</span>
+        <h2>3주차 통합 복습 테스트</h2>
+        <div class="topic">3주차 통합 복습 테스트 (Day 11~15 핵심 어휘 25개 및 실전 퀴즈 총정리)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 Day 11~15 핵심 어휘 25선</div>
+            <div class="vocab-grid">
+                <!-- Day 11 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. RON 95 / RON 97</div><div class="vocab-meaning">일반 휘발유 / 고급 휘발유</div><div class="vocab-tip">💡 [Day 11] 말레이시아 주유소(Petronas, Shell 등)에서 노란색/초록색 건은 RON 95, 빨간색 건은 RON 97입니다.</div></div><button class="speak-btn" onclick="playAudio('RON ninety-five and RON ninety-seven')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Tyre pressure</div><div class="vocab-meaning">타이어 공기압</div><div class="vocab-tip">💡 [Day 11] 주유소 한쪽에 마련된 무료 공기 주입기(Air pump)에서 디지털 숫자를 맞추고 직접 주입할 수 있습니다.</div></div><button class="speak-btn" onclick="playAudio('Tyre pressure')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Engine oil service</div><div class="vocab-meaning">엔진오일 교환 정비</div><div class="vocab-tip">💡 [Day 11] 현지 정비소에서는 보통 마이너 서비스(Minor service)라고 부르며 오일과 오일 필터를 함께 교체합니다.</div></div><button class="speak-btn" onclick="playAudio('Engine oil service')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Car wash (Snow wash)</div><div class="vocab-meaning">세차 (폼건 버블 세차)</div><div class="vocab-tip">💡 [Day 11] 말레이시아 로컬 세차장에서는 거품을 듬뿍 얹고 실내 청소까지 해주는 'Wash and vacuum'을 주로 이용합니다.</div></div><button class="speak-btn" onclick="playAudio('Snow wash')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Full tank</div><div class="vocab-meaning">가득 주유 (만땅)</div><div class="vocab-tip">💡 [Day 11] 기름을 가득 넣고 싶을 때 주유원에게 "Full tank, please"라고 말하면 됩니다.</div></div><button class="speak-btn" onclick="playAudio('Full tank')">🔊</button></div>
+
+                <!-- Day 12 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Parent-Teacher Conference (PTC)</div><div class="vocab-meaning">학부모-교사 정기 상담</div><div class="vocab-tip">💡 [Day 12] 국제학교 학기별 정기 면담은 'PTC' 또는 'PTM', 아이가 주도하는 상담은 'SLC'라고 부릅니다.</div></div><button class="speak-btn" onclick="playAudio('Parent-Teacher Conference')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Keep up with</div><div class="vocab-meaning">(수업 진도 등을) 잘 따라가다</div><div class="vocab-tip">💡 [Day 12] 아이가 영어 수업 진도를 잘 따라가고 있는지 선생님께 여쭤볼 때 가장 자주 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Keep up with')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Get along with</div><div class="vocab-meaning">~와 잘 어울리다 / 친하게 지내다</div><div class="vocab-tip">💡 [Day 12] 반 친구들과의 교우 관계 및 학교 적응을 확인할 때 유용한 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Get along with')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Early pick-up</div><div class="vocab-meaning">조퇴 (정규 하교 전 픽업)</div><div class="vocab-tip">💡 [Day 12] 병원 예약 등으로 아이를 일찍 데리고 나와야 할 때 포털 앱이나 이메일로 사전 신청합니다.</div></div><button class="speak-btn" onclick="playAudio('Early pick-up')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. School portal</div><div class="vocab-meaning">학교 포털 앱 / 학사 시스템</div><div class="vocab-tip">💡 [Day 12] 가정통신문 확인, 결석·조퇴 신청, 상담 예약이 이루어지는 학교 전용 온라인 시스템입니다.</div></div><button class="speak-btn" onclick="playAudio('School portal')">🔊</button></div>
+
+                <!-- Day 13 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">11. Trim</div><div class="vocab-meaning">(끝부분만 살짝) 다듬다</div><div class="vocab-tip">💡 [Day 13] 전체 스타일은 유지하고 자란 끝부분만 다듬을 때 'Just a trim, please'라고 합니다.</div></div><button class="speak-btn" onclick="playAudio('Trim')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">12. Bangs / Fringe</div><div class="vocab-meaning">앞머리</div><div class="vocab-tip">💡 [Day 13] 미국식으로는 Bangs, 영국·말레이시아식으로는 Fringe라고도 많이 부릅니다.</div></div><button class="speak-btn" onclick="playAudio('Bangs and Fringe')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">13. Thin out</div><div class="vocab-meaning">머리 숱을 치다</div><div class="vocab-tip">💡 [Day 13] 더운 날씨에 아이 머리 숱이 많아 답답할 때 'thin out his/her hair'라고 요청하세요.</div></div><button class="speak-btn" onclick="playAudio('Thin out')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">14. Clippers</div><div class="vocab-meaning">바리깡 / 클리퍼</div><div class="vocab-tip">💡 [Day 13] 남자아이 옆·뒷머리를 밀 때 클리퍼 탭 번호(예: Number 3)를 지정해 주면 정확합니다.</div></div><button class="speak-btn" onclick="playAudio('Clippers')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">15. Eyebrow level</div><div class="vocab-meaning">눈썹 높이(길이)</div><div class="vocab-tip">💡 [Day 13] 앞머리가 너무 짧아지지 않도록 'right at the eyebrow level'처럼 기준점을 잡아주세요.</div></div><button class="speak-btn" onclick="playAudio('Eyebrow level')">🔊</button></div>
+
+                <!-- Day 14 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">16. DuitNow QR</div><div class="vocab-meaning">말레이시아 통합 QR 결제·송금 시스템</div><div class="vocab-tip">💡 [Day 14] 분홍색 DuitNow QR 하나로 말레이시아 모든 은행 앱 및 eWallet 결제가 가능합니다.</div></div><button class="speak-btn" onclick="playAudio('DuitNow QR')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">17. TNG (Touch 'n Go) eWallet</div><div class="vocab-meaning">터치앤고 전자지갑 앱</div><div class="vocab-tip">💡 [Day 14] 여권 본인 인증을 마치면 QR 결제, 톨게이트 카드 연동, 계좌 이체까지 모두 가능합니다.</div></div><button class="speak-btn" onclick="playAudio('Touch and Go eWallet')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">18. Top up / Reload</div><div class="vocab-meaning">(잔액·데이터 등을) 충전하다</div><div class="vocab-tip">💡 [Day 14] 선불 유심이나 터치앤고 카드 잔액을 충전할 때 가장 흔히 쓰는 현지 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Top up and Reload')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">19. Daily transfer limit</div><div class="vocab-meaning">일일 이체 한도</div><div class="vocab-tip">💡 [Day 14] 집세나 학비를 송금하기 전에 모바일 뱅킹 앱의 일일 이체 한도를 미리 확인하세요.</div></div><button class="speak-btn" onclick="playAudio('Daily transfer limit')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">20. Guardian visa</div><div class="vocab-meaning">가디언 비자 (동반 학부모 비자)</div><div class="vocab-tip">💡 [Day 14] 현지 은행 계좌 개설 시 여권, 가디언 비자 스티커, 학교 재학 확인서가 필요합니다.</div></div><button class="speak-btn" onclick="playAudio('Guardian visa')">🔊</button></div>
+
+                <!-- Day 15 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">21. Early check-in / Late check-out</div><div class="vocab-meaning">얼리 체크인 / 레이트 체크아웃</div><div class="vocab-tip">💡 [Day 15] 리조트 도착 시간이나 비행기 스케줄에 맞춰 프런트에 객실 여유를 문의해 볼 수 있습니다.</div></div><button class="speak-btn" onclick="playAudio('Early check-in and Late check-out')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">22. Extra bed</div><div class="vocab-meaning">추가 간이침대 (Rollaway bed)</div><div class="vocab-tip">💡 [Day 15] 아이들과 함께 투숙할 때 객실에 간이침대 추가를 요청하는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Extra bed')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">23. Security deposit</div><div class="vocab-meaning">객실 보증금 (디파짓)</div><div class="vocab-tip">💡 [Day 15] 체크인 시 결제했다가 퇴실 시 이상이 없으면 돌려받는 보증금입니다.</div></div><button class="speak-btn" onclick="playAudio('Security deposit')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">24. Complimentary breakfast</div><div class="vocab-meaning">무료 포함 조식</div><div class="vocab-tip">💡 [Day 15] 객실 요금에 기본 포함된 아침 식사이며, 식당 위치와 운영 시간을 체크인 시 확인하세요.</div></div><button class="speak-btn" onclick="playAudio('Complimentary breakfast')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">25. Housekeeping (Make up the room)</div><div class="vocab-meaning">객실 청소 (방 정리 요청)</div><div class="vocab-tip">💡 [Day 15] 외출 전 객실 정돈과 수건 교체를 요청할 때 'make up our room'이라고 표현합니다.</div></div><button class="speak-btn" onclick="playAudio('Make up the room')">🔊</button></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">🗣️ 주간 베스트 핵심 패턴 5선</div>
+            <div class="pattern-box">
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 1. Could you please check my tyre pressure and brake pads? <button class="speak-btn" onclick="playAudio('Could you please check my tyre pressure and brake pads?')">🔊</button></div>
+                    <div class="pattern-example">[Day 11] 타이어 공기압이랑 브레이크 패드 좀 점검해 주시겠어요?</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 2. How is Mike keeping up with his classes lately? <button class="speak-btn" onclick="playAudio('How is Mike keeping up with his classes lately?')">🔊</button></div>
+                    <div class="pattern-example">[Day 12] 요즘 마이크가 수업 진도는 잘 따라가고 있나요?</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 3. Could you thin out his hair a bit? It gets too hot here. <button class="speak-btn" onclick="playAudio('Could you thin out his hair a bit? It gets too hot here.')">🔊</button></div>
+                    <div class="pattern-example">[Day 13] 아이 머리 숱을 조금 쳐주시겠어요? 여기 날씨가 더워서 땀이 많이 나요.</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 4. How can I increase my daily transfer limit on the mobile app? <button class="speak-btn" onclick="playAudio('How can I increase my daily transfer limit on the mobile app?')">🔊</button></div>
+                    <div class="pattern-example">[Day 14] 모바일 앱에서 일일 이체 한도를 어떻게 늘릴 수 있나요?</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 5. Could we get an extra bed and extra towels for the kids, please? <button class="speak-btn" onclick="playAudio('Could we get an extra bed and extra towels for the kids, please?')">🔊</button></div>
+                    <div class="pattern-example">[Day 15] 아이들을 위해 엑스트라 베드 하나와 수건을 좀 더 받을 수 있을까요?</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">✍️ 3주차 실전 통합 퀴즈 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. [Day 11] 세차장에서 외부 세차와 함께 실내 진공청소기 청소까지 세트로 요청할 때 쓰는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Wash and vacuum, please.</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. [Day 12] 담임선생님께 "마이크가 수업 진도를 잘 따라가고 있나요?"를 영어로 물어보면?</summary>
+                    <div class="quiz-answer-content">정답: How is Mike keeping up with his classes?</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. [Day 13] 미용실에서 아이 머리가 너무 무겁고 더워 보일 때 "머리 숱을 조금 쳐주시겠어요?"를 영어로 말하면?</summary>
+                    <div class="quiz-answer-content">정답: Could you thin out his/her hair a bit?</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q4. [Day 14] 터치앤고(TNG) 카드나 선불 유심에 '잔액을 충전하다'를 뜻하는 현지 영어 표현 두 가지는?</summary>
+                    <div class="quiz-answer-content">정답: Top up 또는 Reload</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q5. [Day 15] 리조트 체크인 시간보다 일찍 도착했을 때 "혹시 얼리 체크인이 가능할까요?"를 영어로 물어보세요.</summary>
+                    <div class="quiz-answer-content">정답: Is early check-in available (by any chance)?</div>
                 </details>
             </div>
         </section>
