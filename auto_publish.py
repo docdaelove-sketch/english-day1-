@@ -238,7 +238,7 @@ payload = {
     "contents": [{"parts": [{"text": prompt}]}]
 }
 
-if GEMINI_KEY and current_day_number not in (12, 13, 14, 15) and not (weekday == 5 and week_num == 3):
+if GEMINI_KEY and current_day_number not in (12, 13, 14, 15, 21, 22, 23, 24, 25) and not (weekday == 5 and week_num in (3, 5)):
     for attempt in range(1, 9):
         model_name = model_candidates[(attempt - 1) % len(model_candidates)]
         gemini_path = f"/v1beta/models/{model_name}:generateContent?key={GEMINI_KEY}"
@@ -967,6 +967,420 @@ elif not card_html and weekday == 5 and week_num == 3:
 </article>"""
 
 # 4. 기존 index.html에 새 Day 카드 누적 삽입
+# 3-B. 5주차(Day 21~25 및 5주차 총정리) 사전 검증 카드
+if not card_html and current_day_number == 21:
+    print("비상용 사전 검증 Day 21 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 21</span>
+        <h2>학교 카페테리아·매점 및 식단 관리</h2>
+        <div class="topic">학교 카페테리아·매점 및 식단 관리 (알레르기 음식 대체, 식권·스튜던트 카드 충전, 건강식 문의)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Canteen / Cafeteria</div><div class="vocab-meaning">학교 식당 / 매점</div><div class="vocab-tip">💡 말레이시아 국제학교에서는 학교 식당을 Canteen 또는 Cafeteria라고 부릅니다.</div></div><button class="speak-btn" onclick="playAudio('Canteen and Cafeteria')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Nut-free</div><div class="vocab-meaning">견과류가 전혀 들어가지 않은</div><div class="vocab-tip">💡 많은 국제학교가 알레르기 안전을 위해 'Nut-free campus(견과류 반입 금지)' 정책을 운영합니다.</div></div><button class="speak-btn" onclick="playAudio('Nut-free')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Meal plan</div><div class="vocab-meaning">학기별 급식 신청 프로그램</div><div class="vocab-tip">💡 매끼 사 먹는 방식 외에 한 학기(Term) 단위로 미리 신청하는 정기 급식을 뜻합니다.</div></div><button class="speak-btn" onclick="playAudio('Meal plan')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Student ID card (Cashless)</div><div class="vocab-meaning">학생증 카드 (현금 없는 결제용)</div><div class="vocab-tip">💡 국제학교 매점은 현금 대신 학생증 카드에 돈을 충전해 태그(Tap)하는 방식을 주로 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Student ID card')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Top up balance</div><div class="vocab-meaning">잔액을 충전하다</div><div class="vocab-tip">💡 학생증 급식 카드에 온라인 포털이나 매점 카운터에서 잔액을 채워 넣을 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Top up balance')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Daily spending limit</div><div class="vocab-meaning">일일 사용 한도</div><div class="vocab-tip">💡 아이가 매점에서 간식이나 음료수만 너무 많이 사 먹지 않도록 하루 결제 한도를 설정할 수 있습니다.</div></div><button class="speak-btn" onclick="playAudio('Daily spending limit')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Dairy-free / Gluten-free</div><div class="vocab-meaning">유제품 미포함 / 글루텐 미포함</div><div class="vocab-tip">💡 우유나 밀가루를 소화하기 힘들어하는 아이를 위해 대체 식단을 문의할 때 쓰는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Dairy-free and Gluten-free')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Balanced diet</div><div class="vocab-meaning">영양 균형이 잡힌 식단</div><div class="vocab-tip">💡 고기, 채소, 과일이 골고루 포함된 건강한 점심 메뉴인지 확인할 때 유용합니다.</div></div><button class="speak-btn" onclick="playAudio('Balanced diet')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Pre-order lunch</div><div class="vocab-meaning">점심 도시락/급식 사전 주문</div><div class="vocab-tip">💡 학교 앱을 통해 주간 메뉴표를 보고 아이가 먹을 메뉴를 미리 골라 예약하는 시스템입니다.</div></div><button class="speak-btn" onclick="playAudio('Pre-order lunch')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Packed lunch (Lunchbox)</div><div class="vocab-meaning">집에서 싸 온 도시락</div><div class="vocab-tip">💡 급식을 신청하지 않고 집에서 직접 도시락과 간식(Snack box)을 싸서 보낼 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Packed lunch')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. Mike has a peanut allergy, so I want to make sure this dish is nut-free. <button class="speak-btn" onclick="playAudio('Mike has a peanut allergy, so I want to make sure this dish is nut-free.')">🔊</button></div><div class="pattern-example">마이크가 땅콩 알레르기가 있어서 이 요리에 견과류가 안 들어갔는지 확인하고 싶어요.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. I'd like to top up 100 Ringgit onto his student ID card for the canteen. <button class="speak-btn" onclick="playAudio('I would like to top up 100 Ringgit onto his student ID card for the canteen.')">🔊</button></div><div class="pattern-example">매점에서 쓸 수 있게 아이 학생증 카드에 100링깃을 충전하고 싶어요.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Does the set meal come with fresh fruit or vegetables on the side? <button class="speak-btn" onclick="playAudio('Does the set meal come with fresh fruit or vegetables on the side?')">🔊</button></div><div class="pattern-example">세트 메뉴에 신선한 과일이나 채소 반찬이 함께 나오나요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Good morning! Could I check today's lunch menu? Mike has a peanut allergy, so I want to make sure the chicken dish is peanut-free.</div><button class="speak-btn" onclick="playAudio('Good morning! Could I check today lunch menu? Mike has a peanut allergy, so I want to make sure the chicken dish is peanut-free.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Cafeteria Manager:</span> Good morning, ma'am! All our school meals are strictly nut-free, so the roasted chicken set is completely safe for him.</div><button class="speak-btn" onclick="playAudio('Good morning, maam! All our school meals are strictly nut-free, so the roasted chicken set is completely safe for him.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> That's a huge relief! Does the set meal come with fresh fruit or vegetables on the side?</div><button class="speak-btn" onclick="playAudio('That is a huge relief! Does the set meal come with fresh fruit or vegetables on the side?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Cafeteria Manager:</span> Yes, every hot meal comes with steamed broccoli and a cup of cut watermelon.</div><button class="speak-btn" onclick="playAudio('Yes, every hot meal comes with steamed broccoli and a cup of cut watermelon.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Wonderful! Also, I'd like to top up 100 Ringgit onto Mike's student ID card for the canteen, please.</div><button class="speak-btn" onclick="playAudio('Wonderful! Also, I would like to top up 100 Ringgit onto Mike student ID card for the canteen, please.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Cafeteria Manager:</span> Sure! You can tap your card or scan the DuitNow QR right here, and the balance will update immediately.</div><button class="speak-btn" onclick="playAudio('Sure! You can tap your card or scan the DuitNow QR right here, and the balance will update immediately.')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 학교 급식에 땅콩 등 "견과류가 전혀 들어가지 않은" 상태를 뜻하는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Nut-free (또는 Peanut-free)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. "매점에서 쓸 수 있게 아이 학생증 카드에 100링깃을 충전하고 싶어요"를 영어로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: I'd like to top up 100 Ringgit onto his student ID card for the canteen.</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 급식 대신 집에서 직접 싸서 보내는 '도시락'을 영어로 무엇이라고 할까요?</summary>
+                    <div class="quiz-answer-content">정답: Packed lunch (또는 Lunchbox)</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 22:
+    print("비상용 사전 검증 Day 22 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 22</span>
+        <h2>로컬 세탁소 및 드라이클리닝 이용</h2>
+        <div class="topic">로컬 세탁소 및 드라이클리닝 이용 (교복 드라이클리닝, 얼룩 제거 요청, 수선·기장 줄이기, 픽업일 확인)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Dry-clean</div><div class="vocab-meaning">드라이클리닝하다</div><div class="vocab-tip">💡 말레이시아 로컬 세탁소(Dobi / Laundry)에서 교복 재킷이나 아끼는 옷을 맡길 때 필수 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Dry-clean')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Tough stain</div><div class="vocab-meaning">잘 지워지지 않는 찌든 얼룩</div><div class="vocab-tip">💡 아이 교복에 묻은 초콜릿, 카레, 물감 자국을 가리키며 지워달라고 요청할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Tough stain')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Alteration</div><div class="vocab-meaning">옷 수선 (치수·길이 조절)</div><div class="vocab-tip">💡 쇼핑몰이나 세탁소 옆 수선집 간판에 'Clothing Alteration'이라고 적혀 있습니다.</div></div><button class="speak-btn" onclick="playAudio('Alteration')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Hemming (Hem the pants)</div><div class="vocab-meaning">바짓단 수선 (기장을 접어 박음질하기)</div><div class="vocab-tip">💡 새로 산 교복 바지가 너무 길 때 밑단을 줄여달라고 하는 정확한 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Hemming')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Shorten the length</div><div class="vocab-meaning">기장(길이)을 줄이다</div><div class="vocab-tip">💡 원하는 길이(예: by 2 centimeters)를 말하며 기장을 줄여달라고 할 때 가장 쉽게 쓸 수 있습니다.</div></div><button class="speak-btn" onclick="playAudio('Shorten the length')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Take in the waist</div><div class="vocab-meaning">허리둘레를 줄이다</div><div class="vocab-tip">💡 반대로 아이가 자라서 허리나 기장을 늘릴 때는 'Let out'이라고 표현합니다.</div></div><button class="speak-btn" onclick="playAudio('Take in the waist')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Wash and fold</div><div class="vocab-meaning">물세탁 후 개어주기 서비스</div><div class="vocab-tip">💡 로컬 세탁소(Dobi)에서 침구류나 일상복을 무게(kg) 단위로 맡겨 세탁·건조·개어주는 편리한 서비스입니다.</div></div><button class="speak-btn" onclick="playAudio('Wash and fold')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Ironing / Pressing</div><div class="vocab-meaning">다림질 서비스</div><div class="vocab-tip">💡 구김이 잘 가는 학교 셔츠와 교복 바지를 칼주름 잡아 다려달라고 할 때 요청합니다.</div></div><button class="speak-btn" onclick="playAudio('Ironing and Pressing')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Shrink / Color bleed</div><div class="vocab-meaning">(옷감이) 줄어들다 / 물이 빠지다(이염되다)</div><div class="vocab-tip">💡 고온 건조기를 돌릴 때 옷이 줄어들지 않게(Don't shrink) 주의해 달라고 당부할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Shrink and Color bleed')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Claim ticket</div><div class="vocab-meaning">세탁물 보관증 / 인수증</div><div class="vocab-tip">💡 완성된 세탁물을 찾으러 갈 때(Pick up) 직원에게 제시하는 영수증 번호표입니다.</div></div><button class="speak-btn" onclick="playAudio('Claim ticket')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. Could you get this tough stain out of this white school shirt? <button class="speak-btn" onclick="playAudio('Could you get this tough stain out of this white school shirt?')">🔊</button></div><div class="pattern-example">이 흰색 교복 셔츠에 묻은 얼룩 좀 지워주실 수 있나요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Please shorten the length by two centimeters so they don't drag. <button class="speak-btn" onclick="playAudio('Please shorten the length by two centimeters so they do not drag.')">🔊</button></div><div class="pattern-example">바닥에 끌리지 않게 기장을 2센티미터 정도 줄여주세요.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. When will the dry-cleaning and alterations be ready for pick-up? <button class="speak-btn" onclick="playAudio('When will the dry-cleaning and alterations be ready for pick-up?')">🔊</button></div><div class="pattern-example">드라이클리닝이랑 수선 맡긴 옷은 언제 찾으러 오면 될까요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Hi! I'd like to get these school uniforms dry-cleaned, please. There's a tough chocolate stain on this white shirt.</div><button class="speak-btn" onclick="playAudio('Hi! I would like to get these school uniforms dry-cleaned, please. There is a tough chocolate stain on this white shirt.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Laundry Staff:</span> Let me take a look. We can apply a special stain remover before washing. It should come right out.</div><button class="speak-btn" onclick="playAudio('Let me take a look. We can apply a special stain remover before washing. It should come right out.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Thank you! Also, these school trousers are a bit too long for Mike. Do you do alterations here?</div><button class="speak-btn" onclick="playAudio('Thank you! Also, these school trousers are a bit too long for Mike. Do you do alterations here?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Laundry Staff:</span> Yes, we do hemming. How much shorter would you like them?</div><button class="speak-btn" onclick="playAudio('Yes, we do hemming. How much shorter would you like them?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Please shorten the length by about two centimeters so they don't drag on the floor. When will they be ready for pick-up?</div><button class="speak-btn" onclick="playAudio('Please shorten the length by about two centimeters so they do not drag on the floor. When will they be ready for pick-up?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Laundry Staff:</span> Both the dry-cleaning and alteration will be ready by Thursday after 4:00 PM. Here is your claim ticket.</div><button class="speak-btn" onclick="playAudio('Both the dry-cleaning and alteration will be ready by Thursday after 4 PM. Here is your claim ticket.')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 바지 기장이나 치수를 줄이는 '옷 수선'을 영어로 무엇이라고 할까요?</summary>
+                    <div class="quiz-answer-content">정답: Alteration (바짓단 줄이기는 Hemming)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 수선집에서 "기장을 2센티미터 줄여주세요"를 영어로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Please shorten the length by two centimeters.</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 세탁소에서 "언제 찾으러 오면 될까요?"를 묻는 영어 문장은?</summary>
+                    <div class="quiz-answer-content">정답: When will they be ready for pick-up?</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 23:
+    print("비상용 사전 검증 Day 23 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 23</span>
+        <h2>음식 배달 앱(GrabFood/Foodpanda) 주문 및 라이더 소통</h2>
+        <div class="topic">음식 배달 앱(GrabFood/Foodpanda) 주문 및 라이더 소통 (동 호수 안내, 비대면 로비 수령, 배달 지연 확인)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Delivery rider</div><div class="vocab-meaning">배달 기사님 (라이더)</div><div class="vocab-tip">💡 말레이시아에서는 GrabFood나 Foodpanda 오토바이 배달 기사님을 주로 Rider라고 부릅니다.</div></div><button class="speak-btn" onclick="playAudio('Delivery rider')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Drop-off table / shelf</div><div class="vocab-meaning">배달 음식 보관 테이블 / 선반</div><div class="vocab-tip">💡 대부분 콘도는 보안상 외부인이 층으로 올라가지 못해 로비의 지정 선반에 음식을 둡니다.</div></div><button class="speak-btn" onclick="playAudio('Drop-off table')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Contactless delivery</div><div class="vocab-meaning">비대면 배달</div><div class="vocab-tip">💡 로비 선반이나 문 앞에 음식을 두고 사진만 찍어 보내달라고 할 때 유용한 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Contactless delivery')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Cutlery</div><div class="vocab-meaning">일회용 수저·포크 세트</div><div class="vocab-tip">💡 앱 주문 시 'Request cutlery'를 체크해야 일회용 숟가락과 포크를 챙겨줍니다.</div></div><button class="speak-btn" onclick="playAudio('Cutlery')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Sauce on the side</div><div class="vocab-meaning">소스는 따로 담아주기</div><div class="vocab-tip">💡 배달 중 음식이 눅눅해지거나 매운 소스가 섞이지 않도록 요청사항(Note)에 자주 적는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Sauce on the side')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Missing item</div><div class="vocab-meaning">누락된 메뉴 / 빠진 음식</div><div class="vocab-tip">💡 주문한 음료나 사이드 메뉴가 빠졌을 때 앱 내 Help Center에서 환불 신청하는 항목입니다.</div></div><button class="speak-btn" onclick="playAudio('Missing item')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Spill</div><div class="vocab-meaning">(국물·음료가) 쏟아지다 / 새다</div><div class="vocab-tip">💡 국물 요리를 시킬 때 쏟아지지 않게(Please make sure it doesn't spill) 포장해 달라고 할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Spill')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Heavy downpour</div><div class="vocab-meaning">폭우 / 억수같이 쏟아지는 비</div><div class="vocab-tip">💡 말레이시아 스콜성 폭우가 내릴 때는 라이더 배차가 늦어지거나 배달 시간이 지연되기 쉽습니다.</div></div><button class="speak-btn" onclick="playAudio('Heavy downpour')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Unit number</div><div class="vocab-meaning">콘도 동·호수 (예: B-15-02)</div><div class="vocab-tip">💡 말레이시아 콘도 호수는 보통 '동(Block) - 층(Floor) - 호(Unit)' 순서로 표기합니다.</div></div><button class="speak-btn" onclick="playAudio('Unit number')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Leave it at the lobby</div><div class="vocab-meaning">로비에 맡겨 두다</div><div class="vocab-tip">💡 라이더에게 전화나 그랩 채팅이 왔을 때 가장 많이 쓰는 한 줄 답변입니다.</div></div><button class="speak-btn" onclick="playAudio('Leave it at the lobby')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. Please leave the food on the delivery table at Block B lobby. <button class="speak-btn" onclick="playAudio('Please leave the food on the delivery table at Block B lobby.')">🔊</button></div><div class="pattern-example">Block B 로비에 있는 배달 테이블에 음식을 놓아주세요.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Could you send me a photo once you drop it off? <button class="speak-btn" onclick="playAudio('Could you send me a photo once you drop it off?')">🔊</button></div><div class="pattern-example">음식을 두고 나서 사진 한 장 찍어 보내주실 수 있나요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Thank you for delivering in the rain! Please ride safely. <button class="speak-btn" onclick="playAudio('Thank you for delivering in the rain! Please ride safely.')">🔊</button></div><div class="pattern-example">비 오는데 배달해 주셔서 감사해요! 안전 운전하세요.</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">GrabFood Rider:</span> Hello ma'am, I have arrived at the guardhouse with your GrabFood order. Which block should I go to?</div><button class="speak-btn" onclick="playAudio('Hello maam, I have arrived at the guardhouse with your GrabFood order. Which block should I go to?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Hi! Please come to Block B lobby. You can tell the security guard you're delivering to unit B-15-02.</div><button class="speak-btn" onclick="playAudio('Hi! Please come to Block B lobby. You can tell the security guard you are delivering to unit B-15-02.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">GrabFood Rider:</span> Okay, I'm at the Block B lobby now. Can I leave your food on the delivery table by the lift?</div><button class="speak-btn" onclick="playAudio('Okay, I am at the Block B lobby now. Can I leave your food on the delivery table by the lift?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Yes, please leave it on the designated drop-off shelf and send me a photo through the app. I'm coming down right now.</div><button class="speak-btn" onclick="playAudio('Yes, please leave it on the designated drop-off shelf and send me a photo through the app. I am coming down right now.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">GrabFood Rider:</span> Done! I placed the soup upright in a separate bag so it won't spill. Enjoy your meal!</div><button class="speak-btn" onclick="playAudio('Done! I placed the soup upright in a separate bag so it will not spill. Enjoy your meal!')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Thank you so much for riding safely in the rain! I just added a tip for you on the app.</div><button class="speak-btn" onclick="playAudio('Thank you so much for riding safely in the rain! I just added a tip for you on the app.')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 라이더에게 "Block B 로비에 있는 배달 테이블에 음식을 놓아주세요"를 영어로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Please leave the food on the delivery table at Block B lobby.</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 배달 앱 주문 시 일회용 숟가락과 포크 등 '식기류'를 뜻하는 영어 단어는?</summary>
+                    <div class="quiz-answer-content">정답: Cutlery</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 아이들과 함께 먹기 위해 매운 소스 등을 "따로 담아주세요"라고 요청할 때 쓰는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Sauce on the side, please.</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 24:
+    print("비상용 사전 검증 Day 24 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 24</span>
+        <h2>베이커리 및 디저트 카페 이용</h2>
+        <div class="topic">베이커리 및 디저트 카페 이용 (글루텐프리 빵 문의, 케이크 레터링 예약, 음료 당도 조절)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Custom cake</div><div class="vocab-meaning">맞춤 제작 케이크 (주문제작 케이크)</div><div class="vocab-tip">💡 아이 생일이나 반 파티용으로 캐릭터나 문구를 넣은 케이크를 예약할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Custom cake')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Icing / Frosting</div><div class="vocab-meaning">아이싱 크림 (케이크 장식·레터링용 크림)</div><div class="vocab-tip">💡 한국에서는 '케이크 레터링'이라고 하지만 영어권에서는 'write a message in icing'이라고 표현합니다.</div></div><button class="speak-btn" onclick="playAudio('Icing and Frosting')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Less sweet (Kurang manis)</div><div class="vocab-meaning">덜 달게 (당도 낮춤)</div><div class="vocab-tip">💡 말레이시아 음료는 기본 당도가 꽤 높아서 'Less sweet' 또는 'Half sugar(50%)'로 주문하면 딱 좋습니다.</div></div><button class="speak-btn" onclick="playAudio('Less sweet')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Freshly baked</div><div class="vocab-meaning">갓 구워 나온</div><div class="vocab-tip">💡 빵집에서 가장 따뜻하고 신선한 빵이 몇 시에 나오는지 물어볼 때 쓰는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Freshly baked')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Whole wheat / Sourdough</div><div class="vocab-meaning">통밀빵 / 사워도우 (천연발효빵)</div><div class="vocab-tip">💡 아침 토스트나 아이 샌드위치용으로 소화가 잘되는 건강 빵을 고를 때 자주 찾는 단어입니다.</div></div><button class="speak-btn" onclick="playAudio('Whole wheat and Sourdough')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Slice the bread</div><div class="vocab-meaning">통식빵을 썰어주다</div><div class="vocab-tip">💡 통식빵(Loaf)을 산 뒤 샌드위치 두께로 썰어달라고 할 때 'Could you slice this for me?'라고 합니다.</div></div><button class="speak-btn" onclick="playAudio('Slice the bread')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Oat milk / Soy milk</div><div class="vocab-meaning">귀리 우유(오트밀크) / 두유</div><div class="vocab-tip">💡 카페에서 일반 우유 대신 식물성 우유로 옵션을 변경할 때 'with oat milk'라고 덧붙이면 됩니다.</div></div><button class="speak-btn" onclick="playAudio('Oat milk and Soy milk')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Decaf (Decaffeinated)</div><div class="vocab-meaning">디카페인 커피</div><div class="vocab-tip">💡 오후 늦게 학부모 모임을 가질 때 카페인 부담 없이 커피를 주문할 수 있는 필수 옵션입니다.</div></div><button class="speak-btn" onclick="playAudio('Decaf')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Warm it up</div><div class="vocab-meaning">따뜻하게 데워주다</div><div class="vocab-tip">💡 크루아상이나 머핀을 매장에서 바로 먹을 때 오븐에 살짝 데워달라고 요청하는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Warm it up')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. For here or to go (Takeaway)</div><div class="vocab-meaning">매장 식사 또는 포장 (테이크아웃)</div><div class="vocab-tip">💡 말레이시아에서는 포장 주문을 'Takeaway' 또는 'To go'라고 모두 자연스럽게 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Takeaway')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. Could you write 'Happy Birthday Clara!' in pink icing on the top? <button class="speak-btn" onclick="playAudio('Could you write Happy Birthday Clara in pink icing on the top?')">🔊</button></div><div class="pattern-example">케이크 위에 분홍색 아이싱 크림으로 'Happy Birthday Clara!'라고 적어주실 수 있나요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Could I get one iced matcha latte with less sugar to go, please? <button class="speak-btn" onclick="playAudio('Could I get one iced matcha latte with less sugar to go, please?')">🔊</button></div><div class="pattern-example">덜 달게(당도를 낮춘) 한 아이스 말차 라떼 한 잔 테이크아웃으로 주시겠어요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Could you warm up this croissant and slice the loaf of bread for me? <button class="speak-btn" onclick="playAudio('Could you warm up this croissant and slice the loaf of bread for me?')">🔊</button></div><div class="pattern-example">이 크루아상은 따뜻하게 데워주시고, 통식빵은 먹기 좋게 썰어주시겠어요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Clara (Tina):</span> Hi! I'd like to pre-order a custom birthday cake for my daughter Clara for this Saturday.</div><button class="speak-btn" onclick="playAudio('Hi! I would like to pre-order a custom birthday cake for my daughter Clara for this Saturday.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Bakery Staff:</span> Sure! Our fresh strawberry shortcake is the most popular with kids. What size would you like?</div><button class="speak-btn" onclick="playAudio('Sure! Our fresh strawberry shortcake is the most popular with kids. What size would you like?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Clara (Tina):</span> A one-kilogram cake will be perfect. Could you write 'Happy Birthday Clara!' in pink icing on the top?</div><button class="speak-btn" onclick="playAudio('A one-kilogram cake will be perfect. Could you write Happy Birthday Clara in pink icing on the top?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Bakery Staff:</span> Of course! How many candles do you need, and what time will you pick it up on Saturday?</div><button class="speak-btn" onclick="playAudio('Of course! How many candles do you need, and what time will you pick it up on Saturday?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Clara (Tina):</span> Eight candles, please, and I'll pick it up at 11:00 AM. Also, could I get one iced matcha latte with less sugar to go right now?</div><button class="speak-btn" onclick="playAudio('Eight candles, please, and I will pick it up at 11 AM. Also, could I get one iced matcha latte with less sugar to go right now?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Bakery Staff:</span> Got it! Less sweet iced matcha latte coming right up, and your cake order is all set for Saturday.</div><button class="speak-btn" onclick="playAudio('Got it! Less sweet iced matcha latte coming right up, and your cake order is all set for Saturday.')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 케이크 위에 크림으로 축하 문구(레터링)를 적어달라고 할 때 쓰는 영어 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Could you write '문구' in icing on the top?</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 카페에서 음료를 주문할 때 "덜 달게(설탕 적게) 해주세요"를 영어로 말하면?</summary>
+                    <div class="quiz-answer-content">정답: Less sweet, please. (또는 With less sugar, please.)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 빵집에서 크루아상이나 스콘을 "따뜻하게 데워주시겠어요?"라고 부탁할 때 쓰는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Could you warm this up for me?</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 25:
+    print("비상용 사전 검증 Day 25 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 25</span>
+        <h2>주말 스포츠 클럽 및 수영장 이용</h2>
+        <div class="topic">주말 스포츠 클럽 및 수영장 이용 (레인 배정 문의, 킥판·수모 대여, 샤워실 락커 이용, 안전 수칙)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Lap swimming</div><div class="vocab-meaning">왕복 수영 (운동용 레인 수영)</div><div class="vocab-tip">💡 성인들이 쉬지 않고 왕복 수영을 하는 전용 레인(Lap lane)과 놀이용 풀을 구분할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Lap swimming')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Shallow end / Deep end</div><div class="vocab-meaning">수심이 얕은 쪽 / 수심이 깊은 쪽</div><div class="vocab-tip">💡 아이들이 안전하게 발이 닿는 수심(Shallow end)에서 연습하도록 안내할 때 꼭 필요한 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Shallow end and Deep end')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Swimming cap (Swim cap)</div><div class="vocab-meaning">수영 모자 (수모)</div><div class="vocab-tip">💡 스포츠 클럽 정식 규격 풀(Olympic-size pool)에서는 수모 착용이 의무(Mandatory)인 곳이 많습니다.</div></div><button class="speak-btn" onclick="playAudio('Swimming cap')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Kickboard / Pull buoy</div><div class="vocab-meaning">킥판 / 풀부이 (다리 사이에 끼우는 부력 도구)</div><div class="vocab-tip">💡 아이들 발차기와 영법 연습을 위해 수영장 대여소에서 자주 빌리는 훈련 보조 기구입니다.</div></div><button class="speak-btn" onclick="playAudio('Kickboard and Pull buoy')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Goggles</div><div class="vocab-meaning">물안경 (수경)</div><div class="vocab-tip">💡 항상 복수형(-s)으로 쓰며, 'Adjust the goggles(수경 끈을 조절하다)' 형태로 자주 활용합니다.</div></div><button class="speak-btn" onclick="playAudio('Goggles')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Locker wristband</div><div class="vocab-meaning">사물함(락커) 열쇠 팔찌</div><div class="vocab-tip">💡 클럽 데스크에서 회원증을 맡기고 탈의실 사물함 팔찌와 타월을 받아 입장합니다.</div></div><button class="speak-btn" onclick="playAudio('Locker wristband')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Changing room</div><div class="vocab-meaning">탈의실 및 샤워실 (Locker room)</div><div class="vocab-tip">💡 수영 전후 옷을 갈아입고 샤워하는 공간을 현지에서는 Changing room이라고 주로 부릅니다.</div></div><button class="speak-btn" onclick="playAudio('Changing room')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Lifeguard on duty</div><div class="vocab-meaning">근무 중인 수상 안전요원</div><div class="vocab-tip">💡 수영장 이용 시 안전요원이 상주하는 시간인지 확인하면 아이들과 훨씬 안심하고 물놀이를 할 수 있습니다.</div></div><button class="speak-btn" onclick="playAudio('Lifeguard on duty')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Lightning warning</div><div class="vocab-meaning">낙뢰(번개) 경보</div><div class="vocab-tip">💡 말레이시아 야외 수영장은 천둥·번개가 치면 즉시 입수가 통제되는 엄격한 안전 수칙이 있습니다.</div></div><button class="speak-btn" onclick="playAudio('Lightning warning')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Proper swimwear</div><div class="vocab-meaning">규정 수영복 복장</div><div class="vocab-tip">💡 면 티셔츠나 일반 반바지는 입수가 제한되므로 반드시 수영복 소재(Lycra/Spandex)를 입어야 합니다.</div></div><button class="speak-btn" onclick="playAudio('Proper swimwear')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. Which lane is open for kids to practice their swimming strokes? <button class="speak-btn" onclick="playAudio('Which lane is open for kids to practice their swimming strokes?')">🔊</button></div><div class="pattern-example">아이들이 수영 영법 연습을 할 수 있도록 열려 있는 레인은 몇 번인가요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Are swimming caps mandatory here, and can we borrow two kickboards? <button class="speak-btn" onclick="playAudio('Are swimming caps mandatory here, and can we borrow two kickboards?')">🔊</button></div><div class="pattern-example">여기서는 수모 착용이 필수인가요? 그리고 킥판 두 개를 빌릴 수 있을까요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Could we get two locker wristbands for the changing room, please? <button class="speak-btn" onclick="playAudio('Could we get two locker wristbands for the changing room, please?')">🔊</button></div><div class="pattern-example">탈의실에서 쓸 사물함 열쇠 팔찌 두 개를 받을 수 있을까요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Good afternoon! Mike and Clara want to practice their swimming strokes today. Which lane is open for kids?</div><button class="speak-btn" onclick="playAudio('Good afternoon! Mike and Clara want to practice their swimming strokes today. Which lane is open for kids?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Pool Attendant:</span> Hello! Lanes 1 and 2 are reserved for lap swimming, so you can use Lane 3 or the shallow training pool over there.</div><button class="speak-btn" onclick="playAudio('Hello! Lanes 1 and 2 are reserved for lap swimming, so you can use Lane 3 or the shallow training pool over there.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Got it! Are swimming caps mandatory in the main pool? And can we borrow two kickboards?</div><button class="speak-btn" onclick="playAudio('Got it! Are swimming caps mandatory in the main pool? And can we borrow two kickboards?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Pool Attendant:</span> Yes, everyone must wear a swimming cap in the main pool. You can borrow kickboards and pull buoys for free at the towel counter.</div><button class="speak-btn" onclick="playAudio('Yes, everyone must wear a swimming cap in the main pool. You can borrow kickboards and pull buoys for free at the towel counter.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Great! Could we also get two locker wristbands for the changing room?</div><button class="speak-btn" onclick="playAudio('Great! Could we also get two locker wristbands for the changing room?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Pool Attendant:</span> Here are your wristbands and pool towels. Just a reminder, if it starts thundering, everyone must exit the pool immediately for safety.</div><button class="speak-btn" onclick="playAudio('Here are your wristbands and pool towels. Just a reminder, if it starts thundering, everyone must exit the pool immediately for safety.')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 수영장에서 아이들이 발차기 연습할 때 잡고 헤엄치는 '킥판'을 영어로 무엇이라고 할까요?</summary>
+                    <div class="quiz-answer-content">정답: Kickboard</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. "이 수영장에서는 수영 모자(수모) 착용이 의무(필수)인가요?"를 영어로 물어보세요.</summary>
+                    <div class="quiz-answer-content">정답: Are swimming caps mandatory here?</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 수영장에서 아이들 발이 안전하게 닿는 "수심이 얕은 쪽"을 뜻하는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Shallow end (깊은 쪽은 Deep end)</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and weekday == 5 and week_num == 5:
+    print("비상용 사전 검증 5주차 총정리 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">5주차 총정리</span>
+        <h2>5주차 통합 복습 테스트</h2>
+        <div class="topic">5주차 통합 복습 테스트 (Day 21~25 핵심 어휘 25개 및 실전 퀴즈 총정리)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 Day 21~25 핵심 어휘 25선</div>
+            <div class="vocab-grid">
+                <!-- Day 21 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Canteen / Cafeteria</div><div class="vocab-meaning">학교 식당 / 매점</div><div class="vocab-tip">💡 [Day 21] 말레이시아 국제학교에서는 교내 식당과 매점을 주로 Canteen 또는 Cafeteria라고 부릅니다.</div></div><button class="speak-btn" onclick="playAudio('Canteen and Cafeteria')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Nut-free</div><div class="vocab-meaning">견과류가 전혀 들어가지 않은</div><div class="vocab-tip">💡 [Day 21] 알레르기 안전을 위해 학교 급식과 간식은 Nut-free인지 항상 확인합니다.</div></div><button class="speak-btn" onclick="playAudio('Nut-free')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Student ID card</div><div class="vocab-meaning">학생증 카드 (매점 결제용)</div><div class="vocab-tip">💡 [Day 21] 현금 없이 학생증 카드에 잔액을 충전해 매점과 식당에서 태그 결제합니다.</div></div><button class="speak-btn" onclick="playAudio('Student ID card')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Daily spending limit</div><div class="vocab-meaning">일일 사용 한도</div><div class="vocab-tip">💡 [Day 21] 아이가 매점에서 하루에 쓸 수 있는 최대 금액을 학부모 앱에서 설정할 수 있습니다.</div></div><button class="speak-btn" onclick="playAudio('Daily spending limit')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Packed lunch</div><div class="vocab-meaning">집에서 싸 온 도시락</div><div class="vocab-tip">💡 [Day 21] 급식(School meal) 대신 집에서 직접 준비해 보내는 점심 도시락입니다.</div></div><button class="speak-btn" onclick="playAudio('Packed lunch')">🔊</button></div>
+
+                <!-- Day 22 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Dry-clean</div><div class="vocab-meaning">드라이클리닝하다</div><div class="vocab-tip">💡 [Day 22] 교복 자켓이나 정장 바지를 세탁소에 맡길 때 쓰는 기본 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Dry-clean')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Tough stain</div><div class="vocab-meaning">잘 지워지지 않는 얼룩</div><div class="vocab-tip">💡 [Day 22] 흰색 교복 셔츠에 묻은 음식물이나 물감 자국을 지워달라고 할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Tough stain')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Alteration / Hemming</div><div class="vocab-meaning">옷 수선 / 바짓단 줄이기</div><div class="vocab-tip">💡 [Day 22] 긴 교복 바지 기장을 아이 키에 맞게 수선할 때 꼭 필요한 단어입니다.</div></div><button class="speak-btn" onclick="playAudio('Alteration and Hemming')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Shorten the length</div><div class="vocab-meaning">기장(길이)을 줄이다</div><div class="vocab-tip">💡 [Day 22] 바지나 치마 길이를 몇 센티미터 줄여달라고 설명할 때 가장 직관적인 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Shorten the length')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Claim ticket</div><div class="vocab-meaning">세탁물 보관증 / 인수증</div><div class="vocab-tip">💡 [Day 22] 세탁이나 수선이 끝난 옷을 찾으러 갈 때 제시하는 접수 영수증입니다.</div></div><button class="speak-btn" onclick="playAudio('Claim ticket')">🔊</button></div>
+
+                <!-- Day 23 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">11. Delivery rider</div><div class="vocab-meaning">배달 기사님 (라이더)</div><div class="vocab-tip">💡 [Day 23] GrabFood나 Foodpanda 배달원분들과 채팅·통화할 때 부르는 호칭입니다.</div></div><button class="speak-btn" onclick="playAudio('Delivery rider')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">12. Drop-off table / shelf</div><div class="vocab-meaning">배달 음식 보관 테이블 / 선반</div><div class="vocab-tip">💡 [Day 23] 콘도 로비에서 비대면으로 배달 음식을 올려두는 지정 장소입니다.</div></div><button class="speak-btn" onclick="playAudio('Drop-off table')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">13. Cutlery</div><div class="vocab-meaning">일회용 수저·포크 세트</div><div class="vocab-tip">💡 [Day 23] 외출 중이나 리조트에서 배달시킬 때 수저가 필요하면 꼭 체크해야 합니다.</div></div><button class="speak-btn" onclick="playAudio('Cutlery')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">14. Sauce on the side</div><div class="vocab-meaning">소스는 따로 담아주기</div><div class="vocab-tip">💡 [Day 23] 아이가 먹을 음식에 매운 소스가 부어지지 않도록 따로 요청할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Sauce on the side')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">15. Missing item</div><div class="vocab-meaning">누락된 메뉴 / 빠진 음식</div><div class="vocab-tip">💡 [Day 23] 주문한 음식이 빠졌을 때 앱 고객센터로 환불 요청할 때 선택하는 항목입니다.</div></div><button class="speak-btn" onclick="playAudio('Missing item')">🔊</button></div>
+
+                <!-- Day 24 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">16. Custom cake</div><div class="vocab-meaning">맞춤 제작 케이크</div><div class="vocab-tip">💡 [Day 24] 아이 생일 파티를 위해 디자인과 문구를 지정해 예약하는 케이크입니다.</div></div><button class="speak-btn" onclick="playAudio('Custom cake')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">17. Icing / Frosting</div><div class="vocab-meaning">아이싱 크림 (케이크 레터링용 크림)</div><div class="vocab-tip">💡 [Day 24] 케이크 위에 축하 메시지를 적어달라고 할 때 'write in icing'이라고 합니다.</div></div><button class="speak-btn" onclick="playAudio('Icing and Frosting')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">18. Less sweet</div><div class="vocab-meaning">덜 달게 (당도 조절)</div><div class="vocab-tip">💡 [Day 24] 말레이시아 카페에서 음료를 시킬 때 당도를 낮추는 가장 필수적인 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Less sweet')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">19. Slice the bread</div><div class="vocab-meaning">통식빵을 썰어주다</div><div class="vocab-tip">💡 [Day 24] 베이커리에서 통식빵을 구매하며 샌드위치용으로 썰어달라고 할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Slice the bread')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">20. Warm it up</div><div class="vocab-meaning">따뜻하게 데워주다</div><div class="vocab-tip">💡 [Day 24] 빵이나 페이스트리를 매장에서 먹기 전에 오븐에 데워달라고 할 때 유용합니다.</div></div><button class="speak-btn" onclick="playAudio('Warm it up')">🔊</button></div>
+
+                <!-- Day 25 -->
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">21. Lap swimming</div><div class="vocab-meaning">왕복 수영 (운동 전용 레인 수영)</div><div class="vocab-tip">💡 [Day 25] 수영장에서 쉬지 않고 왕복으로 수영하는 레인을 확인할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Lap swimming')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">22. Shallow end</div><div class="vocab-meaning">수심이 얕은 쪽</div><div class="vocab-tip">💡 [Day 25] 아이들이 발이 닿는 안전한 수심 구역을 가리키는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Shallow end')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">23. Swimming cap</div><div class="vocab-meaning">수영 모자 (수모)</div><div class="vocab-tip">💡 [Day 25] 스포츠 클럽 메인 풀장 입수 시 필수 착용 여부를 확인하는 단어입니다.</div></div><button class="speak-btn" onclick="playAudio('Swimming cap')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">24. Kickboard</div><div class="vocab-meaning">킥판 (수영 연습용 보드)</div><div class="vocab-tip">💡 [Day 25] 아이들 발차기 연습을 위해 타월 카운터에서 대여할 수 있는 도구입니다.</div></div><button class="speak-btn" onclick="playAudio('Kickboard')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">25. Locker wristband</div><div class="vocab-meaning">사물함(락커) 열쇠 팔찌</div><div class="vocab-tip">💡 [Day 25] 탈의실 사물함을 이용하기 위해 리셉션에서 대여하는 열쇠 팔찌입니다.</div></div><button class="speak-btn" onclick="playAudio('Locker wristband')">🔊</button></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">🗣️ 주간 베스트 핵심 패턴 5선</div>
+            <div class="pattern-box">
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 1. I'd like to top up 100 Ringgit onto his student ID card for the canteen. <button class="speak-btn" onclick="playAudio('I would like to top up 100 Ringgit onto his student ID card for the canteen.')">🔊</button></div>
+                    <div class="pattern-example">[Day 21] 매점에서 쓸 수 있게 아이 학생증 카드에 100링깃을 충전하고 싶어요.</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 2. Please shorten the length by two centimeters so they don't drag. <button class="speak-btn" onclick="playAudio('Please shorten the length by two centimeters so they do not drag.')">🔊</button></div>
+                    <div class="pattern-example">[Day 22] 바닥에 끌리지 않게 기장을 2센티미터 정도 줄여주세요.</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 3. Please leave the food on the delivery table at Block B lobby. <button class="speak-btn" onclick="playAudio('Please leave the food on the delivery table at Block B lobby.')">🔊</button></div>
+                    <div class="pattern-example">[Day 23] Block B 로비에 있는 배달 테이블에 음식을 놓아주세요.</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 4. Could you write 'Happy Birthday Clara!' in pink icing on the top? <button class="speak-btn" onclick="playAudio('Could you write Happy Birthday Clara in pink icing on the top?')">🔊</button></div>
+                    <div class="pattern-example">[Day 24] 케이크 위에 분홍색 아이싱 크림으로 'Happy Birthday Clara!'라고 적어주실 수 있나요?</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-title">Pattern 5. Are swimming caps mandatory here, and can we borrow two kickboards? <button class="speak-btn" onclick="playAudio('Are swimming caps mandatory here, and can we borrow two kickboards?')">🔊</button></div>
+                    <div class="pattern-example">[Day 25] 여기서는 수모 착용이 필수인가요? 그리고 킥판 두 개를 빌릴 수 있을까요?</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">✍️ 5주차 실전 통합 퀴즈 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. [Day 21] 학교 급식에 땅콩 등 "견과류가 전혀 들어가지 않은" 안전한 식단을 뜻하는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Nut-free (또는 Peanut-free)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. [Day 22] 세탁소나 수선집에서 긴 교복 바지의 "기장(길이)을 2센티미터 줄여주세요"를 영어로 말하면?</summary>
+                    <div class="quiz-answer-content">정답: Please shorten the length by two centimeters.</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. [Day 23] 그랩푸드 라이더에게 "Block B 로비 배달 테이블에 음식을 놓아주세요"를 영어로 표현해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Please leave the food on the delivery table at Block B lobby.</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q4. [Day 24] 베이커리에서 케이크 위에 크림으로 축하 문구(레터링)를 적어달라고 할 때 쓰는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Could you write '문구' in icing on the top?</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q5. [Day 25] 수영장에서 "여기서는 수영 모자(수모) 착용이 필수인가요?"를 영어로 물어보세요.</summary>
+                    <div class="quiz-answer-content">정답: Are swimming caps mandatory here?</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+
 update_success = False
 if card_html:
     placeholder = "<!-- NEW_CARD_PLACEHOLDER -->"
