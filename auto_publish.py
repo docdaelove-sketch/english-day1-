@@ -1398,8 +1398,8 @@ if card_html:
             print(f"index.html 업데이트 완료: {day_title} 누적 추가됨")
             update_success = True
         else:
-            print(f"{day_title} 카드가 이미 존재합니다.")
-            update_success = True
+            print(f"{day_title} 카드가 이미 존재합니다. (중복 알림 발송을 건너뜁니다.)")
+            update_success = False
     else:
         print("경고: index.html에 <!-- NEW_CARD_PLACEHOLDER --> 태그를 찾을 수 없습니다.")
 else:
