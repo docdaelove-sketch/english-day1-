@@ -15,6 +15,11 @@ now_dt = datetime.datetime.utcnow() + datetime.timedelta(hours=8)
 today_date = now_dt.date()
 weekday = now_dt.weekday()  # 0:월 ~ 6:일
 
+# Day 30(2026년 11월 13일 금요일)을 마지막으로 데일리 영어 정규 연재 종료
+if today_date > datetime.date(2026, 11, 13):
+    print("Day 30을 끝으로 데일리 영어 정규 연재가 모두 완료되었습니다. 그동안 함께해 주셔서 감사합니다!")
+    exit(0)
+
 if weekday == 6:
     print("일요일은 정규 배포가 없습니다. (자율 복습일)")
     exit(0)
@@ -68,11 +73,11 @@ else:
         24: "베이커리 및 디저트 카페 이용 (글루텐프리 빵 문의, 케이크 레터링 예약, 음료 당도 조절)",
         25: "주말 스포츠 클럽 및 수영장 이용 (레인 배정 문의, 킥판·수모 대여, 샤워실 락커 이용, 안전 수칙)",
         # 6주차 (Day 26 ~ Day 30)
-        26: "학교 도서관 및 도서 대출·연체 문의 (북위크 도서 추천, 대출 기한 연장, 분실 도서 변상)",
-        27: "로컬 안경점 및 시력 검사 (아이 시력 검사, 안경테 피팅, 렌즈 압축·블루라이트 차단, 수리 요청)",
-        28: "가구점 및 인테리어 소품 구매 (조립 서비스 신청, 배송 일정 조율, 파손 교환, 치수 측정 문의)",
-        29: "반려동물 동물병원 및 펫샵 이용 (정기 예방접종, 구충제 처방, 광견병 증명서, 펫 그루밍 예약)",
-        30: "테마파크 및 워터파크 이용 (익스프레스 패스 문의, 키 제한 확인, 카바나 대여, 락커 이용)",
+        26: "학교 행정실 자퇴·전학 수속 및 서류 발급 (자퇴 통지서 제출, 생활기록부·성적표 요청, 보증금 환불 문의)",
+        27: "콘도 퇴거(Move-out) 점검 및 인터넷·공과금 해지 (집 상태 합동 점검, 열쇠·카드키 반납, 임대 보증금 정산)",
+        28: "해외 이사 화물(포장이사) 발송 및 중고 물품 정리 (귀국 박스 픽업, 파손 주의 스티커 부착, 세관 통관 목록 작성)",
+        29: "학교 친구·학부모 작별 인사 및 송별 모임 (선생님·친구들에게 작별 선물 전달, 연락처 교환, 한국 방문 초대)",
+        30: "쿠알라룸푸르 공항(KLIA) 출국 수속 및 마지막 인사 (수하물 위탁, 초과 수하물 확인, 좌석 배정, 탑승구 안내)",
         # 7주차 (Day 31 ~ Day 35)
         31: "학교 스쿨버스 탑승 및 노선 문의 (탑승 시간·정류장 확인, 노선 변경 신청, 지연 알림 확인)",
         32: "로컬 마켓 및 야시장(Pasar Malam) 탐방 (열대과일 고르기, 두리안·망고스틴 손질 요청, 현금 결제·QR 페이)",
@@ -238,7 +243,7 @@ payload = {
     "contents": [{"parts": [{"text": prompt}]}]
 }
 
-if GEMINI_KEY and current_day_number not in (12, 13, 14, 15, 21, 22, 23, 24, 25) and not (weekday == 5 and week_num in (3, 5)):
+if GEMINI_KEY and current_day_number not in (12, 13, 14, 15, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30) and not (weekday == 5 and week_num in (3, 5)):
     for attempt in range(1, 9):
         model_name = model_candidates[(attempt - 1) % len(model_candidates)]
         gemini_path = f"/v1beta/models/{model_name}:generateContent?key={GEMINI_KEY}"
@@ -1375,6 +1380,317 @@ elif not card_html and weekday == 5 and week_num == 5:
                 <details class="quiz-item">
                     <summary>Q5. [Day 25] 수영장에서 "여기서는 수영 모자(수모) 착용이 필수인가요?"를 영어로 물어보세요.</summary>
                     <div class="quiz-answer-content">정답: Are swimming caps mandatory here?</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+
+elif not card_html and current_day_number == 26:
+    print("비상용 사전 검증 Day 26 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 26</span>
+        <h2>학교 행정실 자퇴·전학 수속 및 서류 발급</h2>
+        <div class="topic">학교 행정실 자퇴·전학 수속 및 서류 발급 (자퇴 통지서 제출, 생활기록부·성적표 요청, 보증금 환불 문의)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Withdrawal notice</div><div class="vocab-meaning">자퇴(퇴학) 통지서</div><div class="vocab-tip">💡 말레이시아 국제학교는 보통 퇴교 한 학기(One term) 전에 공식 서면 통지서를 제출해야 보증금을 전액 돌려받습니다.</div></div><button class="speak-btn" onclick="playAudio('Withdrawal notice')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. School transcript</div><div class="vocab-meaning">공식 성적 증명서 / 학업 기록부</div><div class="vocab-tip">💡 한국 학교로 전학 및 편입할 때 제출해야 하는 가장 중요한 공식 학업 서류입니다.</div></div><button class="speak-btn" onclick="playAudio('School transcript')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Transfer certificate (Leaving certificate)</div><div class="vocab-meaning">전학 증명서 / 재학 및 퇴교 확인서</div><div class="vocab-tip">💡 아이가 언제부터 언제까지 이 학교에 재학했고 정상적으로 과정을 마쳤음을 증명하는 서류입니다.</div></div><button class="speak-btn" onclick="playAudio('Transfer certificate')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Clearance form</div><div class="vocab-meaning">퇴교 확인서 (도서관·교구 반납 등 정산 확인서)</div><div class="vocab-tip">💡 도서관 대출 도서, 사물함, 급식 카드 잔액 등을 모두 정리했다는 각 부서 확인 서명 용지입니다.</div></div><button class="speak-btn" onclick="playAudio('Clearance form')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Security deposit refund</div><div class="vocab-meaning">학교 보증금 환불</div><div class="vocab-tip">💡 입학할 때 납부했던 1개 학기분 상당의 보증금을 퇴교 수속 완료 후 돌려받는 절차입니다.</div></div><button class="speak-btn" onclick="playAudio('Security deposit refund')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Final report card</div><div class="vocab-meaning">최종 통지표 (학기말 성적표)</div><div class="vocab-tip">💡 담임 선생님의 종합 의견과 과목별 성취도가 적힌 학기 성적표입니다.</div></div><button class="speak-btn" onclick="playAudio('Final report card')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Attendance record</div><div class="vocab-meaning">출결 기록부</div><div class="vocab-tip">💡 한국 교육청이나 전학 갈 학교에서 출석 일수 확인을 위해 요청할 때가 많으니 함께 챙기세요.</div></div><button class="speak-btn" onclick="playAudio('Attendance record')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Visa cancellation (Shortening)</div><div class="vocab-meaning">학생·가디언 비자 취소 (기간 단축)</div><div class="vocab-tip">💡 완전 귀국 시에는 출국 전 학교 비자 담당 부서를 통해 학생 비자와 가디언 비자 취소(Check-out Memo)를 진행합니다.</div></div><button class="speak-btn" onclick="playAudio('Visa cancellation')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Certified true copy</div><div class="vocab-meaning">원본 대조필 사본 (학교 직인 날인본)</div><div class="vocab-tip">💡 서류 사본에 학교 공식 도장(Official school stamp)과 담당자 서명을 받아 공신력을 높인 서류입니다.</div></div><button class="speak-btn" onclick="playAudio('Certified true copy')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Last day of school</div><div class="vocab-meaning">마지막 등교일</div><div class="vocab-tip">💡 행정실과 담임 선생님께 아이가 실제 등교하는 마지막 날짜를 정확히 공유할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Last day of school')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. Could we get their official school transcripts and transfer certificates for Korea? <button class="speak-btn" onclick="playAudio('Could we get their official school transcripts and transfer certificates for Korea?')">🔊</button></div><div class="pattern-example">한국 학교에 제출할 공식 성적 증명서와 전학 증명서를 발급받을 수 있을까요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Has everything been cleared for the security deposit refund? <button class="speak-btn" onclick="playAudio('Has everything been cleared for the security deposit refund?')">🔊</button></div><div class="pattern-example">학교 보증금 환불을 위한 모든 확인 절차(도서 반납 등)가 완료되었나요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Could you also send a digital copy of the final report cards to my email? <button class="speak-btn" onclick="playAudio('Could you also send a digital copy of the final report cards to my email?')">🔊</button></div><div class="pattern-example">최종 성적표의 디지털 사본(PDF)도 제 이메일로 보내주실 수 있나요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Good morning! As we submitted our withdrawal notice last term, this Friday will be Mike and Clara's last day at Sunway International School.</div><button class="speak-btn" onclick="playAudio('Good morning! As we submitted our withdrawal notice last term, this Friday will be Mike and Clara last day at Sunway International School.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">School Admin:</span> Good morning, Ms. Tina! We're so sad to see your family leave. I have prepared their official school transcripts and transfer certificates for their school in Korea.</div><button class="speak-btn" onclick="playAudio('Good morning, Ms. Tina! We are so sad to see your family leave. I have prepared their official school transcripts and transfer certificates for their school in Korea.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Thank you so much! Have they returned all their library books and cleared everything for the security deposit refund?</div><button class="speak-btn" onclick="playAudio('Thank you so much! Have they returned all their library books and cleared everything for the security deposit refund?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">School Admin:</span> Yes, the clearance form is completely signed off. The security deposit will be refunded to your bank account within two weeks.</div><button class="speak-btn" onclick="playAudio('Yes, the clearance form is completely signed off. The security deposit will be refunded to your bank account within two weeks.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> That's great. Could we also get a digital copy of their final report cards sent to my email?</div><button class="speak-btn" onclick="playAudio('That is great. Could we also get a digital copy of their final report cards sent to my email?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">School Admin:</span> Of course! I'll email the PDF files to you right away. We wish Mike and Clara all the best back in Korea!</div><button class="speak-btn" onclick="playAudio('Of course! I will email the PDF files to you right away. We wish Mike and Clara all the best back in Korea!')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 국제학교 퇴교 시 한 학기 전에 미리 제출하는 '자퇴(퇴교) 통지서'를 영어로 무엇이라고 할까요?</summary>
+                    <div class="quiz-answer-content">정답: Withdrawal notice</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 한국 학교로 전학 갈 때 제출하는 '공식 성적 증명서'와 '전학(재학) 증명서'는?</summary>
+                    <div class="quiz-answer-content">정답: Official school transcript &amp; Transfer certificate</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. "학교 보증금 환불을 위한 모든 확인 절차가 완료되었나요?"를 영어로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Has everything been cleared for the security deposit refund?</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 27:
+    print("비상용 사전 검증 Day 27 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 27</span>
+        <h2>콘도 퇴거(Move-out) 점검 및 인터넷·공과금 해지</h2>
+        <div class="topic">콘도 퇴거(Move-out) 점검 및 인터넷·공과금 해지 (집 상태 합동 점검, 열쇠·카드키 반납, 임대 보증금 정산)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Move-out inspection (Handover)</div><div class="vocab-meaning">퇴거 점검 (집 인도 및 상태 확인)</div><div class="vocab-tip">💡 계약 만료일이나 퇴거일에 집주인(또는 에이전트)과 만나 집 상태를 확인하고 열쇠를 넘기는 절차입니다.</div></div><button class="speak-btn" onclick="playAudio('Move-out inspection')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Fair wear and tear</div><div class="vocab-meaning">일상적인 생활 마모 (자연스러운 노후화)</div><div class="vocab-tip">💡 고의 파손이 아닌 거주 중 자연스럽게 생긴 흔적은 보증금 차감 대상이 아니라고 설명할 때 꼭 필요한 법률·계약 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Fair wear and tear')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Security &amp; Utility deposit</div><div class="vocab-meaning">임대 보증금 및 공과금 보증금</div><div class="vocab-tip">💡 말레이시아 월세는 보통 두 달 치 월세 보증금(2개월)과 반달 치 공과금 보증금(0.5개월)을 맡깁니다.</div></div><button class="speak-btn" onclick="playAudio('Security and Utility deposit')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Deduction</div><div class="vocab-meaning">(보증금에서의) 차감 / 공제</div><div class="vocab-tip">💡 'No deductions needed(차감할 내역 없음)'를 확인받아야 보증금 전액을 깔끔하게 돌려받을 수 있습니다.</div></div><button class="speak-btn" onclick="playAudio('Deduction')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Final utility bills</div><div class="vocab-meaning">최종 공과금 고지서 (전기 TNB·수도·하수 IWK)</div><div class="vocab-tip">💡 퇴거 전 앱으로 마지막 전기세와 수도세를 완납하고 영수증(Payment receipt)을 에이전트에게 보여주면 정산이 빨라집니다.</div></div><button class="speak-btn" onclick="playAudio('Final utility bills')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Terminate the internet</div><div class="vocab-meaning">인터넷(TIME / Unifi) 계약을 해지하다</div><div class="vocab-tip">💡 TIME이나 Unifi 인터넷은 해지 신청 후 공유기(Router) 반납 여부를 꼭 확인해야 위약금이 생기지 않습니다.</div></div><button class="speak-btn" onclick="playAudio('Terminate the internet')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Access card &amp; Transponder</div><div class="vocab-meaning">출입 카드키 및 차량 주차 태그</div><div class="vocab-tip">💡 처음 입주할 때 받은 카드키와 주차장 차단기용 태그 개수를 정확히 맞춰 반납해야 분실 비용이 청구되지 않습니다.</div></div><button class="speak-btn" onclick="playAudio('Access card and Transponder')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Professionally cleaned</div><div class="vocab-meaning">전문 입주·퇴거 청소 완료</div><div class="vocab-tip">💡 퇴거 시 전문 청소 업체를 불러 청소하고 에어컨 케미컬 세척 영수증을 챙겨두면 집주인이 매우 만족합니다.</div></div><button class="speak-btn" onclick="playAudio('Professionally cleaned')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Inventory list</div><div class="vocab-meaning">가구·비품 목록표</div><div class="vocab-tip">💡 입주할 때 체크했던 가전제품, 커튼, 리모컨 개수가 그대로 있는지 대조하는 목록입니다.</div></div><button class="speak-btn" onclick="playAudio('Inventory list')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Close the bank account</div><div class="vocab-meaning">현지 은행 계좌를 해지하다(닫다)</div><div class="vocab-tip">💡 보증금을 모두 입금받은 뒤 출국 직전 은행 지점에 방문해 계좌를 정리할 때 쓰는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Close the bank account')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. Thanks for coming for the final move-out inspection today. <button class="speak-btn" onclick="playAudio('Thanks for coming for the final move-out inspection today.')">🔊</button></div><div class="pattern-example">오늘 최종 퇴거 점검(집 상태 확인)하러 와주셔서 감사합니다.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Here are the access cards and the receipts for the final utility bills. <button class="speak-btn" onclick="playAudio('Here are the access cards and the receipts for the final utility bills.')">🔊</button></div><div class="pattern-example">여기 출입 카드키들과 마지막 공과금 완납 영수증입니다.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Could the landlord transfer the full security deposit before Friday? <button class="speak-btn" onclick="playAudio('Could the landlord transfer the full security deposit before Friday?')">🔊</button></div><div class="pattern-example">집주인분께서 금요일 전에 보증금 전액을 이체해 주실 수 있을까요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Hi Kevin! Thanks for coming for the final move-out inspection today. We've had the whole unit professionally cleaned.</div><button class="speak-btn" onclick="playAudio('Hi Kevin! Thanks for coming for the final move-out inspection today. We have had the whole unit professionally cleaned.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Property Agent:</span> Hello Tina! Wow, the unit looks spotless. All the furniture, appliances, and air-conditioners are in great working condition.</div><button class="speak-btn" onclick="playAudio('Hello Tina! Wow, the unit looks spotless. All the furniture, appliances, and air-conditioners are in great working condition.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> I'm glad to hear that! Here are the four access cards, mailbox key, and the receipts for the final electricity and water bills.</div><button class="speak-btn" onclick="playAudio('I am glad to hear that! Here are the four access cards, mailbox key, and the receipts for the final electricity and water bills.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Property Agent:</span> Thank you, everything is in order. There are no deductions needed for repairs, so the landlord will return your full two-month security deposit.</div><button class="speak-btn" onclick="playAudio('Thank you, everything is in order. There are no deductions needed for repairs, so the landlord will return your full two-month security deposit.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Wonderful! Could the landlord transfer the deposit before we close our local bank account this Friday?</div><button class="speak-btn" onclick="playAudio('Wonderful! Could the landlord transfer the deposit before we close our local bank account this Friday?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Property Agent:</span> Yes, I just spoke with the owner, and he will transfer the full amount via DuitNow this afternoon. Thank you for being such wonderful tenants!</div><button class="speak-btn" onclick="playAudio('Yes, I just spoke with the owner, and he will transfer the full amount via DuitNow this afternoon. Thank you for being such wonderful tenants!')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 콘도 계약이 끝나고 집을 비워줄 때 집주인·에이전트와 함께 하는 '퇴거 점검'을 영어로 무엇이라고 할까요?</summary>
+                    <div class="quiz-answer-content">정답: Move-out inspection (또는 Handover inspection)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 보증금에서 수리비 등을 "차감/공제하다"를 뜻하는 명사는?</summary>
+                    <div class="quiz-answer-content">정답: Deduction (No deductions needed = 차감 불필요)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. "여기 출입 카드키들과 마지막 공과금 영수증입니다"를 영어로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Here are the access cards and the receipts for the final utility bills.</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 28:
+    print("비상용 사전 검증 Day 28 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 28</span>
+        <h2>해외 이사 화물(포장이사) 발송 및 중고 물품 정리</h2>
+        <div class="topic">해외 이사 화물(포장이사) 발송 및 중고 물품 정리 (귀국 박스 픽업, 파손 주의 스티커 부착, 세관 통관 목록 작성)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Sea freight / Air freight</div><div class="vocab-meaning">해상 운송(선박 화물) / 항공 운송</div><div class="vocab-tip">💡 부피가 큰 귀국 이삿짐 박스는 비용이 저렴한 해상 운송(Sea freight)으로 주로 보냅니다.</div></div><button class="speak-btn" onclick="playAudio('Sea freight and Air freight')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Door-to-door delivery</div><div class="vocab-meaning">자택 방문 수거 및 한국 집까지 직배송</div><div class="vocab-tip">💡 말레이시아 콘도에서 픽업해 한국 자택 거실까지 바로 배달해 주는 포장이사/택배 서비스입니다.</div></div><button class="speak-btn" onclick="playAudio('Door-to-door delivery')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Fragile</div><div class="vocab-meaning">깨지기 쉬운 물품 (파손 주의)</div><div class="vocab-tip">💡 그릇이나 기념품이 든 박스 겉면에 붙이는 빨간색 주의 스티커 단어입니다.</div></div><button class="speak-btn" onclick="playAudio('Fragile')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Bubble wrap</div><div class="vocab-meaning">에어캡 (뽁뽁이 완충재)</div><div class="vocab-tip">💡 물건이 깨지지 않도록 뽁뽁이로 두껍게 감싸달라고 할 때 'wrap with bubble wrap'이라고 합니다.</div></div><button class="speak-btn" onclick="playAudio('Bubble wrap')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Packing list</div><div class="vocab-meaning">포장 물품 명세서 (패킹 리스트)</div><div class="vocab-tip">💡 각 박스 안에 옷, 책, 주방용품 등이 몇 개 들어있는지 적어 세관에 제출하는 목록입니다.</div></div><button class="speak-btn" onclick="playAudio('Packing list')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Customs clearance</div><div class="vocab-meaning">세관 통관 절차</div><div class="vocab-tip">💡 한국 인천항이나 부산항에 짐이 도착한 뒤 세관 검사를 거쳐 통관되는 과정입니다.</div></div><button class="speak-btn" onclick="playAudio('Customs clearance')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Move-out permit</div><div class="vocab-meaning">콘도 이삿짐 반출 허가서</div><div class="vocab-tip">💡 말레이시아 콘도는 대형 트럭(Lorry)과 이삿짐 엘리베이터를 쓰기 전에 관리사무소의 반출 허가서가 필수입니다.</div></div><button class="speak-btn" onclick="playAudio('Move-out permit')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Moving sale (Garage sale)</div><div class="vocab-meaning">귀국 정리 중고 판매 (무빙 세일)</div><div class="vocab-tip">💡 한국으로 가져가기 어려운 220V/240V 소형 가전이나 자전거 등을 한인 커뮤니티나 학부모 단톡방에 내놓을 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Moving sale')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Heavy-duty carton box</div><div class="vocab-meaning">해외 이사 전용 두꺼운 강화 박스</div><div class="vocab-tip">💡 배로 한 달간 이동해도 찌그러지지 않는 5중 두께의 튼튼한 이사용 단프라/종이 박스입니다.</div></div><button class="speak-btn" onclick="playAudio('Heavy-duty carton box')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Tracking number</div><div class="vocab-meaning">운송장 조회 번호 (화물 추적 번호)</div><div class="vocab-tip">💡 우리 짐이 실린 배가 언제 출발하고 어디쯤 오고 있는지 온라인으로 조회하는 번호입니다.</div></div><button class="speak-btn" onclick="playAudio('Tracking number')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. These three boxes contain fragile items, so please handle them with care. <button class="speak-btn" onclick="playAudio('These three boxes contain fragile items, so please handle them with care.')">🔊</button></div><div class="pattern-example">이 박스 세 개에는 깨지기 쉬운 물건이 들어있으니 조심해서 다뤄주세요.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Have you got the move-out permit from the condo management office? <button class="speak-btn" onclick="playAudio('Have you got the move-out permit from the condo management office?')">🔊</button></div><div class="pattern-example">콘도 관리사무소에서 이삿짐 반출 허가서를 받으셨나요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. How long will the sea freight take to arrive at our home in Korea? <button class="speak-btn" onclick="playAudio('How long will the sea freight take to arrive at our home in Korea?')">🔊</button></div><div class="pattern-example">해상 운송 화물이 한국 우리 집에 도착하기까지 얼마나 걸릴까요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Good morning! We have ten boxes ready for shipping to Korea. These three boxes contain fragile kitchenware and souvenirs.</div><button class="speak-btn" onclick="playAudio('Good morning! We have ten boxes ready for shipping to Korea. These three boxes contain fragile kitchenware and souvenirs.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Moving Manager:</span> Good morning, ma'am! Don't worry, we will wrap them with extra bubble wrap and put 'Fragile' stickers on all sides.</div><button class="speak-btn" onclick="playAudio('Good morning, maam! Do not worry, we will wrap them with extra bubble wrap and put Fragile stickers on all sides.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Thank you! Have you got the move-out permit from the condo management office for the lorry?</div><button class="speak-btn" onclick="playAudio('Thank you! Have you got the move-out permit from the condo management office for the lorry?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Moving Manager:</span> Yes, the guardhouse already approved our entry. Could you please sign this packing list for customs clearance in Korea?</div><button class="speak-btn" onclick="playAudio('Yes, the guardhouse already approved our entry. Could you please sign this packing list for customs clearance in Korea?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Sure, here you go. How long will the sea freight take to arrive at our home in Korea?</div><button class="speak-btn" onclick="playAudio('Sure, here you go. How long will the sea freight take to arrive at our home in Korea?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Moving Manager:</span> Door-to-door delivery takes about three to four weeks including customs. We will send you the tracking number this evening!</div><button class="speak-btn" onclick="playAudio('Door-to-door delivery takes about three to four weeks including customs. We will send you the tracking number this evening!')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 택배나 이삿짐 박스에 붙이는 '깨지기 쉬운 물건(파손 주의)'을 뜻하는 영어 단어는?</summary>
+                    <div class="quiz-answer-content">정답: Fragile</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 배로 이삿짐을 보내는 '해상 운송'을 영어로 무엇이라고 할까요?</summary>
+                    <div class="quiz-answer-content">정답: Sea freight</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 한국 세관 통관을 위해 박스 안 물건들을 적어 제출하는 '포장 물품 명세서'는?</summary>
+                    <div class="quiz-answer-content">정답: Packing list</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 29:
+    print("비상용 사전 검증 Day 29 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 29</span>
+        <h2>학교 친구·학부모 작별 인사 및 송별 모임</h2>
+        <div class="topic">학교 친구·학부모 작별 인사 및 송별 모임 (선생님·친구들에게 작별 선물 전달, 연락처 교환, 한국 방문 초대)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Farewell gift (Parting gift)</div><div class="vocab-meaning">작별 선물</div><div class="vocab-tip">💡 정들었던 반 친구들과 담임 선생님께 감사의 마음을 담아 건네는 작은 선물입니다.</div></div><button class="speak-btn" onclick="playAudio('Farewell gift')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Keep in touch (Stay in touch)</div><div class="vocab-meaning">계속 연락하며 지내다</div><div class="vocab-tip">💡 헤어질 때 "한국에 가서도 꼭 연락하고 지내요!"라고 말할 때 가장 따뜻하고 자연스러운 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Keep in touch')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Handwritten note</div><div class="vocab-meaning">정성껏 쓴 손편지 (카드)</div><div class="vocab-tip">💡 아이가 친구들과 선생님께 고마웠던 기억을 직접 영어로 적어 건네는 짧은 편지입니다.</div></div><button class="speak-btn" onclick="playAudio('Handwritten note')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Farewell party (Send-off)</div><div class="vocab-meaning">송별회 / 환송 모임</div><div class="vocab-tip">💡 떠나기 전 친한 학부모님들과 마지막 브런치나 티타임을 가질 때 쓰는 단어입니다.</div></div><button class="speak-btn" onclick="playAudio('Farewell party')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Wonderful memories</div><div class="vocab-meaning">소중하고 멋진 추억들</div><div class="vocab-tip">💡 말레이시아에서 함께 보낸 시간을 돌아보며 감사 인사를 전할 때 빠지지 않는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Wonderful memories')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Reunion</div><div class="vocab-meaning">재회 / 다시 만나는 모임</div><div class="vocab-tip">💡 방학 때 한국이나 말레이시아에서 꼭 다시 만나자고 약속할 때 'have a reunion'이라고 합니다.</div></div><button class="speak-btn" onclick="playAudio('Reunion')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Settle back in</div><div class="vocab-meaning">(고국으로 돌아가) 다시 잘 정착하다</div><div class="vocab-tip">💡 한국으로 돌아가서 새집과 학교에 다시 잘 적응하길 바란다고 인사할 때 씁니다.</div></div><button class="speak-btn" onclick="playAudio('Settle back in')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Miss you dearly</div><div class="vocab-meaning">무척 그리워하다 / 많이 보고 싶을 것이다</div><div class="vocab-tip">💡 단순한 'miss you'보다 훨씬 더 깊고 따뜻한 아쉬움을 전하는 표현입니다.</div></div><button class="speak-btn" onclick="playAudio('Miss you dearly')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. Group photo (Keepsake)</div><div class="vocab-meaning">기념 단체 사진 (간직할 기념품)</div><div class="vocab-tip">💡 마지막 하교 날 반 친구들, 선생님과 함께 추억으로 남기는 사진입니다.</div></div><button class="speak-btn" onclick="playAudio('Group photo')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Safe flight</div><div class="vocab-meaning">안전한 비행 (조심히 잘 가요)</div><div class="vocab-tip">💡 비행기를 타고 떠나는 가족에게 건네는 가장 대표적이고 다정한 마지막 작별 인사입니다.</div></div><button class="speak-btn" onclick="playAudio('Safe flight')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. Thank you so much for being such a great friend to me and the kids. <button class="speak-btn" onclick="playAudio('Thank you so much for being such a great friend to me and the kids.')">🔊</button></div><div class="pattern-example">그동안 저와 아이들에게 정말 좋은 친구가 되어 주셔서 진심으로 감사해요.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Let's definitely keep in touch, and please visit us in Seoul anytime! <button class="speak-btn" onclick="playAudio('Let us definitely keep in touch, and please visit us in Seoul anytime!')">🔊</button></div><div class="pattern-example">우리 꼭 계속 연락하고 지내요, 그리고 언제든 서울에 놀러 오세요!</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Have a safe flight tomorrow, and good luck settling back home in Korea! <button class="speak-btn" onclick="playAudio('Have a safe flight tomorrow, and good luck settling back home in Korea!')">🔊</button></div><div class="pattern-example">내일 안전하게 비행기 잘 타고 가시고, 한국 돌아가서도 정착 잘하시길 바랄게요!</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Hi Sera! I can't believe tomorrow is already our flight back to Korea. Thank you so much for being such a great friend to me and the kids.</div><button class="speak-btn" onclick="playAudio('Hi Sera! I cannot believe tomorrow is already our flight back to Korea. Thank you so much for being such a great friend to me and the kids.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Sinwoo (Sera):</span> Oh Tina, we're going to miss you, Mike, and Clara so much! Sinwoo made a handmade farewell card and a photo album for Mike.</div><button class="speak-btn" onclick="playAudio('Oh Tina, we are going to miss you, Mike, and Clara so much! Sinwoo made a handmade farewell card and a photo album for Mike.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> That is so sweet of Sinwoo! Mike and Clara also prepared little farewell gifts and handwritten notes for their classmates.</div><button class="speak-btn" onclick="playAudio('That is so sweet of Sinwoo! Mike and Clara also prepared little farewell gifts and handwritten notes for their classmates.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Sinwoo (Sera):</span> The kids made such wonderful memories together here in Malaysia. Let's definitely keep in touch on KakaoTalk and Instagram!</div><button class="speak-btn" onclick="playAudio('The kids made such wonderful memories together here in Malaysia. Let us definitely keep in touch on KakaoTalk and Instagram!')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Definitely! Whenever your family visits Seoul during the school holidays, please let me know so we can have a reunion.</div><button class="speak-btn" onclick="playAudio('Definitely! Whenever your family visits Seoul during the school holidays, please let me know so we can have a reunion.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Sinwoo (Sera):</span> We would love that! Have a safe flight tomorrow, and good luck with settling back home in Korea!</div><button class="speak-btn" onclick="playAudio('We would love that! Have a safe flight tomorrow, and good luck with settling back home in Korea!')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 헤어지는 친구에게 "우리 꼭 계속 연락하고 지내요!"를 영어로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Let's definitely keep in touch! (또는 stay in touch)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. 정들었던 친구나 선생님께 드리는 '작별 선물'을 영어로 무엇이라고 할까요?</summary>
+                    <div class="quiz-answer-content">정답: Farewell gift (또는 Parting gift)</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 출국하는 가족에게 "안전한 비행 되세요(조심히 잘 가요)!"라고 인사할 때 쓰는 표현은?</summary>
+                    <div class="quiz-answer-content">정답: Have a safe flight!</div>
+                </details>
+            </div>
+        </section>
+    </div>
+</article>"""
+elif not card_html and current_day_number == 30:
+    print("비상용 사전 검증 Day 30 카드를 적용합니다.")
+    card_html = """<article class="report-card">
+    <div class="card-header">
+        <span class="card-badge">Day 30</span>
+        <h2>쿠알라룸푸르 공항(KLIA) 출국 수속 및 마지막 인사</h2>
+        <div class="topic">쿠알라룸푸르 공항(KLIA) 출국 수속 및 마지막 인사 (수하물 위탁, 초과 수하물 확인, 좌석 배정, 탑승구 안내)</div>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="section-title">📌 오늘의 핵심 어휘 10개</div>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">1. Check-in luggage (Checked baggage)</div><div class="vocab-meaning">위탁 수하물 (비행기 화물칸에 부치는 큰 짐)</div><div class="vocab-tip">💡 귀국할 때는 짐이 많으므로 항공사별 위탁 수하물 허용 개수와 무게를 미리 확인하세요.</div></div><button class="speak-btn" onclick="playAudio('Check-in luggage')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">2. Carry-on bag (Hand luggage)</div><div class="vocab-meaning">기내 휴대 수하물</div><div class="vocab-tip">💡 노트북, 귀중품, 여권, 보조배터리는 반드시 기내 휴대 가방에 넣어야 합니다.</div></div><button class="speak-btn" onclick="playAudio('Carry-on bag')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">3. Power bank (Lithium battery)</div><div class="vocab-meaning">보조배터리 (리튬 배터리)</div><div class="vocab-tip">💡 모든 항공사 규정상 보조배터리는 부치는 짐에 넣을 수 없으며 체크인할 때 직원이 가장 먼저 물어봅니다.</div></div><button class="speak-btn" onclick="playAudio('Power bank')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">4. Baggage allowance / Weight limit</div><div class="vocab-meaning">수하물 허용량 / 무게 제한</div><div class="vocab-tip">💡 캐리어를 저울에 올렸을 때 무게 제한(보통 23kg 또는 30kg) 이내인지 확인할 때 쓰입니다.</div></div><button class="speak-btn" onclick="playAudio('Baggage allowance')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">5. Seats together</div><div class="vocab-meaning">나란히 붙어 있는 좌석</div><div class="vocab-tip">💡 아이들과 함께 타는 비행기에서 가족이 같은 열에 나란히 앉도록 요청할 때 'assign seats together'라고 합니다.</div></div><button class="speak-btn" onclick="playAudio('Seats together')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">6. Boarding pass</div><div class="vocab-meaning">탑승권</div><div class="vocab-tip">💡 탑승구 번호(Gate number), 좌석 번호(Seat), 탑승 시작 시간(Boarding time)이 적힌 티켓입니다.</div></div><button class="speak-btn" onclick="playAudio('Boarding pass')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">7. Boarding gate</div><div class="vocab-meaning">탑승구 (게이트)</div><div class="vocab-tip">💡 KLIA 제1터미널 국제선은 C 게이트나 G/H 게이트를 주로 이용하며 이동 시간을 넉넉히 잡아야 합니다.</div></div><button class="speak-btn" onclick="playAudio('Boarding gate')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">8. Immigration &amp; Security check</div><div class="vocab-meaning">출국 심사 및 보안 검색대</div><div class="vocab-tip">💡 귀국 비자 취소 서류(Check-out Memo)가 있는 경우 자동 출입국 게이트 대신 유인 출국 심사대에서 도장을 받습니다.</div></div><button class="speak-btn" onclick="playAudio('Immigration and Security check')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">9. On time</div><div class="vocab-meaning">정시 출발 (연착 없음)</div><div class="vocab-tip">💡 비행기가 지연(Delayed)되지 않고 예정된 시간에 정확히 출발할 때 전광판에 표시됩니다.</div></div><button class="speak-btn" onclick="playAudio('On time')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-content"><div class="vocab-word">10. Bon voyage / Have a pleasant flight</div><div class="vocab-meaning">즐겁고 편안한 비행 되세요!</div><div class="vocab-tip">💡 말레이시아 생활을 마치고 한국으로 돌아가는 가족에게 공항 직원이 건네는 따뜻한 축복의 인사입니다.</div></div><button class="speak-btn" onclick="playAudio('Have a pleasant flight')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">🗣️ 입에 붙이는 핵심 패턴 3가지</div>
+            <div class="pattern-box">
+                <div class="pattern-item"><div class="pattern-title">Pattern 1. We have four suitcases to check in, and all power banks are in our carry-on bags. <button class="speak-btn" onclick="playAudio('We have four suitcases to check in, and all power banks are in our carry-on bags.')">🔊</button></div><div class="pattern-example">부칠 캐리어는 4개이고, 보조배터리는 모두 기내 휴대 가방에 넣었습니다.</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 2. Could you assign four seats together for our family, please? <button class="speak-btn" onclick="playAudio('Could you assign four seats together for our family, please?')">🔊</button></div><div class="pattern-example">저희 가족이 나란히 앉을 수 있게 좌석 네 자리를 붙여서 배정해 주실 수 있나요?</div></div>
+                <div class="pattern-item"><div class="pattern-title">Pattern 3. Which gate are we boarding from, and is the flight on time? <button class="speak-btn" onclick="playAudio('Which gate are we boarding from, and is the flight on time?')">🔊</button></div><div class="pattern-example">몇 번 게이트에서 탑승하며, 비행기는 정시에 출발하나요?</div></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">💬 실전 롤플레잉 대화문</div>
+            <div class="dialogue-box">
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Good morning! We're checking in for the flight to Incheon. Here are our four passports.</div><button class="speak-btn" onclick="playAudio('Good morning! We are checking in for the flight to Incheon. Here are our four passports.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Airline Staff:</span> Good morning, ma'am! How many bags are you checking in today, and do you have any power banks or batteries inside?</div><button class="speak-btn" onclick="playAudio('Good morning, maam! How many bags are you checking in today, and do you have any power banks or batteries inside?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> We have four suitcases to check in, and we packed all our power banks in our carry-on bags.</div><button class="speak-btn" onclick="playAudio('We have four suitcases to check in, and we packed all our power banks in our carry-on bags.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Airline Staff:</span> Perfect! All your suitcases are within the weight limit, and I've assigned four seats together in row 24 for your family.</div><button class="speak-btn" onclick="playAudio('Perfect! All your suitcases are within the weight limit, and I have assigned four seats together in row 24 for your family.')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Parent of Mike (Tina):</span> Thank you so much! Which gate are we boarding from, and has the boarding time changed?</div><button class="speak-btn" onclick="playAudio('Thank you so much! Which gate are we boarding from, and has the boarding time changed?')">🔊</button></div>
+                <div class="dialogue-line"><div class="dialogue-text"><span class="speaker">Airline Staff:</span> Your flight is on time. Boarding starts at 10:15 AM at Gate C12. Thank you for visiting Malaysia, and have a wonderful flight home!</div><button class="speak-btn" onclick="playAudio('Your flight is on time. Boarding starts at 10:15 AM at Gate C12. Thank you for visiting Malaysia, and have a wonderful flight home!')">🔊</button></div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">✍️ 1분 셀프 테스트 (클릭 시 정답 확인)</div>
+            <div class="quiz-box">
+                <details class="quiz-item">
+                    <summary>Q1. 공항 체크인 카운터에서 부치는 짐에 넣으면 안 되고 반드시 기내에 들고 타야 하는 '보조배터리'는?</summary>
+                    <div class="quiz-answer-content">정답: Power bank</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q2. "저희 가족을 위해 나란히 붙어 있는 좌석 네 자리를 배정해 주실 수 있나요?"를 영어로 말해보세요.</summary>
+                    <div class="quiz-answer-content">정답: Could you assign four seats together for our family, please?</div>
+                </details>
+                <details class="quiz-item">
+                    <summary>Q3. 비행기가 연착되지 않고 "정시에 출발하다"를 뜻하는 두 단어 표현은?</summary>
+                    <div class="quiz-answer-content">정답: On time (The flight is on time.)</div>
                 </details>
             </div>
         </section>
